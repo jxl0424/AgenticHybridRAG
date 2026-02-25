@@ -1,0 +1,79 @@
+# Application Configuration
+
+app:
+  name: "RAG Application"
+  version: "1.0.0"
+  description: "Retrieval-Augmented Generation application with PDF ingestion"
+
+# Embedding settings
+embedding:
+  model: "pritamdeka/S-PubMedBert-MS-MARCO"
+  dimension: 768
+  batch_size: 100
+
+# Vector database settings
+vector_db:
+  url: "http://localhost:6333"
+  collection: "docs"
+  distance_metric: "cosine"
+
+# Neo4j Graph Database settings (Docker: medrag-neo4j container)
+neo4j:
+  uri: "bolt://localhost:7687"
+  username: "neo4j"
+  password: "Pokemon0424$"
+  database: "neo4j"
+
+# Graph extraction settings (rule-based medical NER)
+graph_extraction:
+  method: "rule_based"
+  entity_types:
+    - DISEASE        # Medical conditions/diagnoses
+    - DRUG           # Medications
+    - PROCEDURE      # Medical procedures
+    - SYMPTOM        # Patient symptoms
+    - ANATOMY        # Body parts/organs
+    - TEST           # Diagnostic tests
+    - TREATMENT      # Treatments
+  relationship_types:
+    - TREATS         # Drug treats disease
+    - CAUSES         # Condition causes symptom
+    - HAS_PROCEDURE  # Disease has procedure
+    - HAS_TEST       # Disease has test
+  max_entities_per_chunk: 20
+
+# Hybrid retrieval settings
+hybrid_retrieval:
+  vector_weight: 0.6
+  graph_weight: 0.4
+  top_k: 5
+
+# Text chunking settings
+chunker:
+  chunk_size: 1000
+  chunk_overlap: 200
+
+# LLM settings
+llm:
+  model: "gpt-4o-mini"
+  base_url: "https://models.github.ai/inference"
+  max_tokens: 1024
+  temperature: 0
+
+# Inngest settings
+inngest:
+  app_id: "rag_app"
+  is_production: false
+  api_base: "http://127.0.0.1:8288/v1"
+
+# Streamlit settings
+streamlit:
+  page_title: "RAG Ingest PDF"
+  page_icon: "📄"
+  layout: "centered"
+
+# Data directories
+data:
+  raw_dir: "data/raw"
+  cleaned_dir: "data/cleaned"
+  embeddings_dir: "data/embeddings"
