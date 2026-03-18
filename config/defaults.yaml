@@ -1,79 +1,41 @@
-# Application Configuration
-
-app:
-  name: "RAG Application"
-  version: "1.0.0"
-  description: "Retrieval-Augmented Generation application with PDF ingestion"
-
-# Embedding settings
-embedding:
-  model: "pritamdeka/S-PubMedBert-MS-MARCO"
-  dimension: 768
-  batch_size: 100
-
-# Vector database settings
-vector_db:
-  url: "http://localhost:6333"
-  collection: "docs"
-  distance_metric: "cosine"
-
-# Neo4j Graph Database settings (Docker: medrag-neo4j container)
-neo4j:
-  uri: "bolt://localhost:7687"
-  username: "neo4j"
-  password: "Pokemon0424$"
-  database: "neo4j"
-
-# Graph extraction settings (rule-based medical NER)
-graph_extraction:
-  method: "rule_based"
-  entity_types:
-    - DISEASE        # Medical conditions/diagnoses
-    - DRUG           # Medications
-    - PROCEDURE      # Medical procedures
-    - SYMPTOM        # Patient symptoms
-    - ANATOMY        # Body parts/organs
-    - TEST           # Diagnostic tests
-    - TREATMENT      # Treatments
-  relationship_types:
-    - TREATS         # Drug treats disease
-    - CAUSES         # Condition causes symptom
-    - HAS_PROCEDURE  # Disease has procedure
-    - HAS_TEST       # Disease has test
-  max_entities_per_chunk: 20
-
-# Hybrid retrieval settings
-hybrid_retrieval:
-  vector_weight: 0.6
-  graph_weight: 0.4
-  top_k: 5
+# Logging settings
+logging:
+  level: "INFO"   # DEBUG | INFO | WARNING | ERROR
 
 # Text chunking settings
 chunker:
-  chunk_size: 1000
-  chunk_overlap: 200
+  chunk_size: 512             # used by TextChunker (get_chunk_settings)
+  chunk_overlap: 128          # used by TextChunker (get_chunk_settings)
+  section_max_tokens: 150     # max words per section chunk (MedicalChunker)
+  sentence_group_tokens: 120  # target words per sentence-group chunk (MedicalChunker)
 
-# LLM settings
+# LLM settings (answer generation)
 llm:
-  model: "gpt-4o-mini"
-  base_url: "https://models.github.ai/inference"
-  max_tokens: 1024
-  temperature: 0
+  model: "qwen2.5:7b-instruct"
+  base_url: "http://localhost:11434/v1"
 
-# Inngest settings
-inngest:
-  app_id: "rag_app"
-  is_production: false
-  api_base: "http://127.0.0.1:8288/v1"
+# Relation extraction LLM (separate from answer-generation LLM)
+relation_llm:
+  model: "meditron:7b"
+  base_url: "http://localhost:11434/v1"
 
-# Streamlit settings
-streamlit:
-  page_title: "RAG Ingest PDF"
-  page_icon: "📄"
-  layout: "centered"
+# Graph extraction settings
+graph_extraction:
+  use_llm_supplement: false   # set true to supplement rule-based NER with LLM extraction
 
-# Data directories
-data:
-  raw_dir: "data/raw"
-  cleaned_dir: "data/cleaned"
-  embeddings_dir: "data/embeddings"
+# Hybrid retrieval settings
+hybrid_retrieval:
+  chunk_weight: 0.5
+  paper_weight: 0.3
+  graph_weight: 0.2
+  top_k: 5
+  min_score: 0.2
+
+# HybridRAG-Bench (arXiv CS/AI) ingestion and querying settings
+hybridrag:
+  embedding_model: "allenai/specter2_base"
+  embedding_dim: 768
+  batch_size: 64
+  qdrant_collection: "arxiv"
+  progress_file: "data/hybridrag/.ingest_progress.json"
+  min_score: 0.05
