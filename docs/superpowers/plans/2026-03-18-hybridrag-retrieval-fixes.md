@@ -1051,6 +1051,9 @@ from src.types import RetrievedContext
 
 RRF_K = 60
 
+# Module-level sentinel — cannot use class attribute as default arg value in Python
+_UNSET = object()
+
 
 class HybridRetriever:
     """
@@ -1063,16 +1066,14 @@ class HybridRetriever:
     Identical text from multiple sources boosts score rather than duplicating.
     """
 
-    _SENTINEL = object()
-
     def __init__(
         self,
         chunk_retriever=None,
         paper_retriever=None,
         graph_retriever=None,
-        chunk_weight=_SENTINEL,
-        paper_weight=_SENTINEL,
-        graph_weight=_SENTINEL,
+        chunk_weight=_UNSET,
+        paper_weight=_UNSET,
+        graph_weight=_UNSET,
         config_path: str = "config/defaults.yaml",
     ):
         # Load defaults from config; explicit constructor args override config values.
@@ -1086,9 +1087,9 @@ class HybridRetriever:
         except Exception:
             pass
 
-        self.chunk_weight = chunk_weight if chunk_weight is not self._SENTINEL else cfg_chunk
-        self.paper_weight = paper_weight if paper_weight is not self._SENTINEL else cfg_paper
-        self.graph_weight = graph_weight if graph_weight is not self._SENTINEL else cfg_graph
+        self.chunk_weight = chunk_weight if chunk_weight is not _UNSET else cfg_chunk
+        self.paper_weight = paper_weight if paper_weight is not _UNSET else cfg_paper
+        self.graph_weight = graph_weight if graph_weight is not _UNSET else cfg_graph
 
         self.chunk_retriever = chunk_retriever
         self.paper_retriever = paper_retriever
