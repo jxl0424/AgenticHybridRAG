@@ -11,6 +11,7 @@ import uuid
 import os
 import datetime
 
+from pydantic import BaseModel
 from src.ingestion.pdf_loader import load_and_chunk_pdf, embed_texts
 from src.retrieval.qdrant_storage import QdrantStorage
 from src.graph.knowledge_graph import get_knowledge_graph, GraphDocument, GraphChunk
@@ -27,6 +28,14 @@ _llm_client = LLMClient()
 _kg = get_knowledge_graph()
 _extractor = get_entity_extractor(llm_client=_llm_client)
 _qdrant = QdrantStorage()
+_pipeline = GraphRAGPipeline()
+
+
+class QueryRequest(BaseModel):
+    question: str
+    top_k: int = 5
+    use_hybrid: bool = True
+
 
 inngest_client = inngest.Inngest(
     app_id="rag_app",
@@ -142,27 +151,44 @@ async def query_pipeline_workflow(ctx: inngest.Context):
     Handles queries using the full GraphRAG Hybrid Pipeline.
     """
     question = ctx.event.data["question"]
+    top_k = ctx.event.data.get("top_k", 5)
+    use_hybrid = ctx.event.data.get("use_hybrid", True)
     
     def _run_pipeline():
         pipeline = GraphRAGPipeline()
-        return pipeline.query(question)
+        return pipeline.query_with_sources(question, top_k=top_k, use_hybrid=use_hybrid)
 
-    result = await ctx.step.run("hybrid-query", _run_pipeline)
+    result = await ctx.step.run(f"{'hybrid' if use_hybrid else 'vector'}-query", _run_pipeline)
     
     return {
         "answer": result["answer"], 
         "sources": result["sources"], 
-        "num_contexts": result["num_contexts"]
+        "vector_contexts": result["vector_contexts"],
+        "graph_contexts": result["graph_contexts"],
+        "entities_found": result["entities_found"],
+        "retrieval_type": result["retrieval_type"],
+        "thought_process": result.get("thought_process", [])
     }
 
 app = FastAPI()
 
+@app.post("/api/query")
+def query_endpoint(req: QueryRequest):
+    try:
+        return _pipeline.query_with_sources(
+            req.question, top_k=req.top_k, use_hybrid=req.use_hybrid
+        )
+    except Exception as e:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=500, detail=str(e))
+
 inngest.fast_api.serve(
-    app, 
-    inngest_client, 
+    app,
+    inngest_client,
     [process_document_workflow, process_chunk_workflow, query_pipeline_workflow],
     serve_origin="http://host.docker.internal:8000"
 )
+
 
 if __name__ == "__main__":
     import uvicorn

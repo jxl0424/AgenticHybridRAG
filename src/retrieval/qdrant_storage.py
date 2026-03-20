@@ -36,17 +36,16 @@ class QdrantStorage:
             top_k: Number of results to return
             min_score: Minimum similarity score threshold (0-1). Results below this are filtered out.
         """
-        # Fetch more to account for filtering
-        fetch_k = max(top_k * 3, 20)
         results = self.client.query_points(
             collection_name=self.collection,
             query=query_vector,
             with_payload=True,
-            limit=fetch_k
+            limit=top_k
         )
         contexts = []
         sources = []  # Changed to list to match contexts
         scores = []
+        document_ids = []
 
         for r in results.points:
             # Filter by minimum score threshold
@@ -60,35 +59,20 @@ class QdrantStorage:
             # Skip very short texts (likely metadata/tables)
             if len(text) < 50:
                 continue
-                
-            # Skip common non-content sections
-            skip_patterns = [
-                'acknowledgment', 'acknowledgement', 
-                'table of contents',
-                'references',
-                'copyright',
-                'examination committee',
-                'dissertation',
-                'curriculum vitae'
-            ]
-            text_lower = text.lower()
-            if any(pattern in text_lower for pattern in skip_patterns):
-                # Only skip if it's at the beginning (these sections are usually at start)
-                first_chars = text_lower[:100]
-                if any(pattern in first_chars for pattern in skip_patterns):
-                    continue
 
             if text:
                 contexts.append(text)
                 sources.append(source)  # Append instead of add to set
                 scores.append(r.score if hasattr(r, 'score') else 0.0)
-                
+                document_ids.append(payload.get("document_id", ""))
+
                 # Stop if we have enough
                 if len(contexts) >= top_k:
                     break
 
         return {
-            "contexts": contexts, 
+            "contexts": contexts,
             "sources": sources,  # Now a list matching contexts
-            "scores": scores
+            "scores": scores,
+            "document_ids": document_ids,
         }

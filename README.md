@@ -51,6 +51,11 @@ python -m src.api.server
 ```powershell
 streamlit run src/api/app.py
 ```
+### 6. Start the Inngest Server
+
+```powershell
+npx inngest dev 
+```
 
 ## Architecture
 

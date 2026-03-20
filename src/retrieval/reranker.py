@@ -12,6 +12,9 @@ with a more expensive but more accurate model.
 from typing import List, Dict, Any, Optional
 import numpy as np
 from sentence_transformers import CrossEncoder
+from src.utils import get_logger
+
+logger = get_logger(__name__)
 
 
 class Reranker:
@@ -44,7 +47,7 @@ class Reranker:
             device: Device to use ('cpu', 'cuda', or None for auto)
         """
         model_path = self.MODELS.get(model_name, model_name)
-        print(f"Loading reranker model: {model_path}")
+        logger.info(f"Loading reranker model: {model_path}")
         
         self.model = CrossEncoder(
             model_path,
@@ -157,75 +160,3 @@ class Reranker:
             "avg_original_score": float(np.mean(original_scores)),
             "score_delta": float(np.mean(rerank_scores) - np.mean(original_scores))
         }
-
-
-class TwoStageRetriever:
-    """
-    Two-stage retrieval with initial embedding search + reranking.
-    """
-    
-    def __init__(
-        self,
-        embedding_model: str = "sentence-transformers/all-mpnet-base-v2",
-        reranker_model: str = "msmarco",
-        embedding_dim: int = 768,
-        qdrant_url: str = "http://localhost:6333",
-        collection: str = "docs",
-        initial_top_k: int = 20,
-        final_top_k: int = 5
-    ):
-        """Initialize the two-stage retriever."""
-        from sentence_transformers import SentenceTransformer
-        from src.retrieval.qdrant_storage import QdrantStorage
-        
-        # Stage 1: Embedding model
-        print(f"Loading embedding model: {embedding_model}")
-        self.embedding_model = SentenceTransformer(embedding_model)
-        
-        # Stage 2: Reranker
-        self.reranker = Reranker(model_name=reranker_model)
-        
-        # Vector store
-        self.storage = QdrantStorage(
-            url=qdrant_url,
-            collection=collection,
-            dim=embedding_dim
-        )
-        
-        self.initial_top_k = initial_top_k
-        self.final_top_k = final_top_k
-        
-    def retrieve(self, query: str, min_score: float = 0.0) -> Dict[str, Any]:
-        """
-        Retrieve documents using two-stage approach.
-        
-        Args:
-            query: Search query
-            min_score: Minimum similarity threshold for initial retrieval
-            
-        Returns:
-            Reranked results
-        """
-        # Stage 1: Initial embedding-based retrieval
-        query_embedding = self.embedding_model.encode([query])[0].tolist()
-        initial_results = self.storage.search(
-            query_embedding, 
-            top_k=self.initial_top_k,
-            min_score=min_score
-        )
-        
-        # Stage 2: Rerank
-        reranked = self.reranker.rerank(
-            query=query,
-            documents=initial_results["contexts"],
-            sources=initial_results["sources"],
-            scores=initial_results.get("scores"),
-            top_k=self.final_top_k
-        )
-        
-        return reranked
-
-
-def create_reranker(model: str = "msmarco") -> Reranker:
-    """Factory function to create a reranker."""
-    return Reranker(model_name=model)

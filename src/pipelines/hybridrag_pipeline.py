@@ -296,6 +296,13 @@ class HybridRAGBenchPipeline:
             context_texts = reranked.get("contexts", context_texts[:top_k])
             context_sources = reranked.get("sources", context_sources[:top_k])
             context_scores = reranked.get("rerank_scores", context_scores[:top_k])
+
+            # Drop contexts the reranker scores as irrelevant (negative cross-encoder logits)
+            keep = [i for i, s in enumerate(context_scores) if s >= 0]
+            if keep:
+                context_texts = [context_texts[i] for i in keep]
+                context_sources = [context_sources[i] for i in keep]
+                context_scores = [context_scores[i] for i in keep]
         else:
             context_texts = context_texts[:top_k]
             context_sources = context_sources[:top_k]

@@ -2,31 +2,29 @@
 Prompt templates for RAG queries.
 """
 
-# System prompt for the RAG assistant - STRICT about not hallucinating
-SYSTEM_PROMPT = """You are a helpful assistant that answers questions based ONLY on the provided context.
+# System prompt for the RAG assistant
+SYSTEM_PROMPT = """You are a helpful assistant that answers questions using the provided context.
 
 IMPORTANT RULES:
-1. If the provided context does NOT contain relevant information to answer the question, you MUST respond with "I don't have enough information to answer that question based on the provided documents."
-2. Do NOT make up or hallucinate any information that is not explicitly in the context.
-3. Do NOT refer to the context as "the document" or "the text" - just answer the question directly.
-4. If asked about topics unrelated to the context (e.g., cooking, weather, general knowledge), say you don't have that information."""
+1. Base your answer primarily on the provided context.
+2. If the context is topically related but does not fully answer the question, reason from what is available and note any gaps.
+3. Only respond with "I don't have enough information to answer that question based on the provided documents." if the context is completely unrelated to the topic of the question.
+4. Do NOT make up specific facts, numbers, or citations not present in the context.
+5. Do NOT refer to the context as "the document" or "the text" - just answer the question directly."""
 
 # Template for user query with context
-QUERY_TEMPLATE = """Use the following context to answer the question. If the context is not relevant to the question, say you don't know.
+QUERY_TEMPLATE = """Use the following context to answer the question.
 
-Context: 
+Context:
 {context}
 
 Question: {question}
 
 Instructions:
-- Answer ONLY based on the context above
-- If the context doesn't contain relevant information, say "I don't have enough information..."
+- Answer based on the context above
+- If the context is related but incomplete, provide a partial answer using what is available
+- Only say you don't have enough information if the context is entirely off-topic
 - Keep your answer concise and accurate"""
-
-# Template for building context from retrieved chunks
-CONTEXT_TEMPLATE = "\n\n".join("- {chunk}" for chunk in "{chunks}")
-
 
 def build_query_prompt(question: str, contexts: list[str]) -> str:
     """Build a query prompt with the given question and context chunks."""
