@@ -7,6 +7,9 @@ from typing import Optional
 import yaml
 
 from src.types import RetrievedContext
+from src.utils import get_logger
+
+logger = get_logger("retrieval.hybrid")
 
 RRF_K = 60
 
@@ -90,9 +93,31 @@ class HybridRetriever:
         if use_graph and self.graph_retriever:
             graph_results = self.graph_retriever.retrieve(query=query, top_k=fetch_k)
 
-        return self._fuse(
-            chunk_results, paper_results, graph_results, top_k=top_k
+        logger.debug(
+            "[HybridRetriever] query=%r | chunk=%d paper=%d graph=%d",
+            query[:80], len(chunk_results), len(paper_results), len(graph_results),
         )
+
+        fused = self._fuse(chunk_results, paper_results, graph_results, top_k=top_k)
+
+        source_counts: dict[str, int] = {}
+        for ctx in fused:
+            source_counts[ctx.collection] = source_counts.get(ctx.collection, 0) + 1
+        logger.debug(
+            "[HybridRetriever] top_%d sources: %s",
+            top_k, source_counts,
+        )
+
+        self._last_trace: dict = {
+            "chunk_count_raw": len(chunk_results),
+            "paper_count_raw": len(paper_results),
+            "graph_count_raw": len(graph_results),
+            "fused_count": len(fused),
+            "fused_source_breakdown": source_counts,
+            "top_rrf_scores": [round(ctx.score, 5) for ctx in fused[:5]],
+        }
+
+        return fused
 
     def _fuse(
         self,

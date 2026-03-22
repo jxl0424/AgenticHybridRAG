@@ -1,0 +1,2192 @@
+{
+  "vector": [
+    {
+      "question": "If variational free energy were NOT a proxy for minimizing entropy, how might this affect the theoretical justification for active inference?",
+      "answer": "If variational free energy were not a proxy for minimizing entropy, the theoretical justification for active inference would be significantly affected. Active inference is grounded in the idea that systems minimize free energy to reduce entropy. Without this proxy relationship, the core imperative driving perception, decision-making, and learning as described by active inference would need to be reevaluated. The justification for using expected free energy (EFE) as the objective functional for action selection and the encoding of values through the desire distribution would lose a key foundational assumption. This could lead to a need for alternative theoretical frameworks or modifications to active inference to maintain its normative and explanatory power in neuroscience and machine learning.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.625,
+          1.584,
+          1.273,
+          0.787,
+          -1.12
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 2.625,
+            "text": "<!-- image -->\n\nFigure 2.1: The logical flow of the argument of the FEP from the initial formulation to the crucial approximate Bayesian inference lem"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.584,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.273,
+            "text": "## 2.10 Active Inference\n\nIn the previous section, we have covered the very general and abstract form of the FEP, here we elucidate the central proces"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the Expected Free Energy (EFE) objective did NOT mandate minimization of ambiguity, what might be a consequence for an active inference agent?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.5
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.776,
+          2.023,
+          1.516,
+          0.751,
+          0.595
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.776,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 2.023,
+            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.516,
+            "text": "Specifically, and quite elegantly, we can show that under certain conditions of the generative model of the future, that we can derive the optimal pla"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If specification of hyper-parameters was NOT positively correlated with reproducibility, how would that affect the assessment of machine learning research quality?",
+      "answer": "If the specification of hyper-parameters was NOT positively correlated with reproducibility, it would suggest that simply documenting hyper-parameters might not be sufficient for ensuring the reproducibility of a machine learning research paper. This could imply that other factors, such as the clarity of the method explanation, the provision of high-level pseudo-code, and the use of toy examples, might also need to be considered in assessing the quality of the research. The absence of a positive correlation would highlight the need for a more comprehensive approach to reproducibility guidelines in machine learning research.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "EFE"
+        ],
+        "qdrant_ids_per_entity": {
+          "EFE": 90
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_papers": 14,
+          "arxiv_chunks": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.957,
+          1.155,
+          -0.483,
+          -1.41,
+          -3.143
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2302.12691v1",
+            "rerank_score": 1.957,
+            "text": "Reproducibility guidelines - beyond documentation. The main paradigm in machine learning has shifted from classic supervised methods and hand-coded al"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": 1.155,
+            "text": "What makes a ML/DL paper reproducible? However, while the short paper of Tatman et al. gives an important motivation for considering the practical sid"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -0.483,
+            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If Embodied AI were NOT composed of intelligence as a core element, how would that affect its ability to generate adaptive behavior?",
+      "answer": "If Embodied AI were NOT composed of intelligence as a core element, it would likely struggle to generate adaptive behavior. The context emphasizes that intelligence, particularly in the form of embodied intelligence, is fundamental to achieving AGI goals and guarantees. Without intelligence as a core element, the AI's ability to learn from experience and optimize its performance would be compromised, affecting its adaptive behavior.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 4,
+          "arxiv_papers": 11
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -0.485,
+          -3.663,
+          -3.776,
+          -4.679,
+          -5.511
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -0.485,
+            "text": "## Abstract\n\nCurrent artificial intelligence systems-from large language models to autonomous robotsexcel at narrow tasks but lack key qualities of se"
+          },
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -3.663,
+            "text": "## 1. Introduction\n\n## 1.1 Context and Motivation\n\nWe stand at a pivotal moment in the evolution of artificial intelligence. Rapid advancements, parti"
+          },
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -3.776,
+            "text": "Influential theories, such as Antonio Damasio's work on embodiment [6, 7], posit that consciousness and rational thought are inextricably linked to th"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, what might be the implication for its accessibility?",
+      "answer": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, it would likely have taken longer for the paper to be accessible to the broader academic community, as Arxiv provides a rapid pre-publication platform for researchers to share their work. Without Arxiv, the paper might have been submitted to a journal, leading to a longer review and publication process.",
+      "num_contexts": 3,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.0,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          5.705,
+          4.389,
+          1.153
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 5.705,
+            "text": "This paper derives the relationship between active inference methods, and the control as inference paradigm which is popular within the reinforcement "
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.389,
+            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.153,
+            "text": "1 Technically this is more of an induction argument than a reductio-ad-absurdum, but we still refer to it as such due to its description as a reductio"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, how would this affect the model's ability to guide AI adoption?",
+      "answer": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, this would significantly affect its ability to guide AI adoption. The AI-CAM is designed to cover core capability dimensions including technology, which is crucial for understanding and implementing AI technologies. Excluding the Technology area would mean the model would lack a key component necessary for a comprehensive assessment of an organization's AI capabilities. This could lead to gaps in the organization's understanding of its technological readiness for AI, potentially hindering effective AI adoption and innovation.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "ARXIV"
+        ],
+        "qdrant_ids_per_entity": {
+          "ARXIV": 90
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 4,
+          "arxiv_papers": 11
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          5.134,
+          4.545,
+          4.492,
+          3.89,
+          3.723
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 5.134,
+            "text": "This paper's contribution is a 5-level AI Capability Assessment Model (AI-CAM) and a related AI Capabilities Matrix (AI-CM) which are tools aimed at a"
+          },
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 4.545,
+            "text": "This article's contribution is a Capability Assessment Model for AI adoption in organisations: This specifies the capabilities required to achieve des"
+          },
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 4.492,
+            "text": "These  three  AI  categories  are  used  to  drive  the  development  of  the  capability  assessment  model presented in the next section.\n\n## 3 Towa"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If Design D2 did NOT enable continual learning without erasing past knowledge, what might be a consequence?",
+      "answer": "If Design D2 did NOT enable continual learning without erasing past knowledge, it would likely result in destructive adaptation, as mentioned in the context: \"This ensures continual learning without destructive adaptation, inherently and from the lowest level of organization.\" The absence of this property would mean that past knowledge could be erased during the learning process, which is contrary to the described benefits of Design D2.",
+      "num_contexts": 2,
+      "metrics": {
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "AI-CAM"
+        ],
+        "qdrant_ids_per_entity": {
+          "AI-CAM": 9
+        },
+        "graph_qdrant_ids_total": 9,
+        "graph_fetched_count": 9,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          3.877,
+          2.648
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 3.877,
+            "text": "<!-- image -->\n\nexemplified in Figure 6: In 6b, after elimination of X 1 as a positive source, the earlier exposure of X 0 , X 1 \u2192 Y still results in "
+          },
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 2.648,
+            "text": "## 5 Conclusion\n\nThe prevailing AI design paradigm, despite its widespread success in tackling previously intractable problems, suffers from inherent "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the VC dimension of the class of all complete acyclic 0-bounded CP-nets were not (m-1)n, how might this affect the lower bound on the number of equivalence and membership queries required for learning?",
+      "answer": "I don't have enough information to answer that question based on the provided documents. The context specifically discusses k-bounded CP-nets for k \u2264 n-1, and does not mention the VC dimension or the number of queries required for learning 0-bounded CP-nets.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.377,
+          3.96,
+          3.239,
+          2.613,
+          2.491
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 4.377,
+            "text": "In the remainder of this article, we fix n \u2265 1 , m \u2265 2 , k \u2208 { 0 , . . . , n -1 } , and consider the following two concept classes:\n\n- \u00b7 The class C k"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.96,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.239,
+            "text": "As a consequence, the easiest to teach concepts in C k ac are the maximal ones. Using these lemmas, one can determine the recursive teaching dimension"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the teaching dimension were NOT calculated for the class of k-bounded acyclic CP-nets, how would this affect the assessment of optimality for algorithms learning CP-nets from membership queries?",
+      "answer": "If the teaching dimension were not calculated for the class of k-bounded acyclic CP-nets, it would affect the assessment of optimality for algorithms learning CP-nets from membership queries because the teaching dimension is used to show that the proposed algorithm for learning complete tree CP-nets from membership queries alone is close to optimal. Without this parameter, such an optimality assessment would not be possible.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.563,
+          3.274,
+          2.434,
+          2.416,
+          1.796
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.563,
+            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.274,
+            "text": "One may argue that the VC dimension should be computed over arbitrary instances rather than just swap instances, since it captures how difficult a con"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 2.434,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the deterministic method had NOT been compared with JueWu-SL in validation accuracy, how would this affect the evaluation of its action controllability?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -6.265,
+          -7.21,
+          -7.466,
+          -8.38,
+          -9.042
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2503.00096v3",
+            "rerank_score": -6.265,
+            "text": "To assess the capabilities of current AI models for performing these types of analyses, we present results of two frontier models (GPT-4o from OpenAI "
+          },
+          {
+            "source": "2508.20040v1",
+            "rerank_score": -7.21,
+            "text": "These findings demonstrate a recurring pattern: foundation models, and AI models in general, perform worse than initially reported when subjected to t"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -7.466,
+            "text": "Dealing with randomness and indeterminism. Whereas managing the provenance of a computational objects is a cornerstone of reproducibility, the issues "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the Free Energy Principle had NOT been developed into predictive coding, what might be the implication for neurobiologically plausible process theories?",
+      "answer": "If the Free Energy Principle had NOT been developed into predictive coding, the implication for neurobiologically plausible process theories might be a lack of a specific, detailed, and widely applicable neurobiological theory to explain the brain's function. Predictive coding, derived from the Free Energy Principle, provides a concrete framework that aligns with observed neurobiological processes and offers a scalable solution for understanding perception. Without predictive coding, neurobiologically plausible theories might remain more abstract or less grounded in empirical observations, potentially hindering their direct application to neural circuitry.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "accuracy"
+        ],
+        "qdrant_ids_per_entity": {
+          "accuracy": 77
+        },
+        "graph_qdrant_ids_total": 77,
+        "graph_fetched_count": 77,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          5.32,
+          3.642,
+          3.623,
+          3.054,
+          2.505
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 5.32,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.642,
+            "text": "In Chapter 2, I will give a detailed overview of the free energy principle, starting from\n\nfirst principles, and include a discussion of the mathemati"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.623,
+            "text": "## 3.1 Introduction\n\nIn this chapter, we consider the application of the free energy principle to perception.\n\nHere, we focus entirely on visual perce"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If simpliflow were not implemented in Python, how might its adoption and integration with existing tools be affected?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -8.183,
+          -8.626,
+          -8.732,
+          -10.171,
+          -10.19
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2510.02139v1",
+            "rerank_score": -8.183,
+            "text": "Here, we present the BioinfoMCP platform, which tackles three fundamental barriers limiting bioinformaticians' productivity: 1) Fragmentation and Inco"
+          },
+          {
+            "source": "1208.4271v2",
+            "rerank_score": -8.626,
+            "text": "\u2217 to whom correspondence should be addressed\n\n+ authors equally contributed to this work\n\n(Speed, 2011; Nat. Biotech., 2012) as well as criticisms 1 ."
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -8.732,
+            "text": "- (1) Documentation frameworks such as Model Cards [97] should be used to document training, documenting also software dependencies.\n- (3) Appropriate"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If hybrid embedding were NOT a type of graph embedding output, how might that affect the representation of combined graph components?",
+      "answer": "If hybrid embedding were NOT a type of graph embedding output, it would mean that the embedding of a combination of different types of graph components, such as nodes and edges, would not be directly supported. This could affect the representation of combined graph components by potentially limiting the ability to effectively model the interplay between nodes and edges in a unified vector space. Without hybrid embedding, the challenge of preserving the relationship between nodes and edges during the embedding process might become more complex, as the methods would need to find alternative ways to represent and utilize this combined information.",
+      "num_contexts": 4,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.0,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 5,
+          "arxiv_papers": 10
+        },
+        "post_rerank_count": 4,
+        "dropped_by_reranker": 11,
+        "reranker_scores": [
+          2.82,
+          1.554,
+          -0.432,
+          -2.057
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1808.00434v1",
+            "rerank_score": 2.82,
+            "text": "## 2. Graph Embeddings\n\nTo get the best results for a given task, choosing the right embedding technique is obviously the starting point. On the one h"
+          },
+          {
+            "source": "1808.00434v1",
+            "rerank_score": 1.554,
+            "text": "## 2.2. Embedding output\n\nApplications have different requirements regarding the information preserved in the embedding. Some embedding approaches aim"
+          },
+          {
+            "source": "1808.00434v1",
+            "rerank_score": -0.432,
+            "text": "## 2.1. Graph types\n\nHomogeneous graphs (graphs with only one edge and node type) can be further categorized as weighted or unweighted and directed or"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If Xidao were not located in Sanya, how might its appeal to tourists change?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -11.168,
+          -11.175,
+          -11.199,
+          -11.222,
+          -11.227
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2504.21848v1",
+            "rerank_score": -11.168,
+            "text": "Finally,  the generality of  an  AI  agent  informs  the  scope  and  nature  of  governance interventions  in  a  range  of  ways.  Generality  denot"
+          },
+          {
+            "source": "2303.12329v2",
+            "rerank_score": -11.175,
+            "text": "SPARQL is a structured query language and protocol for RDFbaseddata. BasedontheBgeeRDFdatadumpdepictedinsubsection 4 . 1 , a SPARQL endpoint is availa"
+          },
+          {
+            "source": "1805.07885v1",
+            "rerank_score": -11.199,
+            "text": "scholars; they argue that ridesharing enables people to communicate with one another and increase social capital, and it is regarded as a new form of "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If Koriche and Zanuttini's algorithm did NOT use equivalence queries, how would its learning of acyclic CP-nets be affected?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 3,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          3.939,
+          -0.613,
+          -1.312
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.939,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": -0.613,
+            "text": "## Abstract\n\nLearning of user preferences, as represented by, for example, Conditional Preference Networks (CP-nets), has become a core issue in AI re"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": -1.312,
+            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the Free Energy Principle did NOT provide a vocabulary to talk about generative models, how would this affect the ability to ask questions about the generative models embodied by systems?",
+      "answer": "If the Free Energy Principle did NOT provide a vocabulary to talk about generative models, it would be impossible to ask and answer questions such as 'what kind of generative model does this system embody?' (Baltieri et al., 2020; Maturana & Varela, 2012). This means that without this principle, the ability to inquire about and understand the generative models within systems would be significantly limited.",
+      "num_contexts": 2,
+      "metrics": {
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          6.511,
+          -1.091
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 6.511,
+            "text": "generative models, and approximate variational distributions - the free energy principle provides a novel and powerful vocabulary to talk about such s"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": -1.091,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If ToyArchitecture were NOT designed to combine a big picture view with practical implementation, what might be a consequence?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.5
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -9.476,
+          -9.647,
+          -9.872,
+          -10.099,
+          -10.133
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -9.476,
+            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": -9.647,
+            "text": "The other possibility is that some future theoretical breakthrough leads to more capable AI systems with radically different architectures. If this ha"
+          },
+          {
+            "source": "1804.03437v1",
+            "rerank_score": -9.872,
+            "text": "<!-- image -->\n\n## SKABA\n\nmethods are the closest to our understanding of self-programming, nevertheless the papers on the topic  rarely  deal  with  "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the Free Energy Principle did NOT aim to provide a mathematical interpretation of dynamics in terms of variational Bayesian inference, what might be its alternative purpose?",
+      "answer": "I don't have enough information to answer that question based on the provided documents. The context primarily discusses the Free Energy Principle's aim to provide a mathematical interpretation of dynamics in terms of variational Bayesian inference. It does not explicitly state alternative purposes if this aim were not present.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.156,
+          3.346,
+          3.289,
+          2.863,
+          2.754
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.156,
+            "text": "## The Free Energy Principle\n\nThe free energy principle is a grand theory, arising out of theoretical neuroscience, with deep ambitions to provide a u"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.346,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.289,
+            "text": "increase or decrease the entropy of the steady-state-density, but do, however, in contrast to an equilibrium steady state (ESS), provide a clear arrow"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the ToyArchitecture had NOT aimed to combine a big picture view with practical implementation, what might have been a consequence for its design?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_papers": 14,
+          "arxiv_chunks": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -7.57,
+          -9.978,
+          -10.164,
+          -10.257,
+          -10.295
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2503.05705v1",
+            "rerank_score": -7.57,
+            "text": "But perhaps most importantly, the possibility of training general models via iterated distillation  and  amplification  could  shorten  the  timelines"
+          },
+          {
+            "source": "2503.05705v1",
+            "rerank_score": -9.978,
+            "text": "Perhaps  one  way  to  save  the  compute  thresholds  is  to  say  that  they  cover  both systems above 10 26 FLOP of pre-training and systems above"
+          },
+          {
+            "source": "2507.07765v1",
+            "rerank_score": -10.164,
+            "text": "## 4. Conclusions\n\nIn this paper, we have presented recent developments in the domain of low-communication training algorithms and described two new p"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If adversarial attacks did NOT bypass the safeguards of fine-tuning, how would this affect AI alignment strategies?",
+      "answer": "If adversarial attacks did NOT bypass the safeguards of fine-tuning, it would suggest that current alignment strategies like fine-tuning and system prompts are more effective than indicated. This would imply that the brittleness of existing strategies to align LLMs might be less of an issue, and that the value alignment problem for current AI systems might be more tractable. However, the context still emphasizes the difficulty of achieving robust value alignment, even with sophisticated methods like fine-tuning. Therefore, while the attacks not bypassing the safeguards would be a positive development, it does not guarantee a complete solution to the alignment problem.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 0.0,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          6.031,
+          5.704,
+          4.397,
+          4.047,
+          3.398
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 6.031,
+            "text": "In summary, prompt injection attacks reveal the brittleness of existing strategies to align LLM through fine-tuning and system prompts. Whatever the b"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 5.704,
+            "text": "The other possibility is that some future theoretical breakthrough leads to more capable AI systems with radically different architectures. If this ha"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 4.397,
+            "text": "My argument also has implications for AI safety regulation. Companies like OpenAI routinely decline to release the weights of their flagship models on"
+          }
+        ]
+      },
+      "mode": "vector"
+    }
+  ],
+  "hybrid": [
+    {
+      "question": "If variational free energy were NOT a proxy for minimizing entropy, how might this affect the theoretical justification for active inference?",
+      "answer": "If variational free energy were not a proxy for minimizing entropy, the theoretical justification for active inference would be significantly affected. Active inference is grounded in the idea that systems minimize free energy to reduce entropy. Without this proxy relationship, the core imperative driving perception, decision-making, and learning as described by active inference would need to be reevaluated. The justification for using expected free energy (EFE) as the objective functional for action selection and the encoding of values through the desire distribution would lose a key foundational assumption. This could lead to a need for alternative theoretical frameworks or modifications to active inference to maintain its normative and explanatory power in neuroscience and machine learning.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.625,
+          1.584,
+          1.273,
+          0.787,
+          -1.12
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 2.625,
+            "text": "<!-- image -->\n\nFigure 2.1: The logical flow of the argument of the FEP from the initial formulation to the crucial approximate Bayesian inference lem"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.584,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.273,
+            "text": "## 2.10 Active Inference\n\nIn the previous section, we have covered the very general and abstract form of the FEP, here we elucidate the central proces"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the Expected Free Energy (EFE) objective did NOT mandate minimization of ambiguity, what might be a consequence for an active inference agent?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.4,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.5
+      },
+      "trace": {
+        "entities_extracted": [
+          "EFE"
+        ],
+        "qdrant_ids_per_entity": {
+          "EFE": 90
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "graph": 2,
+          "arxiv_chunks": 1,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.776,
+          2.023,
+          0.751,
+          0.595,
+          -0.693
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.776,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 2.023,
+            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 0.751,
+            "text": "<!-- formula-not-decoded -->\n\n\ufe38 \ufe37\ufe37 \ufe38 Divergence Objective\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n(5.27)\n\nWhere we see that the d"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If specification of hyper-parameters was NOT positively correlated with reproducibility, how would that affect the assessment of machine learning research quality?",
+      "answer": "If the specification of hyper-parameters was NOT positively correlated with reproducibility, it would suggest that simply documenting hyper-parameters might not be sufficient for ensuring the reproducibility of a machine learning research paper. This could imply that other factors, such as the clarity of the method explanation, the provision of high-level pseudo-code, and the use of toy examples, might also need to be considered in assessing the quality of the research. The absence of a positive correlation would highlight the need for a more comprehensive approach to reproducibility guidelines in machine learning research.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_papers": 14,
+          "arxiv_chunks": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.957,
+          1.155,
+          -0.483,
+          -1.41,
+          -3.143
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2302.12691v1",
+            "rerank_score": 1.957,
+            "text": "Reproducibility guidelines - beyond documentation. The main paradigm in machine learning has shifted from classic supervised methods and hand-coded al"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": 1.155,
+            "text": "What makes a ML/DL paper reproducible? However, while the short paper of Tatman et al. gives an important motivation for considering the practical sid"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -0.483,
+            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If Embodied AI were NOT composed of intelligence as a core element, how would that affect its ability to generate adaptive behavior?",
+      "answer": "If Embodied AI were NOT composed of intelligence as a core element, it would likely struggle to generate adaptive behavior. The context emphasizes that intelligence, particularly in the form of embodied intelligence, is fundamental to achieving AGI goals and guarantees. Without intelligence as a core element, the AI's ability to learn from experience and optimize its performance would be compromised, affecting its adaptive behavior.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 4,
+          "arxiv_papers": 11
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -0.485,
+          -3.663,
+          -3.776,
+          -4.679,
+          -5.511
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -0.485,
+            "text": "## Abstract\n\nCurrent artificial intelligence systems-from large language models to autonomous robotsexcel at narrow tasks but lack key qualities of se"
+          },
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -3.663,
+            "text": "## 1. Introduction\n\n## 1.1 Context and Motivation\n\nWe stand at a pivotal moment in the evolution of artificial intelligence. Rapid advancements, parti"
+          },
+          {
+            "source": "2505.12229v1",
+            "rerank_score": -3.776,
+            "text": "Influential theories, such as Antonio Damasio's work on embodiment [6, 7], posit that consciousness and rational thought are inextricably linked to th"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, what might be the implication for its accessibility?",
+      "answer": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, it would likely have taken longer for the paper to be accessible to the broader academic community, as Arxiv provides a rapid pre-publication platform for researchers to share their work. Without Arxiv, the paper might have been submitted to a journal, leading to a longer review and publication process.",
+      "num_contexts": 3,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.0,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "ARXIV"
+        ],
+        "qdrant_ids_per_entity": {
+          "ARXIV": 90
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "graph": 3,
+          "arxiv_papers": 10
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          5.705,
+          4.389,
+          1.153
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 5.705,
+            "text": "This paper derives the relationship between active inference methods, and the control as inference paradigm which is popular within the reinforcement "
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.389,
+            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.153,
+            "text": "1 Technically this is more of an induction argument than a reductio-ad-absurdum, but we still refer to it as such due to its description as a reductio"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, how would this affect the model's ability to guide AI adoption?",
+      "answer": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, this would significantly affect its ability to guide AI adoption. The AI-CAM is designed to cover core capability dimensions including technology, which is crucial for understanding and implementing AI technologies. Excluding the Technology area would mean the model would lack a key component necessary for a comprehensive assessment of an organization's AI capabilities. This could lead to gaps in the organization's understanding of its technological readiness for AI, potentially hindering effective AI adoption and innovation.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "AI-CAM"
+        ],
+        "qdrant_ids_per_entity": {
+          "AI-CAM": 9
+        },
+        "graph_qdrant_ids_total": 9,
+        "graph_fetched_count": 9,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 9
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 4,
+          "arxiv_papers": 10,
+          "graph": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          5.134,
+          4.545,
+          4.492,
+          3.89,
+          3.723
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 5.134,
+            "text": "This paper's contribution is a 5-level AI Capability Assessment Model (AI-CAM) and a related AI Capabilities Matrix (AI-CM) which are tools aimed at a"
+          },
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 4.545,
+            "text": "This article's contribution is a Capability Assessment Model for AI adoption in organisations: This specifies the capabilities required to achieve des"
+          },
+          {
+            "source": "2305.15922v1",
+            "rerank_score": 4.492,
+            "text": "These  three  AI  categories  are  used  to  drive  the  development  of  the  capability  assessment  model presented in the next section.\n\n## 3 Towa"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If Design D2 did NOT enable continual learning without erasing past knowledge, what might be a consequence?",
+      "answer": "If Design D2 did NOT enable continual learning without erasing past knowledge, it would likely result in destructive adaptation, as mentioned in the context: \"This ensures continual learning without destructive adaptation, inherently and from the lowest level of organization.\" The absence of this property would mean that past knowledge could be erased during the learning process, which is contrary to the described benefits of Design D2.",
+      "num_contexts": 2,
+      "metrics": {
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          3.877,
+          2.648
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 3.877,
+            "text": "<!-- image -->\n\nexemplified in Figure 6: In 6b, after elimination of X 1 as a positive source, the earlier exposure of X 0 , X 1 \u2192 Y still results in "
+          },
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 2.648,
+            "text": "## 5 Conclusion\n\nThe prevailing AI design paradigm, despite its widespread success in tackling previously intractable problems, suffers from inherent "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the VC dimension of the class of all complete acyclic 0-bounded CP-nets were not (m-1)n, how might this affect the lower bound on the number of equivalence and membership queries required for learning?",
+      "answer": "I don't have enough information to answer that question based on the provided documents. The context does not specify the VC dimension for complete acyclic 0-bounded CP-nets or discuss how a different VC dimension would affect the query complexity.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 10,
+          "graph": 2
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.377,
+          3.96,
+          2.848,
+          2.749,
+          2.613
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 4.377,
+            "text": "In the remainder of this article, we fix n \u2265 1 , m \u2265 2 , k \u2208 { 0 , . . . , n -1 } , and consider the following two concept classes:\n\n- \u00b7 The class C k"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.96,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 2.848,
+            "text": "A CP-net is acyclic if it contains no cycles. We call a CP-net k -bounded, for some k \u2264 n -1 , if each vertex has indegree at most k , i.e., each vari"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the teaching dimension were NOT calculated for the class of k-bounded acyclic CP-nets, how would this affect the assessment of optimality for algorithms learning CP-nets from membership queries?",
+      "answer": "If the teaching dimension (TD) were not calculated for the class of k-bounded acyclic CP-nets, it would affect the assessment of optimality for algorithms learning CP-nets from membership queries because the TD values were used to show that the proposed algorithm for learning complete tree CP-nets from membership queries alone is close to optimal. Without these values, the optimality assessment would lack a crucial component.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 12,
+          "graph": 2
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.563,
+          3.274,
+          2.434,
+          2.416,
+          1.856
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.563,
+            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.274,
+            "text": "One may argue that the VC dimension should be computed over arbitrary instances rather than just swap instances, since it captures how difficult a con"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 2.434,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the deterministic method had NOT been compared with JueWu-SL in validation accuracy, how would this affect the evaluation of its action controllability?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [
+          "accuracy"
+        ],
+        "qdrant_ids_per_entity": {
+          "accuracy": 77
+        },
+        "graph_qdrant_ids_total": 77,
+        "graph_fetched_count": 77,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "graph": 2,
+          "arxiv_chunks": 3,
+          "arxiv_papers": 10
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -5.873,
+          -7.049,
+          -7.21,
+          -7.466,
+          -8.38
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1901.06152v1",
+            "rerank_score": -5.873,
+            "text": "From the last decades, it seems that the computational technique such as machine learning classification technique has been used for functional discov"
+          },
+          {
+            "source": "2407.14981v2",
+            "rerank_score": -7.049,
+            "text": "Balancing tractability and accuracy in data attribution. One key challenge in data attribution is the trade-off between computational tractability and"
+          },
+          {
+            "source": "2508.20040v1",
+            "rerank_score": -7.21,
+            "text": "These findings demonstrate a recurring pattern: foundation models, and AI models in general, perform worse than initially reported when subjected to t"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the Free Energy Principle had NOT been developed into predictive coding, what might be the implication for neurobiologically plausible process theories?",
+      "answer": "If the Free Energy Principle had NOT been developed into predictive coding, the implication for neurobiologically plausible process theories might be a lack of a specific, detailed, and widely applicable neurobiological theory to explain the brain's function. Predictive coding, derived from the Free Energy Principle, provides a concrete framework that aligns with observed neurobiological processes and offers a scalable solution for understanding perception. Without predictive coding, neurobiologically plausible theories might remain more abstract or less grounded in empirical observations, potentially hindering their direct application to neural circuitry.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.8,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 12
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          5.32,
+          3.642,
+          3.623,
+          3.054,
+          2.505
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 5.32,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.642,
+            "text": "In Chapter 2, I will give a detailed overview of the free energy principle, starting from\n\nfirst principles, and include a discussion of the mathemati"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.623,
+            "text": "## 3.1 Introduction\n\nIn this chapter, we consider the application of the free energy principle to perception.\n\nHere, we focus entirely on visual perce"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If simpliflow were not implemented in Python, how might its adoption and integration with existing tools be affected?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -8.183,
+          -8.626,
+          -8.732,
+          -10.171,
+          -10.19
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2510.02139v1",
+            "rerank_score": -8.183,
+            "text": "Here, we present the BioinfoMCP platform, which tackles three fundamental barriers limiting bioinformaticians' productivity: 1) Fragmentation and Inco"
+          },
+          {
+            "source": "1208.4271v2",
+            "rerank_score": -8.626,
+            "text": "\u2217 to whom correspondence should be addressed\n\n+ authors equally contributed to this work\n\n(Speed, 2011; Nat. Biotech., 2012) as well as criticisms 1 ."
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -8.732,
+            "text": "- (1) Documentation frameworks such as Model Cards [97] should be used to document training, documenting also software dependencies.\n- (3) Appropriate"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If hybrid embedding were NOT a type of graph embedding output, how might that affect the representation of combined graph components?",
+      "answer": "If hybrid embedding were NOT a type of graph embedding output, it would mean that the embedding of a combination of different types of graph components, such as nodes and edges, would not be directly supported. This could affect the representation of combined graph components by potentially limiting the ability to effectively model the interplay between nodes and edges in a unified vector space. Without hybrid embedding, the challenge of preserving the relationship between nodes and edges during the embedding process might become more complex, as the methods would need to find alternative ways to represent and utilize this combined information.",
+      "num_contexts": 4,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 0.0,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 5,
+          "arxiv_papers": 10
+        },
+        "post_rerank_count": 4,
+        "dropped_by_reranker": 11,
+        "reranker_scores": [
+          2.82,
+          1.554,
+          -0.432,
+          -2.057
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1808.00434v1",
+            "rerank_score": 2.82,
+            "text": "## 2. Graph Embeddings\n\nTo get the best results for a given task, choosing the right embedding technique is obviously the starting point. On the one h"
+          },
+          {
+            "source": "1808.00434v1",
+            "rerank_score": 1.554,
+            "text": "## 2.2. Embedding output\n\nApplications have different requirements regarding the information preserved in the embedding. Some embedding approaches aim"
+          },
+          {
+            "source": "1808.00434v1",
+            "rerank_score": -0.432,
+            "text": "## 2.1. Graph types\n\nHomogeneous graphs (graphs with only one edge and node type) can be further categorized as weighted or unweighted and directed or"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If Xidao were not located in Sanya, how might its appeal to tourists change?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 2,
+          "arxiv_papers": 13
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -11.168,
+          -11.175,
+          -11.199,
+          -11.222,
+          -11.227
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2504.21848v1",
+            "rerank_score": -11.168,
+            "text": "Finally,  the generality of  an  AI  agent  informs  the  scope  and  nature  of  governance interventions  in  a  range  of  ways.  Generality  denot"
+          },
+          {
+            "source": "2303.12329v2",
+            "rerank_score": -11.175,
+            "text": "SPARQL is a structured query language and protocol for RDFbaseddata. BasedontheBgeeRDFdatadumpdepictedinsubsection 4 . 1 , a SPARQL endpoint is availa"
+          },
+          {
+            "source": "1805.07885v1",
+            "rerank_score": -11.199,
+            "text": "scholars; they argue that ridesharing enables people to communicate with one another and increase social capital, and it is regarded as a new form of "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If Koriche and Zanuttini's algorithm did NOT use equivalence queries, how would its learning of acyclic CP-nets be affected?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 3,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [
+          "CP-nets"
+        ],
+        "qdrant_ids_per_entity": {
+          "CP-nets": 85
+        },
+        "graph_qdrant_ids_total": 85,
+        "graph_fetched_count": 85,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 3,
+          "arxiv_papers": 10,
+          "graph": 2
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          3.939,
+          -0.613,
+          -1.312
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1801.03968v3",
+            "rerank_score": 3.939,
+            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": -0.613,
+            "text": "## Abstract\n\nLearning of user preferences, as represented by, for example, Conditional Preference Networks (CP-nets), has become a core issue in AI re"
+          },
+          {
+            "source": "1801.03968v3",
+            "rerank_score": -1.312,
+            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the Free Energy Principle did NOT provide a vocabulary to talk about generative models, how would this affect the ability to ask questions about the generative models embodied by systems?",
+      "answer": "If the Free Energy Principle did NOT provide a vocabulary to talk about generative models, it would be impossible to ask and answer questions such as 'what kind of generative model does this system embody?' (Baltieri et al., 2020; Maturana & Varela, 2012). This means that without this principle, the ability to inquire about and understand the generative models within systems would be significantly limited.",
+      "num_contexts": 2,
+      "metrics": {
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "answer_correctness": 0.8
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          6.511,
+          -1.091
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 6.511,
+            "text": "generative models, and approximate variational distributions - the free energy principle provides a novel and powerful vocabulary to talk about such s"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": -1.091,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If ToyArchitecture were NOT designed to combine a big picture view with practical implementation, what might be a consequence?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.5
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -9.476,
+          -9.647,
+          -9.872,
+          -10.099,
+          -10.133
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -9.476,
+            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": -9.647,
+            "text": "The other possibility is that some future theoretical breakthrough leads to more capable AI systems with radically different architectures. If this ha"
+          },
+          {
+            "source": "1804.03437v1",
+            "rerank_score": -9.872,
+            "text": "<!-- image -->\n\n## SKABA\n\nmethods are the closest to our understanding of self-programming, nevertheless the papers on the topic  rarely  deal  with  "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the Free Energy Principle did NOT aim to provide a mathematical interpretation of dynamics in terms of variational Bayesian inference, what might be its alternative purpose?",
+      "answer": "I don't have enough information to answer that question based on the provided documents. The context primarily discusses the Free Energy Principle's aim to provide a mathematical interpretation of dynamics in terms of variational Bayesian inference. It does not explicitly state alternative purposes if this aim were not present.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 1,
+          "arxiv_papers": 14
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          4.156,
+          3.346,
+          3.289,
+          2.863,
+          2.754
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 4.156,
+            "text": "## The Free Energy Principle\n\nThe free energy principle is a grand theory, arising out of theoretical neuroscience, with deep ambitions to provide a u"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.346,
+            "text": "## Abstract\n\nIn this thesis, we explore and apply methods inspired by the free energy principle to two important areas in machine learning and neurosc"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.289,
+            "text": "increase or decrease the entropy of the steady-state-density, but do, however, in contrast to an equilibrium steady state (ESS), provide a clear arrow"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If the ToyArchitecture had NOT aimed to combine a big picture view with practical implementation, what might have been a consequence for its design?",
+      "answer": "I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_papers": 14,
+          "arxiv_chunks": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -7.57,
+          -9.978,
+          -10.164,
+          -10.257,
+          -10.295
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2503.05705v1",
+            "rerank_score": -7.57,
+            "text": "But perhaps most importantly, the possibility of training general models via iterated distillation  and  amplification  could  shorten  the  timelines"
+          },
+          {
+            "source": "2503.05705v1",
+            "rerank_score": -9.978,
+            "text": "Perhaps  one  way  to  save  the  compute  thresholds  is  to  say  that  they  cover  both systems above 10 26 FLOP of pre-training and systems above"
+          },
+          {
+            "source": "2507.07765v1",
+            "rerank_score": -10.164,
+            "text": "## 4. Conclusions\n\nIn this paper, we have presented recent developments in the domain of low-communication training algorithms and described two new p"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If adversarial attacks did NOT bypass the safeguards of fine-tuning, how would this affect AI alignment strategies?",
+      "answer": "If adversarial attacks did NOT bypass the safeguards of fine-tuning, it would suggest that current alignment strategies like fine-tuning and system prompts are more effective than indicated. However, the context does not provide specific details on how this would affect AI alignment strategies. Therefore, I don't have enough information to answer that question based on the provided documents.",
+      "num_contexts": 5,
+      "metrics": {
+        "context_recall": 0.5,
+        "faithfulness": 1.0,
+        "answer_correctness": 0.0
+      },
+      "trace": {
+        "entities_extracted": [
+          "fine-tuning"
+        ],
+        "qdrant_ids_per_entity": {
+          "fine-tuning": 90
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "graph": 3,
+          "arxiv_chunks": 3,
+          "arxiv_papers": 9
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          6.031,
+          5.704,
+          4.047,
+          3.398,
+          3.125
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 6.031,
+            "text": "In summary, prompt injection attacks reveal the brittleness of existing strategies to align LLM through fine-tuning and system prompts. Whatever the b"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 5.704,
+            "text": "The other possibility is that some future theoretical breakthrough leads to more capable AI systems with radically different architectures. If this ha"
+          },
+          {
+            "source": "2311.02147v1",
+            "rerank_score": 4.047,
+            "text": "completely prevent them. Nonetheless, fine-tuning and system prompts are relatively effective at making LLMs safe and reliable in ordinary circumstanc"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    }
+  ]
+}

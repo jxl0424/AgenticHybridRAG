@@ -108,7 +108,9 @@ _ARXIV_ID_PATTERN = re.compile(r"\barXiv[:\s]?(\d{4}\.\d{4,5})\b", re.IGNORECASE
 _AUTHOR_ET_AL_PATTERN = re.compile(
     r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*) et al\.?", re.UNICODE
 )
-_CAPITALIZED_ACRONYM_PATTERN = re.compile(r"\b([A-Z][A-Z0-9\-]{1,12})\b")
+_CAPITALIZED_ACRONYM_PATTERN = re.compile(r"\b([A-Z][A-Z0-9\-]{1,11}[A-Z0-9])\b")
+# Matches mixed-case hyphenated abbreviations like "CP-nets", "k-means", "t-SNE"
+_HYPHENATED_ABBREV_PATTERN = re.compile(r"\b([A-Z]{1,4}-[a-z][a-zA-Z0-9\-]{2,})\b")
 
 # Predicate -> relationship type mapping (longest match first)
 _PREDICATE_MAP = [
@@ -296,6 +298,15 @@ class CSEntityExtractor:
                         text=acronym, entity_type="MODEL",
                         start_pos=m.start(), end_pos=m.end(), confidence=0.5,
                     ))
+                    known_spans.add((m.start(), m.end()))
+
+        # Mixed-case hyphenated abbreviations: CP-nets, t-SNE, k-means, VC-dimension
+        for m in _HYPHENATED_ABBREV_PATTERN.finditer(text):
+            if (m.start(), m.end()) not in known_spans:
+                entities.append(ExtractedEntity(
+                    text=m.group(1), entity_type="MODEL",
+                    start_pos=m.start(), end_pos=m.end(), confidence=0.6,
+                ))
 
         return entities
 

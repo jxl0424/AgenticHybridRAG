@@ -11,6 +11,9 @@ from dataclasses import dataclass
 from src.graph.cs_knowledge_graph import CSKnowledgeGraph
 from src.graph.cs_entity_extractor import CSEntityExtractor, get_cs_entity_extractor
 from src.types import RetrievedContext
+from src.utils import get_logger
+
+logger = get_logger("retrieval.graph")
 
 
 # Kept for backward-compat imports elsewhere; will be cleaned up separately
@@ -64,27 +67,44 @@ class GraphRetriever:
         Retrieve relevant contexts using graph-based search.
 
         Returns list[RetrievedContext] with collection="graph".
+        Sets self._last_trace with diagnostic info for the pipeline to read.
         """
         extraction = self.entity_extractor.extract_entities(query)
         entity_names = list({e.text for e in extraction.entities})
 
+        logger.debug("[GraphRetriever] query=%r | entities_extracted=%s", query[:80], entity_names)
+
+        self._last_trace: dict = {
+            "entities_extracted": entity_names,
+            "qdrant_ids_per_entity": {},
+            "total_qdrant_ids": 0,
+            "fetched_count": 0,
+        }
+
         if not entity_names:
-            # No CS entities found -- fall back to keyword search on _Embeddable display names
-            return self._keyword_fallback(query, top_k)
+            logger.debug("[GraphRetriever] no entities found, returning empty")
+            return []
 
         all_qdrant_ids: list[str] = []
         for name in entity_names:
             ids = self.kg.get_chunk_refs_for_entity(name, limit=top_k * 2)
+            logger.debug("[GraphRetriever] entity=%r -> %d qdrant_ids: %s", name, len(ids), ids[:5])
+            self._last_trace["qdrant_ids_per_entity"][name] = len(ids)
             all_qdrant_ids.extend(ids)
 
         # Deduplicate while preserving order
         seen: set[str] = set()
         unique_ids = [i for i in all_qdrant_ids if not (i in seen or seen.add(i))]
+        self._last_trace["total_qdrant_ids"] = len(unique_ids)
 
         if not unique_ids or self.chunk_retriever is None:
-            return self._keyword_fallback(query, top_k)
+            logger.debug("[GraphRetriever] no qdrant_ids resolved, returning empty")
+            return []
 
         contexts = self.chunk_retriever.fetch_by_ids(unique_ids[:top_k * 2])
+        logger.debug("[GraphRetriever] fetched %d contexts from %d unique_ids", len(contexts), len(unique_ids))
+        self._last_trace["fetched_count"] = len(contexts)
+
         # Tag as graph-sourced. fetch_by_ids() returns fresh objects each call -- mutation is safe.
         for ctx in contexts:
             ctx.collection = "graph"
@@ -119,6 +139,7 @@ class GraphRetriever:
         if not keywords:
             return []
 
+        logger.debug("[GraphRetriever] keyword_fallback keywords=%s", keywords[:5])
         try:
             rows = self.kg.client.execute_read(
                 """
@@ -129,18 +150,22 @@ class GraphRetriever:
                 """,
                 {"keywords": keywords[:5], "lim": top_k},
             )
-            return [
+            results = [
                 RetrievedContext(
                     text=r["name"],
                     source="neo4j/keyword",
-                    score=0.3,
+                    score=0.1,
                     collection="graph",
                     metadata={"entity_type": r.get("type", "")},
                 )
                 for r in rows
                 if r.get("name")
             ]
-        except Exception:
+            logger.debug("[GraphRetriever] keyword_fallback returned %d results: %s",
+                         len(results), [r.text for r in results])
+            return results
+        except Exception as e:
+            logger.debug("[GraphRetriever] keyword_fallback exception: %s", e)
             return []
 
 

@@ -1,6 +1,6 @@
 # Logging settings
 logging:
-  level: "INFO"   # DEBUG | INFO | WARNING | ERROR
+  level: "INFO"  # DEBUG | INFO | WARNING | ERROR
 
 # Text chunking settings
 chunker:
@@ -25,8 +25,8 @@ graph_extraction:
 
 # Hybrid retrieval settings
 hybrid_retrieval:
-  chunk_weight: 0.5
-  paper_weight: 0.3
+  chunk_weight: 0.2
+  paper_weight: 0.6
   graph_weight: 0.2
   top_k: 5
   min_score: 0.2

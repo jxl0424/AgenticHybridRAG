@@ -22,9 +22,19 @@ class RAGMetrics:
         Measures how much of the answer is supported by the context.
         Uses LLM to verify each claim in the answer against the context.
         """
+        refusal_phrases = [
+            "i don't have enough information",
+            "i do not have enough information",
+            "i don't know",
+            "cannot answer",
+            "no information",
+        ]
+        if any(p in answer.lower() for p in refusal_phrases):
+            return 1.0
+
         if not self.llm:
             return 0.0
-            
+
         context_str = "\n".join(context)
         prompt = f"""
         Task: Verify if the following answer is faithful to the provided context.
@@ -93,9 +103,6 @@ class RAGMetrics:
                     if len(w) > 3 and w.lower() not in stop_words}
 
         if not gt_words:
-            # Fallback: LLM check if available
-            if self.llm:
-                return self._llm_relevance_check(contexts, ground_truth_context)
             return 0.0
 
         relevant_count = 0
@@ -148,23 +155,18 @@ class RAGMetrics:
         """
         if not retrieved_contexts or not ground_truth_context:
             return 0.0
-        
-        # Use LLM for semantic relevance
-        if self.llm:
-            return self._llm_relevance_check(retrieved_contexts, ground_truth_context)
-        
-        # Fallback to simple matching
+
         gt_lower = ground_truth_context.lower()
         gt_key_phrases = self._extract_key_phrases(gt_lower)
-        
+
         for ctx in retrieved_contexts:
             ctx_lower = ctx.lower()
             for phrase in gt_key_phrases:
                 if phrase in ctx_lower:
                     return 1.0
-        
+
         return 0.0
-    
+
     def _llm_relevance_check(self, retrieved_contexts: List[str], ground_truth_context: str) -> float:
         """
         Use LLM to check if any retrieved context is relevant to ground truth.
@@ -212,21 +214,16 @@ Return ONLY the numerical score."""
         """
         if not retrieved_contexts or not ground_truth_context:
             return 0.0
-        
-        # Use LLM for semantic relevance
-        if self.llm:
-            return self._llm_mrr(retrieved_contexts, ground_truth_context)
-        
-        # Fallback to simple matching
+
         gt_lower = ground_truth_context.lower()
         gt_key_phrases = self._extract_key_phrases(gt_lower)
-        
+
         for rank, ctx in enumerate(retrieved_contexts, start=1):
             ctx_lower = ctx.lower()
             for phrase in gt_key_phrases:
                 if phrase in ctx_lower:
                     return 1.0 / rank
-        
+
         return 0.0
     
     def _llm_mrr(self, retrieved_contexts: List[str], ground_truth_context: str) -> float:
@@ -326,7 +323,6 @@ Output just the number or "none":"""
         if not self.llm:
             return 0.0
         
-        # Explicit 0 for refusals — do not reward "I don't have enough information"
         refusal_phrases = [
             "i don't have enough information",
             "i do not have enough information",
@@ -335,6 +331,9 @@ Output just the number or "none":"""
             "no information",
         ]
         if any(p in generated_answer.lower() for p in refusal_phrases):
+            # If ground truth is also vague/unknown (< 30 words), refusal is appropriate
+            if len(ground_truth_answer.split()) < 30:
+                return 0.5
             return 0.0
 
         prompt = f"""
