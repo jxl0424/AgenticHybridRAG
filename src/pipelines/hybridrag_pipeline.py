@@ -380,10 +380,9 @@ class HybridRAGBenchPipeline:
                 span.set_attribute("threshold_dropped", pre_threshold_count - len(keep))
                 span.set_attribute("post_count", len(keep))
 
-            if keep:
-                context_texts = [context_texts[i] for i in keep]
-                context_sources = [context_sources[i] for i in keep]
-                context_scores = [context_scores[i] for i in keep]
+            context_texts = [context_texts[i] for i in keep]
+            context_sources = [context_sources[i] for i in keep]
+            context_scores = [context_scores[i] for i in keep]
         else:
             context_texts = context_texts[:top_k]
             context_sources = context_sources[:top_k]

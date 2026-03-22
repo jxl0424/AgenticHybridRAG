@@ -21,6 +21,5 @@ def test_start_phoenix_returns_none_when_phoenix_not_importable(monkeypatch):
     fake_phoenix = mock.MagicMock()
     fake_phoenix.launch_app.side_effect = RuntimeError("simulated failure")
     monkeypatch.setitem(sys.modules, "phoenix", fake_phoenix)
-    from src.observability.tracer import start_phoenix
     result = start_phoenix()
     assert result is None

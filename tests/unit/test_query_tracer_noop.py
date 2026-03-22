@@ -40,3 +40,10 @@ def test_query_tracer_none_returns_expected_keys():
 
     assert set(result.keys()) == {"question", "answer", "contexts", "sources",
                                    "scores", "entities_found", "retrieval_type", "trace"}
+    trace = result["trace"]
+    assert set(trace.keys()) >= {
+        "entities_extracted", "qdrant_ids_per_entity", "graph_qdrant_ids_total",
+        "graph_fetched_count", "raw_counts", "pre_rerank_count",
+        "pre_rerank_source_breakdown", "post_rerank_count", "dropped_by_reranker",
+        "reranker_scores", "answer_type", "top3_contexts",
+    }
