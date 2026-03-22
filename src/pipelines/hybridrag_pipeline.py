@@ -315,10 +315,12 @@ class HybridRAGBenchPipeline:
                 s.set_attribute("entities_extracted", json.dumps(
                     graph_trace.get("entities_extracted", [])
                 ))
+                s.set_attribute("latency_ms", retrieve_ms)
 
             with pipeline_span(tracer, "chunk_fetch") as s:
                 s.set_attribute("ids_requested", graph_trace.get("total_qdrant_ids", 0))
                 s.set_attribute("ids_resolved", graph_trace.get("fetched_count", 0))
+                s.set_attribute("latency_ms", retrieve_ms)
 
         with pipeline_span(tracer, "rrf_fuse") as span:
             span.set_attribute("fused.count", hybrid_trace.get("fused_count", 0))
