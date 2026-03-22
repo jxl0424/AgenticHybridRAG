@@ -26,8 +26,8 @@ Arize Phoenix (local, free, open source) running on `localhost:6006`. Each eval 
 **`src/observability/tracer.py`**
 
 Two responsibilities:
-1. `start_phoenix()` — launches the Phoenix server (idempotent; reuses existing instance) and configures the OTel exporter to send to it. Returns a configured `opentelemetry.trace.Tracer`.
-2. `pipeline_span(tracer, name, attrs)` — a `@contextmanager` that opens a named OTel span, sets attributes from `attrs`, and closes it. Returns a no-op context if `tracer` is `None`, so calling code in `query()` is always safe.
+1. `start_phoenix()` — launches the Phoenix server (idempotent; reuses existing instance) and configures the OTel exporter to send to it. Returns a configured `opentelemetry.trace.Tracer`. If `localhost:6006` is unreachable after launch, logs a warning and returns `None`; it does not raise. The eval loop then calls `pipeline.query(tracer=None)` and tracing is skipped for that run without aborting evaluation.
+2. `pipeline_span(tracer, name, attrs)` — a `@contextmanager` that opens a named OTel span, sets attributes from `attrs`, and closes it. Returns a no-op context manager if `tracer` is `None`, so all calling code in `query()` is always safe regardless of whether Phoenix is running.
 
 ### Modified files
 
@@ -55,6 +55,8 @@ query  [root]
 │   └── chunk_fetch
 ├── rrf_fuse
 ├── rerank
+│   ├── rerank_crossencoder    (cross-encoder trims to top_k)
+│   └── rerank_threshold       (relative-threshold filter: drop if score < top - 8)
 └── llm_generate
 ```
 
@@ -64,16 +66,29 @@ query  [root]
 
 | Span | Attributes |
 |------|-----------|
-| `query` | `query.text`, `retrieval.mode`, `retrieval.top_k`, `answer.type`, `answer.text`, `eval.hit_rate`, `eval.mrr`, `eval.ndcg`, `eval.context_precision` |
-| `embed_query` | `embedding.model`, `latency_ms` |
+| `query` | `query.text`, `retrieval.mode`, `retrieval.use_hybrid` (bool), `retrieval.top_k`, `answer.type`, `answer.text`, `eval.hit_rate`, `eval.mrr`, `eval.ndcg`, `eval.context_precision` |
+| `embed_query` | `embedding.model`, `embedding.vector_dim`, `latency_ms` |
 | `chunk_retriever` | `chunk.raw_count`, `chunk.top_score`, `latency_ms` |
 | `paper_retriever` | `paper.raw_count`, `paper.top_score`, `latency_ms` |
 | `graph_retriever` | `graph.entity_count`, `graph.total_qdrant_ids`, `graph.fetched_count`, `latency_ms` |
 | `entity_extraction` | `entities_extracted` (JSON-encoded list) |
 | `chunk_fetch` | `ids_requested`, `ids_resolved` |
-| `rrf_fuse` | `fused.count`, `fused.source_breakdown` (JSON), `top_rrf_scores` (JSON) |
-| `rerank` | `pre_count`, `post_count`, `dropped`, `top_scores` (JSON), `latency_ms` |
+| `rrf_fuse` | `fused.count`, `fused.source_breakdown` (JSON), `top_rrf_scores` (JSON), `rrf.weights` (JSON with `chunk_weight`, `paper_weight`, `graph_weight`) |
+| `rerank_crossencoder` | `pre_count`, `post_count`, `latency_ms` |
+| `rerank_threshold` | `pre_count`, `threshold_dropped`, `post_count` |
 | `llm_generate` | `llm.model`, `latency_ms` |
+
+### Reranker split rationale
+
+The pipeline applies two sequential filters after the cross-encoder scores:
+1. Cross-encoder trims to `top_k` candidates.
+2. A relative-threshold filter drops any candidate whose score is more than 8 points below the top score.
+
+Conflating these into a single `dropped` count hides which filter is responsible for context loss. Splitting into `rerank_crossencoder` and `rerank_threshold` makes this directly inspectable in Phoenix.
+
+### RRF weights and use_hybrid rationale
+
+When a query returns zero graph results it is ambiguous whether graph retrieval fired and found nothing, or was disabled via `use_hybrid=False`. Recording `retrieval.use_hybrid` on the root span and `rrf.weights` on the fuse span resolves this without requiring the user to cross-reference config files.
 
 ---
 
@@ -85,17 +100,20 @@ Phoenix stores traces in a local SQLite database across runs. Eval runs from dif
 
 ## No-op guarantee
 
-When no tracer is active (e.g. `query_hybridrag.py` interactive use), all `pipeline_span` calls are no-ops. Zero overhead, zero behaviour change outside eval runs.
+When no tracer is active (e.g. `query_hybridrag.py` interactive use), all `pipeline_span` calls are no-ops. Zero overhead, zero behaviour change outside eval runs. If `start_phoenix()` cannot reach `localhost:6006`, it logs a warning and returns `None`; the eval run continues without tracing rather than aborting.
 
 ---
 
 ## New dependencies
 
 ```
-arize-phoenix
+arize-phoenix[otel]
 opentelemetry-sdk
 opentelemetry-exporter-otlp-proto-grpc
+grpcio
 ```
+
+`arize-phoenix` must be installed as `arize-phoenix[otel]` to include the OTel SDK glue. `grpcio` must be listed explicitly — on Windows it is not always pulled in transitively by the gRPC exporter.
 
 ---
 
