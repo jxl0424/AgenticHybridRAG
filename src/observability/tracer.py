@@ -8,7 +8,7 @@ Public API:
 import json
 import logging
 from contextlib import contextmanager
-from typing import Optional
+from typing import Any, Optional
 
 logger = logging.getLogger("rag.observability")
 
@@ -16,12 +16,21 @@ logger = logging.getLogger("rag.observability")
 class _NoOpSpan:
     """Returned by pipeline_span when tracing is disabled. All methods are no-ops."""
 
-    def set_attribute(self, key: str, value) -> None:  # noqa: ANN001
+    def set_attribute(self, key: str, value: Any) -> None:
+        pass
+
+    def set_status(self, status: Any, description: str = "") -> None:
+        pass
+
+    def record_exception(self, exception: BaseException, **kwargs: Any) -> None:
+        pass
+
+    def add_event(self, name: str, **kwargs: Any) -> None:
         pass
 
 
 @contextmanager
-def pipeline_span(tracer, name: str):
+def pipeline_span(tracer: Optional[Any], name: str):
     """
     Open a named OTel span as a context manager.
 
@@ -36,7 +45,7 @@ def pipeline_span(tracer, name: str):
         yield span
 
 
-def start_phoenix() -> Optional[object]:
+def start_phoenix() -> Optional[Any]:
     """
     Launch Arize Phoenix and configure the OTel OTLP/gRPC exporter.
 

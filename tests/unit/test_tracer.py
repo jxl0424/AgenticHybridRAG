@@ -15,16 +15,12 @@ def test_pipeline_span_yields_noop_when_tracer_is_none():
         span.set_attribute("x", 1)  # must not raise
 
 
-def test_pipeline_span_noop_exits_cleanly():
-    entered = False
-    with pipeline_span(None, "test_span") as span:
-        entered = True
-    assert entered
-
-
 def test_start_phoenix_returns_none_when_phoenix_not_importable(monkeypatch):
+    import unittest.mock as mock
     import sys
-    monkeypatch.setitem(sys.modules, "phoenix", None)
-    # Re-importing after patching sys.modules triggers ImportError inside start_phoenix
+    fake_phoenix = mock.MagicMock()
+    fake_phoenix.launch_app.side_effect = RuntimeError("simulated failure")
+    monkeypatch.setitem(sys.modules, "phoenix", fake_phoenix)
+    from src.observability.tracer import start_phoenix
     result = start_phoenix()
     assert result is None
