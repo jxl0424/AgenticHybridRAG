@@ -152,7 +152,9 @@ Replaces the current free-form prompt for `open_ended` and `counterfactual` type
 
 `--max-pairs` is removed.
 
-**Run loop:** When `--runs N > 1`, execute N independent eval runs. Output files are named by inserting `_run{i}` before the `.json` extension of the `--output` path: e.g., for `--output tests/results/my_eval.json`, run files are `my_eval_run1.json`, `my_eval_run2.json`. The summary is named by inserting `_summary` before `.json`: `my_eval_summary.json`. This derivation applies to any `--output` value.
+**Run loop:**
+- `--runs 1` (default): output goes directly to the raw `--output` path (e.g., `my_eval.json`). No suffix is added.
+- `--runs N > 1`: execute N independent eval runs. Output files are named by inserting `_run{i}` before the `.json` extension: e.g., `my_eval_run1.json`, `my_eval_run2.json`. After all runs complete, a summary is written with `_summary` inserted before `.json`: `my_eval_summary.json`. This derivation applies to any `--output` value.
 
 ---
 
@@ -189,9 +191,9 @@ Replaces the current free-form prompt for `open_ended` and `counterfactual` type
 }
 ```
 
-`context_recall` is computed only when both `ground_truth_answer` and `contexts` are non-empty. `faithfulness` is computed only when both `answer` (the generated prediction) and `contexts` are non-empty. Both are written as `null` otherwise.
+`context_recall` is computed only when both `ground_truth` (the per-question JSON field) and `contexts` are non-empty. `faithfulness` is computed only when both `answer` (the generated prediction) and `contexts` are non-empty. Both are written as `null` otherwise.
 
-**Null aggregation in summary:** `null` values are excluded from the denominator when computing mean/std/median/min/max. If all values for a metric are `null`, the summary entry is `null`. `num_nulls` is tracked per metric per run to make null bias visible (see summary schema below).
+**Null aggregation in summary:** `null` values are excluded from the denominator when computing mean/std/median/min/max. If all values for a metric are `null`, the summary entry is `null`. In `_summary.json`, `num_nulls` is the **total count across all runs** (summed, not averaged) for that metric, to make LLM parse-failure bias visible.
 
 #### Summary file (`_summary.json`)
 
@@ -232,12 +234,14 @@ Replaces the current free-form prompt for `open_ended` and `counterfactual` type
 ### 5. Display
 
 **`print_type_breakdown(aggregated: dict[str, dict[str, Any]])`**
+- Called only in the single-run case (`--runs 1`). For multi-run output, use `print_multirun_summary`.
 - Input: outer key = `question_type`, inner key = metric name, value = scalar or `None`
+- Shows two metrics per type: `final_answer_correctness` and `context_recall`. Additional metrics may be added in future but are not part of this design.
 - Prints metrics in three labelled sections: `[Extractive: EM / Token F1]`, `[LLM Judge]`, `[Retrieval]`
-- One column per question type, one row per metric
-- `N/A` for metrics not applicable to that type
+- One column per question type, one row per metric; `N/A` for inapplicable cells
 
 **`print_multirun_summary(summary: dict)`**
+- Called only when `--runs > 1`.
 - Input: the `_summary.json` dict structure defined above
 - Prints `mean`, `std`, `median`, `min`, `max`, `num_nulls` for every scalar metric
 - Second table: per-type `count` and `std` for `final_answer_correctness`
@@ -251,7 +255,7 @@ Replaces the current free-form prompt for `open_ended` and `counterfactual` type
 
 | File | Change |
 |---|---|
-| `src/ingestion/local_parquet_loader.py` | Replace `max_pairs` with `seed`, `k_per_type`, `stratify` in `load_local_qa_pairs()`; use single `np.random.default_rng(seed)` for all sampling and shuffle |
+| `src/ingestion/local_parquet_loader.py` | Replace `max_pairs` with `seed`, `k_per_type`, `stratify` in `load_local_qa_pairs()`; use single `np.random.default_rng(seed)` for all sampling and shuffle; loader docstring must note that seed printing is the caller's responsibility (done in `hybridrag_eval.py`) |
 | `tests/evaluation/hybridrag_eval.py` | Update `load_qa_pairs()` wrapper (remove `max_pairs`, add new params); add `--seed`, `--runs`, `--k-per-type` CLI args; remove `--max-pairs`; add `--output` `.json` extension validation; update `_compute_metrics()` to dispatch on `question_type` and populate new JSON fields; add multi-run loop with per-run file output; add `print_type_breakdown()` and `print_multirun_summary()`; update `print_trace_summary()` to use `final_answer_correctness`; update `print_comparison_table()` replacing its `metric_keys` list with `["exact_match", "token_f1", "answer_correctness_llm", "final_answer_correctness", "context_recall", "faithfulness"]` (removing old `"answer_correctness"`) |
 | `tests/evaluation/metrics.py` | Add `normalize()` (NFKD + lowercase + punctuation + articles + whitespace), `calculate_exact_match()`, `calculate_token_f1()` (Counter-based); update LLM judge prompt (structured output, non-overlapping rubric, counterfactual clause, score clamping to [0,1]) |
 
