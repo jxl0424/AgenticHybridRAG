@@ -26,7 +26,7 @@ from src.graph.cs_knowledge_graph import GraphDocument, GraphChunk
 from src.retrieval.hybrid_retriever import HybridRetriever
 from src.retrieval.graph_retriever import GraphRetriever
 from src.retrieval.reranker import Reranker
-from src.generation.llm_client import LLMClient
+from src.generation.llm_client import LLMClient, build_providers_from_config
 from src.prompts.templates import build_messages
 from src.utils import get_logger
 
@@ -80,7 +80,6 @@ class HybridRAGBenchPipeline:
             cfg = yaml.safe_load(f)
 
         hcfg = cfg.get("hybridrag", {})
-        llm_cfg = cfg.get("llm", {})
         hybrid_cfg = cfg.get("hybrid_retrieval", {})
 
         self.embedding_model: str = hcfg.get("embedding_model", "allenai/specter2_base")
@@ -121,11 +120,8 @@ class HybridRAGBenchPipeline:
             device = "cpu"
         self.reranker = Reranker(model_name="msmarco", device=device)
 
-        # LLM
-        self.llm = LLMClient(
-            base_url=llm_cfg.get("base_url", "http://localhost:11434/v1"),
-            model=llm_cfg.get("model", "qwen2.5:7b-instruct"),
-        )
+        # LLM — OpenRouter first, Ollama fallback (see config/defaults.yaml openrouter block)
+        self.llm = LLMClient(providers=build_providers_from_config(cfg))
 
         self.min_score: float = hcfg.get("min_score", hybrid_cfg.get("min_score", 0.05))
 
@@ -394,7 +390,7 @@ class HybridRAGBenchPipeline:
         with pipeline_span(tracer, "llm_generate") as span:
             t0 = time.perf_counter()
             answer = self.llm.generate(messages)
-            span.set_attribute("llm.model", self.llm.model)
+            span.set_attribute("llm.model", self.llm._active_model)
             span.set_attribute("latency_ms", round((time.perf_counter() - t0) * 1000, 2))
 
         _refusal_phrases = [

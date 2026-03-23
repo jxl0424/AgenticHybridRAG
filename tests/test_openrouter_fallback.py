@@ -1,6 +1,7 @@
 """Tests for LLMClient multi-provider fallback."""
 import logging
-from src.generation.llm_client import LLMClient, ProviderConfig
+import yaml
+from src.generation.llm_client import LLMClient, ProviderConfig, build_providers_from_config
 
 
 def _ollama_provider() -> ProviderConfig:
@@ -43,3 +44,14 @@ def test_all_providers_fail_returns_empty():
     client = LLMClient(providers=[_bad_provider(), _bad_provider()])
     result = client.generate([{"role": "user", "content": "hello"}])
     assert result == ""
+
+
+def test_openrouter_skipped_when_no_api_key():
+    """build_providers_from_config() returns only the Ollama provider when key is absent."""
+    cfg = yaml.safe_load(open("config/defaults.yaml"))
+    # Pass an env dict with no OPENROUTER_API_KEY
+    providers = build_providers_from_config(cfg, env={})
+    assert len(providers) == 1, f"Expected 1 provider (Ollama), got {len(providers)}"
+    assert "localhost" in providers[0].base_url or "11434" in providers[0].base_url, (
+        f"Expected Ollama provider, got base_url={providers[0].base_url}"
+    )
