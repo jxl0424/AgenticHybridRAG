@@ -14,14 +14,16 @@ llm:
   model: "qwen2.5:7b-instruct"
   base_url: "http://localhost:11434/v1"
 
-# Relation extraction LLM (separate from answer-generation LLM)
-relation_llm:
-  model: "meditron:7b"
-  base_url: "http://localhost:11434/v1"
-
-# Graph extraction settings
-graph_extraction:
-  use_llm_supplement: false   # set true to supplement rule-based NER with LLM extraction
+# OpenRouter free-model fallback (answer generation)
+# Set OPENROUTER_API_KEY in .env to enable. Falls back to local Ollama if unavailable.
+openrouter:
+  enabled: true
+  api_key_env: "OPENROUTER_API_KEY"
+  models:
+    - "qwen/qwq-32b:free"
+    - "deepseek/deepseek-chat-v3-0324:free"
+  site_url: ""     # optional — sent as HTTP-Referer (OpenRouter best practice)
+  app_name: ""     # optional — sent as X-Title header
 
 # Hybrid retrieval settings
 hybrid_retrieval:
