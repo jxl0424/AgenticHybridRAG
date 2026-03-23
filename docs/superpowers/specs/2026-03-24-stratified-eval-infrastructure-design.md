@@ -102,7 +102,7 @@ Replaces the current free-form prompt for `open_ended` and `counterfactual` type
   - 0.0–0.29 = wrong, off-topic, or unjustified refusal
 - Required output format: `Score: <float>\nJustification: <one sentence>`
 - Parse score with `re.search(r"Score:\s*(\d*\.?\d+)")`. Store the extracted justification sentence in `lm_judge_justification`, truncated to 500 characters on success.
-- **Parse failure handling:** If the regex does not match, log `WARNING: LLM judge parse failed for question "{question[:60]}..."`, set `answer_correctness_llm` to `null`, set `lm_judge_justification` to the raw LLM response truncated to 200 characters, and set `final_answer_correctness` to `null` for that question. The question still appears in results with `null` metrics — it is not silently dropped.
+- **Parse failure handling:** If the regex does not match, log `WARNING: LLM judge parse failed for question "{question[:60]}..."`, set `answer_correctness_llm` to `null`, set `lm_judge_justification` to the raw LLM response truncated to 200 characters, set `final_answer_correctness` to `null`, and set `final_answer_correctness_source` to `null` for that question. The question still appears in results with `null` metrics — it is not silently dropped.
 
 **Counterfactual-specific clause** added to the judge prompt:
 > "If the model correctly identifies that a premise is false or cannot be verified from the provided context, this is a valid and high-scoring response. Score it as 0.7 or higher."
@@ -212,9 +212,9 @@ This is the primary metric for tracking system-level progress over time. It is n
     "counterfactual":          { "final_answer_correctness": { "mean": 0.69, "std": 0.05 }, "context_recall": { "mean": 0.48, "std": 0.06 } }
   }
 }
+```
 
 All six question types always appear in `per_type`, even if a type had zero sampled questions for a run (e.g., due to the `k_per_type > group_size` path). In that case, all metrics for that type are `null`.
-```
 
 **Overall** = macro average across question types (equal weight per type, consistent with balanced sampling).
 
