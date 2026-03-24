@@ -30,8 +30,8 @@ class HybridRAGEvaluator:
     Evaluates HybridRAGBenchPipeline against HybridRAG-Bench QA pairs.
 
     Compares vector-only vs hybrid retrieval on:
-        hit_rate, mrr, context_precision, context_recall,
-        ndcg@5, faithfulness, answer_correctness
+        exact_match, token_f1, answer_correctness_llm, final_answer_correctness,
+        context_recall, faithfulness (+ hit_rate, mrr, context_precision, ndcg_at_5 when gt_context available)
     """
 
     EXTRACTIVE_TYPES = frozenset({"single_hop", "single_hop_w_conditions", "multi_hop"})
@@ -96,6 +96,8 @@ class HybridRAGEvaluator:
             modes: Retrieval modes to compare. Options: "vector", "hybrid"
             top_k: Number of contexts to retrieve per query
             output_path: Where to save incremental results
+            seed: RNG seed used for this run (stored in each per-question item)
+            run: Run index (1-based, stored in each per-question item)
 
         Returns:
             Aggregated metrics per mode
@@ -218,7 +220,7 @@ class HybridRAGEvaluator:
                 metrics["exact_match"] = em
                 metrics["token_f1"] = tf1
                 pred_len = len(self.metrics.normalize(answer).split())
-                if tf1 == 0.0 and pred_len > 15:
+                if tf1 == 0.0 and pred_len > 15:  # long prediction with zero F1 -> likely verbose, not simply wrong
                     judge = self.metrics.calculate_answer_correctness(
                         question, gt_answer, answer, question_type="multi_hop_difficult"
                     )
@@ -238,6 +240,16 @@ class HybridRAGEvaluator:
                 metrics["lm_judge_justification"] = judge["justification"]
                 metrics["final_answer_correctness"] = judge["score"]
                 metrics["final_answer_correctness_source"] = "llm" if judge["score"] is not None else None
+
+        if gt_context:
+            metrics["hit_rate"] = self.metrics.calculate_hit_rate(contexts, gt_context)
+            metrics["mrr"] = self.metrics.calculate_mrr(contexts, gt_context)
+            metrics["context_precision"] = self.metrics.calculate_context_precision(
+                question, contexts, gt_context
+            )
+            metrics["ndcg_at_5"] = self.metrics.calculate_ndcg(
+                contexts, [gt_context], k=5
+            )
 
         if gt_answer and contexts:
             metrics["context_recall"] = self.metrics.calculate_context_recall(gt_answer, contexts)

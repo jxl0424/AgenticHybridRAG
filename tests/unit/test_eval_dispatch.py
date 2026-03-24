@@ -121,6 +121,15 @@ class TestDispatchMultiHopDifficult:
                                    question_type="multi_hop_difficult", domain="d", seed=1, run=1)
         ev.metrics.calculate_answer_correctness.assert_not_called()
 
+    def test_no_escalation_at_exact_boundary(self):
+        """Exactly 15 words should NOT escalate (threshold is strictly > 15)."""
+        ev = _make_evaluator()
+        ev.metrics.calculate_token_f1.return_value = 0.0
+        ev.metrics.normalize.return_value = " ".join(["word"] * 15)
+        item = ev._compute_metrics("q", "gt", "", RESPONSE,
+                                   question_type="multi_hop_difficult", domain="d", seed=1, run=1)
+        ev.metrics.calculate_answer_correctness.assert_not_called()
+
 
 class TestOutputSchema:
     def test_output_has_required_keys(self):
