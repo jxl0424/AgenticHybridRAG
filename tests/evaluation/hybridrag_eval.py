@@ -25,6 +25,28 @@ from src.pipelines.hybridrag_pipeline import HybridRAGBenchPipeline
 from tests.evaluation.metrics import RAGMetrics
 
 
+# ---------------------------------------------------------------------------
+# Path helpers
+# ---------------------------------------------------------------------------
+
+def validate_output_path(path: str) -> None:
+    """Raise ValueError if path does not end in .json."""
+    if not path.endswith(".json"):
+        raise ValueError(f"--output must end in .json, got: {path!r}")
+
+
+def _derive_run_path(output: str, run_index: int) -> str:
+    """'my_eval.json' -> 'my_eval_run1.json'"""
+    p = Path(output)
+    return (p.parent / f"{p.stem}_run{run_index}{p.suffix}").as_posix()
+
+
+def _derive_summary_path(output: str) -> str:
+    """'my_eval.json' -> 'my_eval_summary.json'"""
+    p = Path(output)
+    return (p.parent / f"{p.stem}_summary{p.suffix}").as_posix()
+
+
 class HybridRAGEvaluator:
     """
     Evaluates HybridRAGBenchPipeline against HybridRAG-Bench QA pairs.
@@ -339,6 +361,175 @@ class HybridRAGEvaluator:
         print("         pre_rr=contexts before rerank, post_rr=after, dropped=filtered by threshold")
         print()
 
+    def _build_type_breakdown(self, raw_results: dict) -> dict:
+        """
+        Compute per-type averages of final_answer_correctness and context_recall.
+
+        Args:
+            raw_results: {mode: [list of per-question items]} as saved to JSON.
+
+        Returns:
+            {question_type: {"final_answer_correctness": float|None, "context_recall": float|None}}
+        """
+        by_type: dict[str, list[dict]] = {}
+        for mode_items in raw_results.values():
+            for item in mode_items:
+                qt = item.get("question_type", "unknown")
+                by_type.setdefault(qt, []).append(item.get("metrics", {}))
+
+        result = {}
+        for qt, metric_list in by_type.items():
+            type_entry = {}
+            for key in ("final_answer_correctness", "context_recall"):
+                values = [m.get(key) for m in metric_list if isinstance(m.get(key), float)]
+                type_entry[key] = round(sum(values) / len(values), 4) if values else None
+            result[qt] = type_entry
+        return result
+
+    def _build_summary(self, all_items: list[dict], config: dict) -> dict:
+        """
+        Aggregate metrics across all runs for the multi-run summary JSON.
+
+        Args:
+            all_items: Flat list of per-question items from all runs.
+            config: {seed, runs, k_per_type, modes}.
+
+        Returns:
+            {"config": {...}, "per_metric": {...}, "per_type": {...}}
+        """
+        import statistics
+
+        METRIC_KEYS = [
+            "final_answer_correctness", "exact_match", "token_f1",
+            "answer_correctness_llm", "context_recall", "faithfulness",
+        ]
+        QUESTION_TYPES = [
+            "single_hop", "single_hop_w_conditions", "multi_hop",
+            "multi_hop_difficult", "open_ended", "counterfactual",
+        ]
+
+        per_metric = {}
+        for key in METRIC_KEYS:
+            values = [
+                item["metrics"][key]
+                for item in all_items
+                if isinstance(item.get("metrics", {}).get(key), float)
+            ]
+            num_nulls = sum(
+                1 for item in all_items
+                if not isinstance(item.get("metrics", {}).get(key), float)
+            )
+            if values:
+                per_metric[key] = {
+                    "mean": round(sum(values) / len(values), 4),
+                    "std": round(statistics.stdev(values) if len(values) > 1 else 0.0, 4),
+                    "median": round(statistics.median(values), 4),
+                    "min": round(min(values), 4),
+                    "max": round(max(values), 4),
+                    "num_nulls": num_nulls,
+                }
+            else:
+                per_metric[key] = {"mean": None, "std": None, "median": None,
+                                    "min": None, "max": None, "num_nulls": num_nulls}
+
+        per_type = {}
+        for qt in QUESTION_TYPES:
+            type_items = [item for item in all_items if item.get("question_type") == qt]
+            fac_vals = [
+                item["metrics"]["final_answer_correctness"]
+                for item in type_items
+                if isinstance(item.get("metrics", {}).get("final_answer_correctness"), float)
+            ]
+            cr_vals = [
+                item["metrics"]["context_recall"]
+                for item in type_items
+                if isinstance(item.get("metrics", {}).get("context_recall"), float)
+            ]
+            per_type[qt] = {
+                "count": len(fac_vals),
+                "final_answer_correctness": {
+                    "mean": round(sum(fac_vals) / len(fac_vals), 4) if fac_vals else None,
+                    "std": round(statistics.stdev(fac_vals) if len(fac_vals) > 1 else 0.0, 4) if fac_vals else None,
+                },
+                "context_recall": {
+                    "mean": round(sum(cr_vals) / len(cr_vals), 4) if cr_vals else None,
+                    "std": round(statistics.stdev(cr_vals) if len(cr_vals) > 1 else 0.0, 4) if cr_vals else None,
+                },
+            }
+
+        return {
+            "config": {
+                **config,
+                "domain_note": (
+                    "Sampling is stratified by question_type, not domain — "
+                    "domain distribution is uncontrolled."
+                ),
+            },
+            "per_metric": per_metric,
+            "per_type": per_type,
+        }
+
+    def print_type_breakdown(self, aggregated: dict) -> None:
+        """
+        Print final_answer_correctness and context_recall per question type.
+
+        Args:
+            aggregated: {question_type: {"final_answer_correctness": float|None, ...}}
+        """
+        def _fmt(val):
+            return f"{val:.4f}" if isinstance(val, float) else "N/A"
+
+        print("\n" + "=" * 80)
+        print("Breakdown by Question Type")
+        print("=" * 80)
+
+        print("\n[Extractive: EM / Token F1]")
+        for qt in ("single_hop", "single_hop_w_conditions", "multi_hop", "multi_hop_difficult"):
+            data = aggregated.get(qt, {})
+            print(f"  {qt:<32} final_ac={_fmt(data.get('final_answer_correctness'))}  "
+                  f"context_recall={_fmt(data.get('context_recall'))}")
+
+        print("\n[LLM Judge]")
+        for qt in ("open_ended", "counterfactual"):
+            data = aggregated.get(qt, {})
+            print(f"  {qt:<32} final_ac={_fmt(data.get('final_answer_correctness'))}  "
+                  f"context_recall={_fmt(data.get('context_recall'))}")
+
+        print("=" * 80)
+
+    def print_multirun_summary(self, summary: dict) -> None:
+        """Print multi-run aggregated summary to stdout."""
+        cfg = summary["config"]
+        print("\n" + "=" * 88)
+        print(f"Multi-Run Summary  ({cfg['runs']} runs, seed={cfg['seed']}, "
+              f"k_per_type={cfg['k_per_type']})")
+        print("=" * 88)
+
+        hdr = f"{'Metric':<32} {'mean':>8} {'std':>8} {'median':>8} {'min':>8} {'max':>8} {'nulls':>6}"
+        print(hdr)
+        print("-" * len(hdr))
+        for key, stats in summary["per_metric"].items():
+            if stats is None or stats.get("mean") is None:
+                print(f"{key:<32} {'N/A':>8}")
+                continue
+            print(
+                f"{key:<32} {stats['mean']:>8.4f} {stats['std']:>8.4f} "
+                f"{stats['median']:>8.4f} {stats['min']:>8.4f} {stats['max']:>8.4f} "
+                f"{stats['num_nulls']:>6}"
+            )
+
+        print(f"\n{'Type':<32} {'count':>6} {'mean_final_ac':>14} {'std':>8}")
+        print("-" * 62)
+        for qt, data in summary["per_type"].items():
+            fac = data["final_answer_correctness"]
+            if fac and fac["mean"] is not None:
+                print(f"{qt:<32} {data['count']:>6} {fac['mean']:>14.4f} {fac['std']:>8.4f}")
+            else:
+                print(f"{qt:<32} {data['count']:>6} {'N/A':>14}")
+
+        print(f"\nWARNING: {cfg['domain_note']}")
+        print("=" * 88)
+
     def print_comparison_table(self, aggregated: dict) -> None:
         """Print a side-by-side comparison table of modes."""
         metric_keys = [
@@ -383,32 +574,86 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Evaluate HybridRAG-Bench pipeline")
-    parser.add_argument("--k-per-type", type=int, default=5, help="Questions per type (temporary, replaced in Task 5)")
+    parser.add_argument("--seed", type=int, default=None,
+                        help="Base RNG seed. If omitted, a random seed is chosen and printed.")
+    parser.add_argument("--runs", type=int, default=1,
+                        help="Number of independent eval runs (seeds: [seed, seed+1, ...])")
+    parser.add_argument("--k-per-type", type=int, default=5,
+                        help="Questions sampled per question_type per run")
     parser.add_argument("--top-k", type=int, default=5, help="Contexts per query")
-    parser.add_argument("--modes", nargs="+", default=["vector", "hybrid"], help="Retrieval modes")
-    parser.add_argument("--output", default="tests/results/hybridrag_eval.json", help="Output path")
-    parser.add_argument("--local-data-dir", default="data/hybridrag", help="Path to local HybridRAG-Bench parquet data")
+    parser.add_argument("--modes", nargs="+", default=["vector", "hybrid"])
+    parser.add_argument("--output", default="tests/results/hybridrag_eval.json",
+                        help="Output path (must end in .json)")
+    parser.add_argument("--local-data-dir", default="data/hybridrag")
     args = parser.parse_args()
+
+    validate_output_path(args.output)
+
+    import numpy as np
+    base_seed = args.seed if args.seed is not None else int(
+        np.random.default_rng().integers(0, 1_000_000)
+    )
+    print(f"Seed: {base_seed}")
 
     print("Initializing pipeline...")
     pipeline = HybridRAGBenchPipeline()
     evaluator = HybridRAGEvaluator(pipeline)
 
-    print(f"Loading QA pairs from {args.local_data_dir}...")
-    qa_pairs = evaluator.load_qa_pairs(k_per_type=args.k_per_type, local_data_dir=args.local_data_dir)
+    all_run_items: list[dict] = []
 
-    if not qa_pairs:
-        print("No QA pairs found. Inspect the dataset schema printed above and adjust --question-key etc.")
-        sys.exit(1)
+    for run_i in range(1, args.runs + 1):
+        seed_i = base_seed + (run_i - 1)
+        output_i = _derive_run_path(args.output, run_i) if args.runs > 1 else args.output
 
-    print(f"Running evaluation: modes={args.modes}, top_k={args.top_k}")
-    aggregated = evaluator.run(qa_pairs, modes=args.modes, top_k=args.top_k, output_path=args.output)
-    evaluator.print_comparison_table(aggregated)
+        qa_pairs = evaluator.load_qa_pairs(
+            local_data_dir=args.local_data_dir,
+            seed=seed_i,
+            k_per_type=args.k_per_type,
+        )
 
-    import json
-    with open(args.output) as f:
-        raw_results = json.load(f)
-    evaluator.print_trace_summary(raw_results)
+        if not qa_pairs:
+            print("No QA pairs found. Check --local-data-dir path and parquet schema.")
+            sys.exit(1)
+
+        if args.runs > 1:
+            print(f"\n--- Run {run_i}/{args.runs} (seed={seed_i}, {len(qa_pairs)} pairs) ---")
+
+        aggregated = evaluator.run(
+            qa_pairs,
+            modes=args.modes,
+            top_k=args.top_k,
+            output_path=output_i,
+            seed=seed_i,
+            run=run_i,
+        )
+
+        with open(output_i) as f:
+            raw_results = json.load(f)
+        for mode_items in raw_results.values():
+            all_run_items.extend(mode_items)
+
+        if args.runs == 1:
+            evaluator.print_comparison_table(aggregated)
+            type_breakdown = evaluator._build_type_breakdown(raw_results)
+            evaluator.print_type_breakdown(type_breakdown)
+            evaluator.print_trace_summary(raw_results)
+
+    if args.runs > 1:
+        summary = evaluator._build_summary(
+            all_run_items,
+            {
+                "seed": base_seed,
+                "runs": args.runs,
+                "k_per_type": args.k_per_type,
+                "modes": args.modes,
+            },
+        )
+        summary_path = _derive_summary_path(args.output)
+        Path(summary_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(summary_path, "w") as f:
+            json.dump(summary, f, indent=2)
+        print(f"\nSummary saved to {summary_path}")
+        evaluator.print_multirun_summary(summary)
 
     if evaluator.tracer is not None:
         print("\nPhoenix is running at http://localhost:6006")
