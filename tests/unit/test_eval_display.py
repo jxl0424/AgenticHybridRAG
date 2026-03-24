@@ -1,26 +1,6 @@
 """Tests for print_type_breakdown() and print_multirun_summary()."""
-import sys
 from unittest.mock import MagicMock
 import pytest
-
-
-def _setup_stubs():
-    for mod in (
-        "src.ingestion.hf_hybridrag_loader",
-        "src.graph.cs_entity_extractor",
-        "src.graph.cs_knowledge_graph",
-        "src.graph.knowledge_graph",
-        "src.retrieval.qdrant_storage",
-        "src.retrieval.hybrid_retriever",
-        "src.retrieval.graph_retriever",
-        "src.retrieval.reranker",
-        "src.generation.llm_client",
-        "src.observability.tracer",
-    ):
-        sys.modules.setdefault(mod, MagicMock())
-
-
-_setup_stubs()
 
 from tests.evaluation.hybridrag_eval import HybridRAGEvaluator
 

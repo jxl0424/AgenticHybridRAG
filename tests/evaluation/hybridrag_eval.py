@@ -13,6 +13,7 @@ Usage:
 """
 import json
 import os
+import statistics
 import sys
 from pathlib import Path
 
@@ -397,8 +398,6 @@ class HybridRAGEvaluator:
         Returns:
             {"config": {...}, "per_metric": {...}, "per_type": {...}}
         """
-        import statistics
-
         METRIC_KEYS = [
             "final_answer_correctness", "exact_match", "token_f1",
             "answer_correctness_llm", "context_recall", "faithfulness",

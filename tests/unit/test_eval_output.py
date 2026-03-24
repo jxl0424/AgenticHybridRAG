@@ -1,26 +1,6 @@
 """Tests for multi-run path helpers and summary aggregation."""
-import sys
 from unittest.mock import MagicMock
 import pytest
-
-
-def _setup_stubs():
-    for mod in (
-        "src.ingestion.hf_hybridrag_loader",
-        "src.graph.cs_entity_extractor",
-        "src.graph.cs_knowledge_graph",
-        "src.graph.knowledge_graph",
-        "src.retrieval.qdrant_storage",
-        "src.retrieval.hybrid_retriever",
-        "src.retrieval.graph_retriever",
-        "src.retrieval.reranker",
-        "src.generation.llm_client",
-        "src.observability.tracer",
-    ):
-        sys.modules.setdefault(mod, MagicMock())
-
-
-_setup_stubs()
 
 from tests.evaluation.hybridrag_eval import (
     _derive_run_path,
@@ -48,14 +28,16 @@ class TestPathHelpers:
             validate_output_path("my_eval.txt")
 
 
-class TestBuildSummary:
-    def _make_evaluator(self):
-        ev = HybridRAGEvaluator.__new__(HybridRAGEvaluator)
-        ev.pipeline = MagicMock()
-        ev.tracer = None
-        ev.metrics = MagicMock()
-        return ev
+@pytest.fixture
+def ev():
+    e = HybridRAGEvaluator.__new__(HybridRAGEvaluator)
+    e.pipeline = MagicMock()
+    e.tracer = None
+    e.metrics = MagicMock()
+    return e
 
+
+class TestBuildSummary:
     def _make_items(self):
         """Six items: one per question type, with known metric values."""
         types = ["single_hop", "single_hop_w_conditions", "multi_hop",
@@ -75,43 +57,37 @@ class TestBuildSummary:
             })
         return items
 
-    def test_summary_has_required_top_level_keys(self):
-        ev = self._make_evaluator()
+    def test_summary_has_required_top_level_keys(self, ev):
         summary = ev._build_summary(self._make_items(), {"seed": 42, "runs": 1,
                                                           "k_per_type": 5, "modes": ["hybrid"]})
         assert "config" in summary
         assert "per_metric" in summary
         assert "per_type" in summary
 
-    def test_config_contains_domain_note(self):
-        ev = self._make_evaluator()
+    def test_config_contains_domain_note(self, ev):
         summary = ev._build_summary([], {"seed": 0, "runs": 1, "k_per_type": 5, "modes": []})
         assert "domain" in summary["config"]["domain_note"].lower()
 
-    def test_per_metric_contains_final_answer_correctness(self):
-        ev = self._make_evaluator()
+    def test_per_metric_contains_final_answer_correctness(self, ev):
         summary = ev._build_summary(self._make_items(), {"seed": 1, "runs": 1,
                                                           "k_per_type": 5, "modes": []})
         assert "final_answer_correctness" in summary["per_metric"]
 
-    def test_per_metric_num_nulls_counts_nulls(self):
-        ev = self._make_evaluator()
+    def test_per_metric_num_nulls_counts_nulls(self, ev):
         items = self._make_items()
         # answer_correctness_llm is None for 4 extractive types
         summary = ev._build_summary(items, {"seed": 1, "runs": 1, "k_per_type": 5, "modes": []})
         null_count = summary["per_metric"]["answer_correctness_llm"]["num_nulls"]
         assert null_count == 4
 
-    def test_per_type_contains_all_six_types(self):
-        ev = self._make_evaluator()
+    def test_per_type_contains_all_six_types(self, ev):
         summary = ev._build_summary(self._make_items(), {"seed": 1, "runs": 1,
                                                           "k_per_type": 5, "modes": []})
         expected = {"single_hop", "single_hop_w_conditions", "multi_hop",
                     "multi_hop_difficult", "open_ended", "counterfactual"}
         assert set(summary["per_type"].keys()) == expected
 
-    def test_per_type_count_reflects_non_null_final_ac(self):
-        ev = self._make_evaluator()
+    def test_per_type_count_reflects_non_null_final_ac(self, ev):
         summary = ev._build_summary(self._make_items(), {"seed": 1, "runs": 1,
                                                           "k_per_type": 5, "modes": []})
         for qt in summary["per_type"]:
