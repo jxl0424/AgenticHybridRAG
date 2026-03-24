@@ -44,6 +44,8 @@ Re-embed `arxiv_chunks` and `arxiv_nodes` with SPECTER2 at ingestion time (same 
   4. Upsert `qdrant_points` to `arxiv_nodes`.
   5. Clear only `batch` (the `qdrant_points` list is local to `_flush()` and needs no explicit clear).
 
+**Discard pre-computed embeddings**: `NodeRecord.embedding` carries the dataset's pre-computed vector (unknown third-party model) and must be discarded entirely. Only the freshly-computed SPECTER2 vector from `embed_texts_with_model` is written to Qdrant.
+
 **Edge case**: if `rec.display_name` is empty or `None`, skip that record for Qdrant (do not embed; do not upsert). It is still written to Neo4j as part of the Neo4j batch.
 
 **Progress counter**: the existing `total` counter (e.g., `total += len(batch)`) counts records written to Neo4j and must NOT be changed to `len(embeddable_recs)`. Records skipped for Qdrant are still Neo4j writes and should be counted.
@@ -58,7 +60,7 @@ Re-embed `arxiv_chunks` and `arxiv_nodes` with SPECTER2 at ingestion time (same 
 - Inside `_flush()`:
   1. Build `neo4j_batch` from `ChunkRecord` attributes — `rec.src_id`, `rec.dst_id`, `rec.edge_id`, `rec.domain`, `str(rec.qdrant_id)` — instead of from `p.payload` dict lookups. This preserves the existing error-recovery and HAS_CHUNK write logic exactly.
   2. Embed paragraphs: call `embed_texts_with_model([r.paragraph for r in recs], EMBEDDING_MODEL, batch_size=64)`.
-  3. Build a local `points: list[PointStruct]` by zipping `recs` with their embeddings, carrying the same payload dict as before.
+  3. Build a local `points: list[PointStruct]` by zipping `recs` with their embeddings (from step 2), carrying the same payload dict as before. `ChunkRecord.embedding` carries the dataset pre-computed vector and must be discarded — only the freshly-computed SPECTER2 vector from step 2 is written to Qdrant.
   4. Upsert `points` to `arxiv_chunks`.
   5. Clear only `recs`.
 
@@ -115,7 +117,7 @@ The existing `get_chunk_refs_for_entity(display_name)` method is retained but no
 Replace the `self.kg.get_chunk_refs_for_entity(name, ...)` call with:
 
 ```
-for each entity_name in entity_names:
+for name in entity_names:
     1. name_emb = embed_texts_with_model([name], EMBEDDING_MODEL, batch_size=1)[0]
     2. results = self._qdrant.query_points("arxiv_nodes", query=name_emb,
                                            with_payload=True, limit=NODES_PER_ENTITY)
