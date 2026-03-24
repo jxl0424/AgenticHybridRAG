@@ -5,9 +5,10 @@ Public API:
     start_phoenix() -> tracer or None
     pipeline_span(tracer, name) -> context manager yielding a span or _NoOpSpan
 """
-import json
 import logging
+import os
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Any, Optional
 
 logger = logging.getLogger("rag.observability")
@@ -61,7 +62,10 @@ def start_phoenix() -> Optional[Any]:
         from opentelemetry.sdk.trace.export import BatchSpanProcessor
         from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 
-        px.launch_app()
+        storage_path = Path("data/phoenix")
+        storage_path.mkdir(parents=True, exist_ok=True)
+        os.environ.setdefault("PHOENIX_WORKING_DIR", str(storage_path.resolve()))
+        px.launch_app(use_temp_dir=False)
 
         exporter = OTLPSpanExporter(endpoint="http://localhost:4317", insecure=True)
         provider = TracerProvider()

@@ -20,8 +20,7 @@ openrouter:
   enabled: true
   api_key_env: "OPENROUTER_API_KEY"
   models:
-    - "qwen/qwq-32b:free"
-    - "deepseek/deepseek-chat-v3-0324:free"
+    - "openai/gpt-oss-120b:free"
   site_url: ""     # optional — sent as HTTP-Referer (OpenRouter best practice)
   app_name: ""     # optional — sent as X-Title header
 

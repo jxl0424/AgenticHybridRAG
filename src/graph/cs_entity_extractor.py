@@ -35,6 +35,12 @@ CS_RELATIONSHIP_TYPES = {
 
 # --- Dictionaries ---
 
+# Whitelisted 2-character CS/AI acronyms (kept narrow to avoid noise)
+TWO_CHAR_CS_ACRONYMS = {
+    "AI", "ML", "DL", "RL", "NL", "CV", "NP", "QA",
+    "KG", "KB", "VC", "KL", "GD", "EM",
+}
+
 FRAMEWORKS = {
     "pytorch", "tensorflow", "jax", "keras", "theano", "mxnet",
     "huggingface", "transformers", "langchain", "llama-index", "llamaindex",
@@ -230,7 +236,31 @@ class CSEntityExtractor:
             result = extractor.extract_entities(query)
             for e in result.entities: e.text
         """
-        return self.extract(query, "", "query")
+        result = self.extract(query, "", "query")
+
+        # For counterfactual questions ("If X were NOT ..."), also run extraction
+        # on just the subject clause — the framing can obscure named entities.
+        subject = self._extract_counterfactual_subject(query)
+        if subject:
+            subject_result = self.extract(subject, "", "query")
+            seen = {(e.text.lower(), e.entity_type) for e in result.entities}
+            for e in subject_result.entities:
+                key = (e.text.lower(), e.entity_type)
+                if key not in seen:
+                    result.entities.append(e)
+                    seen.add(key)
+
+        return result
+
+    _COUNTERFACTUAL_RE = re.compile(
+        r"^[Ii]f\s+(.+?)\s+(?:were|was|did|had)\s+(?:NOT|not)\b",
+        re.IGNORECASE,
+    )
+
+    def _extract_counterfactual_subject(self, query: str) -> str:
+        """Return the subject clause of an 'If X were/did NOT ...' question."""
+        m = self._COUNTERFACTUAL_RE.match(query)
+        return m.group(1).strip() if m else ""
 
     def _extract_from_text(self, text: str) -> list[ExtractedEntity]:
         entities = []
@@ -306,6 +336,18 @@ class CSEntityExtractor:
                 entities.append(ExtractedEntity(
                     text=m.group(1), entity_type="MODEL",
                     start_pos=m.start(), end_pos=m.end(), confidence=0.6,
+                ))
+                known_spans.add((m.start(), m.end()))
+
+        # Whitelisted 2-char CS acronyms (e.g. VC dimension, ML pipeline)
+        _two_char_pat = re.compile(
+            r"\b(" + "|".join(re.escape(a) for a in TWO_CHAR_CS_ACRONYMS) + r")\b"
+        )
+        for m in _two_char_pat.finditer(text):
+            if (m.start(), m.end()) not in known_spans:
+                entities.append(ExtractedEntity(
+                    text=m.group(1), entity_type="MODEL",
+                    start_pos=m.start(), end_pos=m.end(), confidence=0.4,
                 ))
 
         return entities
