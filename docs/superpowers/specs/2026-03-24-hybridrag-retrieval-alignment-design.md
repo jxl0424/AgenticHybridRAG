@@ -64,6 +64,11 @@ Re-embed `arxiv_chunks` and `arxiv_nodes` with SPECTER2 at ingestion time (same 
 
 The existing `qdrant_ok` flag, `progress.log_batch_failure` call, and HAS_CHUNK Neo4j write remain structurally unchanged. Only the source of the vector (embedding at flush time vs. pre-computed at loop time) and the type of the accumulator change.
 
+The following lines inside `_flush()` also reference `points` by name and must be updated as part of the rename:
+- `snapshot_ids = [str(p.id) for p in points]` → `snapshot_ids = [str(rec.qdrant_id) for rec in recs]` (iterate `recs`, use `ChunkRecord.qdrant_id`)
+- `total += len(points)` (inside the `try` block) → `total += len(recs)`
+- `points.clear()` at the end of `_flush()` → `recs.clear()`
+
 **Flush threshold**: `_ingest_chunks` uses `QDRANT_BATCH` (256) as its flush threshold (not `self.neo4j_batch_size`). This threshold applies to the renamed `recs` accumulator exactly as it did to the old `points` accumulator — no change to the flush condition.
 
 #### `_ingest_paper_chunks(domain, progress)` — no change (already embeds with SPECTER2)
