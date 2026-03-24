@@ -387,54 +387,107 @@ class LocalParquetLoader:
         self,
         domains: list[str] | None = None,
         split: str = "test",
-        max_pairs: int | None = None,
+        k_per_type: int = 5,
+        seed: int | None = None,
+        stratify: bool = True,
     ) -> list[dict]:
         """
-        Load QA pairs from text_qa/{domain}/qa.parquet files.
+        Load QA pairs from text_qa/{domain}/qa.parquet with stratified random sampling.
 
         Args:
             domains: Domains to load (default: all three arxiv_* domains).
             split: Dataset split to filter on ("test" or "train").
-            max_pairs: Total cap on returned pairs (None = all).
+            k_per_type: Samples per question_type per run.
+            seed: numpy RNG seed. If None, a random seed is chosen.
+                  Seed printing is the caller's responsibility.
+            stratify: If True, sample k_per_type per question_type.
+                      If False, sample k_per_type * 6 from the full pool.
 
         Returns:
-            List of dicts with keys:
-                question, ground_truth_answer, ground_truth_context,
-                question_type, domain
+            Shuffled list of dicts with keys:
+                question, ground_truth_answer, ground_truth_context, question_type, domain
         """
         import pandas as pd
+        import numpy as np
+
+        if seed is None:
+            seed = int(np.random.default_rng().integers(0, 1_000_000))
+
+        rng = np.random.default_rng(seed)
 
         if domains is None:
             domains = DOMAINS
 
-        pairs: list[dict] = []
+        QUESTION_TYPES = [
+            "single_hop", "single_hop_w_conditions", "multi_hop",
+            "multi_hop_difficult", "open_ended", "counterfactual",
+        ]
+
+        all_dfs: list[pd.DataFrame] = []
         for domain in domains:
             path = self.data_dir / f"text_qa/{domain}/qa.parquet"
             if not path.exists():
                 logger.warning(f"QA parquet not found, skipping: {path}")
                 continue
-
             df = pd.read_parquet(path)
             if "split" in df.columns:
                 df = df[df["split"] == split]
+            df = df[df["question"].notna() & df["answer"].notna()]
+            df = df[df["question"].astype(str).str.strip() != ""]
+            df = df[df["answer"].astype(str).str.strip() != ""]
+            df["domain"] = domain
+            all_dfs.append(df)
 
-            for _, row in df.iterrows():
-                question = str(row.get("question") or "").strip()
-                answer = str(row.get("answer") or "").strip()
-                if not question or not answer:
-                    continue
-                pairs.append({
-                    "question": question,
-                    "ground_truth_answer": answer,
-                    "ground_truth_context": "",
-                    "question_type": str(row.get("question_type") or ""),
-                    "domain": domain,
-                })
+        if not all_dfs:
+            return []
 
-        if max_pairs is not None:
-            pairs = pairs[:max_pairs]
+        full_df = pd.concat(all_dfs, ignore_index=True)
 
-        logger.info(f"Loaded {len(pairs)} QA pairs (split={split}, domains={domains})")
+        if not stratify:
+            n = min(k_per_type * len(QUESTION_TYPES), len(full_df))
+            sampled = full_df.sample(n=n, random_state=rng)
+        else:
+            if "question_type" not in full_df.columns:
+                logger.warning(
+                    "question_type column missing from QA parquet; falling back to stratify=False"
+                )
+                n = min(k_per_type * len(QUESTION_TYPES), len(full_df))
+                sampled = full_df.sample(n=n, random_state=rng)
+            else:
+                sampled_groups: list[pd.DataFrame] = []
+                for qt in QUESTION_TYPES:
+                    group_df = full_df[full_df["question_type"] == qt]
+                    if len(group_df) == 0:
+                        continue
+                    if len(group_df) < k_per_type:
+                        logger.warning(f"only {len(group_df)} rows available for '{qt}', using all")
+                        sampled_groups.append(group_df)
+                    else:
+                        sampled_groups.append(
+                            group_df.sample(n=k_per_type, random_state=rng)
+                        )
+                if not sampled_groups:
+                    return []
+                sampled = pd.concat(sampled_groups, ignore_index=True)
+
+        # Final shuffle using the same RNG instance (no reset)
+        idx = rng.permutation(len(sampled))
+        sampled = sampled.iloc[idx].reset_index(drop=True)
+
+        pairs = []
+        for _, row in sampled.iterrows():
+            pairs.append({
+                "question": str(row["question"]).strip(),
+                "ground_truth_answer": str(row["answer"]).strip(),
+                "ground_truth_context": "",
+                "question_type": str(row.get("question_type") or ""),
+                "domain": str(row.get("domain") or ""),
+            })
+
+        logger.info(
+            f"Loaded {len(pairs)} QA pairs "
+            f"(split={split}, seed={seed}, k_per_type={k_per_type}, stratify={stratify})"
+        )
         return pairs
 
     def iter_paper_chunks(

@@ -1,6 +1,6 @@
 # Logging settings
 logging:
-  level: "INFO"   # DEBUG | INFO | WARNING | ERROR
+  level: "INFO"  # DEBUG | INFO | WARNING | ERROR
 
 # Text chunking settings
 chunker:
@@ -14,19 +14,20 @@ llm:
   model: "qwen2.5:7b-instruct"
   base_url: "http://localhost:11434/v1"
 
-# Relation extraction LLM (separate from answer-generation LLM)
-relation_llm:
-  model: "meditron:7b"
-  base_url: "http://localhost:11434/v1"
-
-# Graph extraction settings
-graph_extraction:
-  use_llm_supplement: false   # set true to supplement rule-based NER with LLM extraction
+# OpenRouter free-model fallback (answer generation)
+# Set OPENROUTER_API_KEY in .env to enable. Falls back to local Ollama if unavailable.
+openrouter:
+  enabled: true
+  api_key_env: "OPENROUTER_API_KEY"
+  models:
+    - "openai/gpt-oss-120b:free"
+  site_url: ""     # optional — sent as HTTP-Referer (OpenRouter best practice)
+  app_name: ""     # optional — sent as X-Title header
 
 # Hybrid retrieval settings
 hybrid_retrieval:
-  chunk_weight: 0.5
-  paper_weight: 0.3
+  chunk_weight: 0.2
+  paper_weight: 0.6
   graph_weight: 0.2
   top_k: 5
   min_score: 0.2

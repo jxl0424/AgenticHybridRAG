@@ -49,3 +49,9 @@ tiktoken>=0.5.0                   # accurate token counting for PMCChunker
 rapidfuzz>=3.0.0                  # used by EntityLinker
 # Optional NER backends (scispacy requires C++ build tools — skip on Windows):
 # gliner>=0.2.0
+
+# Observability (Arize Phoenix + OpenTelemetry)
+arize-phoenix[otel]>=4.0.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-exporter-otlp-proto-grpc>=1.20.0
+grpcio>=1.50.0
