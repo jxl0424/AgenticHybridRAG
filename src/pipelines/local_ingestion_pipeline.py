@@ -276,7 +276,6 @@ class LocalIngestionPipeline:
         from collections import defaultdict
         total = 0
         batch: list[NodeRecord] = []
-        qdrant_points: list[PointStruct] = []
 
         def _flush():
             nonlocal total
@@ -298,23 +297,29 @@ class LocalIngestionPipeline:
                         f"display_name: n.display_name, entity_type: n.entity_type}})",
                         {"batch": records},
                     )
-            self._q().upsert(collection_name="arxiv_nodes", points=qdrant_points)
+            embeddable_recs = [r for r in batch if r.display_name]
+            display_names = [r.display_name for r in embeddable_recs]
+            if display_names:
+                embeddings = embed_texts_with_model(display_names, EMBEDDING_MODEL, batch_size=64)
+                qdrant_points = [
+                    PointStruct(
+                        id=str(r.qdrant_id),
+                        vector=emb,
+                        payload={
+                            "node_id": r.node_id,
+                            "domain": r.domain,
+                            "display_name": r.display_name,
+                            "entity_type": r.entity_type,
+                        },
+                    )
+                    for r, emb in zip(embeddable_recs, embeddings)
+                ]
+                self._q().upsert(collection_name="arxiv_nodes", points=qdrant_points)
             total += len(batch)
             batch.clear()
-            qdrant_points.clear()
 
         for rec in self.loader.iter_nodes(domain):
             batch.append(rec)
-            qdrant_points.append(PointStruct(
-                id=str(rec.qdrant_id),
-                vector=rec.embedding,
-                payload={
-                    "node_id": rec.node_id,
-                    "domain": rec.domain,
-                    "display_name": rec.display_name,
-                    "entity_type": rec.entity_type,
-                },
-            ))
             if len(batch) >= self.neo4j_batch_size:
                 _flush()
 
