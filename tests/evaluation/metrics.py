@@ -331,8 +331,8 @@ Output just the number or "none":"""
             "no information",
         ]
         if any(p in generated_answer.lower() for p in refusal_phrases):
-            # If ground truth is also vague/unknown (< 30 words), refusal is appropriate
-            if len(ground_truth_answer.split()) < 30:
+            # If ground truth is short/vague (< 50 words), refusal is appropriate
+            if len(ground_truth_answer.split()) < 50:
                 return 0.5
             return 0.0
 
@@ -363,6 +363,36 @@ Output just the number or "none":"""
             print(f"Answer correctness metric error: {e}")
             return 0.0
     
+    def normalize(self, text: str) -> str:
+        """NFKD -> lowercase -> strip punctuation -> remove articles -> collapse whitespace."""
+        import unicodedata, re
+        text = unicodedata.normalize("NFKD", text)
+        text = text.encode("ascii", "ignore").decode("ascii")
+        text = text.lower()
+        text = re.sub(r"[^\w\s]", " ", text)
+        tokens = [t for t in text.split() if t not in {"a", "an", "the"}]
+        return " ".join(tokens)
+
+    def calculate_exact_match(self, prediction: str, ground_truth: str) -> float:
+        """1.0 if normalized prediction == normalized ground truth, else 0.0."""
+        return 1.0 if self.normalize(prediction) == self.normalize(ground_truth) else 0.0
+
+    def calculate_token_f1(self, prediction: str, ground_truth: str) -> float:
+        """Counter-based (bag) token F1, SQuAD-style."""
+        from collections import Counter
+        pred_tokens = self.normalize(prediction).split()
+        gt_tokens = self.normalize(ground_truth).split()
+        if not pred_tokens and not gt_tokens:
+            return 1.0
+        if not pred_tokens or not gt_tokens:
+            return 0.0
+        common = sum((Counter(pred_tokens) & Counter(gt_tokens)).values())
+        precision = common / len(pred_tokens)
+        recall = common / len(gt_tokens)
+        if precision + recall == 0:
+            return 0.0
+        return 2 * precision * recall / (precision + recall)
+
     def _extract_key_phrases(self, text: str, min_length: int = 20) -> List[str]:
         """
         Extract key phrases from text for matching.
