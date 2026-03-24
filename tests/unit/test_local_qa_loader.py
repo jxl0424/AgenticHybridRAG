@@ -50,6 +50,29 @@ def qa_data_dir(tmp_path):
     return str(tmp_path)
 
 
+QUESTION_TYPES = [
+    "single_hop", "single_hop_w_conditions", "multi_hop",
+    "multi_hop_difficult", "open_ended", "counterfactual",
+]
+
+
+@pytest.fixture
+def stratified_qa_data_dir(tmp_path):
+    """18 test rows: 3 per question type, single domain."""
+    rows = []
+    for i, qt in enumerate(QUESTION_TYPES):
+        for j in range(3):
+            rows.append({
+                "domain": "arxiv_ai", "split": "test",
+                "question_id": i * 10 + j,
+                "question": f"Q {qt} {j}?",
+                "answer": f"A {qt} {j}.",
+                "question_type": qt,
+            })
+    _make_qa_parquet(tmp_path, "arxiv_ai", rows)
+    return str(tmp_path)
+
+
 # ---------------------------------------------------------------------------
 # LocalParquetLoader.load_local_qa_pairs()
 # ---------------------------------------------------------------------------
@@ -97,11 +120,6 @@ class TestLoadLocalQAPairs:
         pairs = loader.load_local_qa_pairs(domains=["arxiv_ai"])
         assert all(p["domain"] == "arxiv_ai" for p in pairs)
         assert len(pairs) == 2  # two test rows in arxiv_ai
-
-    def test_max_pairs_limits_results(self, qa_data_dir):
-        loader = LocalParquetLoader(qa_data_dir)
-        pairs = loader.load_local_qa_pairs(max_pairs=2)
-        assert len(pairs) <= 2
 
     def test_skips_missing_domain_directory(self, qa_data_dir):
         """Requesting a domain with no file should not raise — just skip it."""
@@ -201,8 +219,8 @@ class TestHybridRAGEvaluatorLocalLoad:
 
         assert call_record == [], "HybridRAGLoader was instantiated but should not have been"
 
-    def test_load_qa_pairs_local_max_pairs_forwarded(self, qa_data_dir):
-        """max_pairs is forwarded to the local loader."""
+    def test_load_qa_pairs_local_seed_forwarded(self, stratified_qa_data_dir):
+        """seed is forwarded to the local loader for reproducibility."""
         from unittest.mock import MagicMock
 
         HybridRAGEvaluator = _import_evaluator()
@@ -210,5 +228,58 @@ class TestHybridRAGEvaluatorLocalLoad:
         mock_pipeline.llm = MagicMock()
         evaluator = HybridRAGEvaluator(mock_pipeline)
 
-        pairs = evaluator.load_qa_pairs(local_data_dir=qa_data_dir, max_pairs=1)
-        assert len(pairs) <= 1
+        run1 = evaluator.load_qa_pairs(local_data_dir=stratified_qa_data_dir, seed=7, k_per_type=2)
+        run2 = evaluator.load_qa_pairs(local_data_dir=stratified_qa_data_dir, seed=7, k_per_type=2)
+        assert [p["question"] for p in run1] == [p["question"] for p in run2]
+
+
+# ---------------------------------------------------------------------------
+# Stratified sampling
+# ---------------------------------------------------------------------------
+
+class TestStratifiedSampling:
+
+    def test_k_per_type_returns_correct_count(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        pairs = loader.load_local_qa_pairs(k_per_type=2, seed=42)
+        # 6 types x 2 = 12 pairs
+        assert len(pairs) == 12
+
+    def test_all_question_types_represented(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        pairs = loader.load_local_qa_pairs(k_per_type=2, seed=42)
+        types_found = {p["question_type"] for p in pairs}
+        assert types_found == set(QUESTION_TYPES)
+
+    def test_same_seed_reproduces_same_pairs(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        run1 = loader.load_local_qa_pairs(k_per_type=2, seed=99)
+        run2 = loader.load_local_qa_pairs(k_per_type=2, seed=99)
+        assert [p["question"] for p in run1] == [p["question"] for p in run2]
+
+    def test_different_seeds_produce_different_ordering(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        run1 = loader.load_local_qa_pairs(k_per_type=2, seed=1)
+        run2 = loader.load_local_qa_pairs(k_per_type=2, seed=2)
+        # Final shuffle must differ between seeds
+        assert [p["question"] for p in run1] != [p["question"] for p in run2]
+
+    def test_warns_when_type_smaller_than_k(self, stratified_qa_data_dir, capsys):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        # k_per_type=5 but only 3 rows per type -> warning
+        loader.load_local_qa_pairs(k_per_type=5, seed=0)
+        captured = capsys.readouterr()
+        assert "WARNING" in captured.out
+
+    def test_stratify_false_samples_from_full_pool(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        pairs = loader.load_local_qa_pairs(k_per_type=2, seed=42, stratify=False)
+        # stratify=False: sample k_per_type*6=12 from full pool
+        assert len(pairs) == 12
+
+    def test_returned_dicts_have_required_keys(self, stratified_qa_data_dir):
+        loader = LocalParquetLoader(stratified_qa_data_dir)
+        pairs = loader.load_local_qa_pairs(k_per_type=1, seed=0)
+        for p in pairs:
+            assert set(p.keys()) >= {"question", "ground_truth_answer", "ground_truth_context",
+                                     "question_type", "domain"}

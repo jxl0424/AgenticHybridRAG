@@ -15,7 +15,6 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Optional
 
 # Allow running from project root
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -48,23 +47,30 @@ class HybridRAGEvaluator:
     def load_qa_pairs(
         self,
         split: str = "test",
-        max_pairs: Optional[int] = 200,
         local_data_dir: str = "data/hybridrag",
+        seed: int | None = None,
+        k_per_type: int = 5,
+        stratify: bool = True,
     ) -> list[dict]:
         """
-        Load QA pairs from local HybridRAG-Bench parquet files.
+        Load QA pairs from local HybridRAG-Bench parquet files using stratified sampling.
 
         Args:
             split: Dataset split to use ("test" or "train")
-            max_pairs: Maximum number of QA pairs to load
             local_data_dir: Path to the local HybridRAG-Bench data directory
+            seed: RNG seed for reproducible sampling (None = random)
+            k_per_type: Questions sampled per question_type
+            stratify: Whether to stratify by question_type
 
         Returns:
-            List of dicts with keys: question, ground_truth_answer, ground_truth_context, question_type
+            List of dicts with keys: question, ground_truth_answer, ground_truth_context,
+            question_type, domain
         """
         from src.ingestion.local_parquet_loader import LocalParquetLoader
         loader = LocalParquetLoader(local_data_dir)
-        return loader.load_local_qa_pairs(split=split, max_pairs=max_pairs)
+        return loader.load_local_qa_pairs(
+            split=split, seed=seed, k_per_type=k_per_type, stratify=stratify
+        )
 
     # -------------------------------------------------------------------------
     # Evaluation
