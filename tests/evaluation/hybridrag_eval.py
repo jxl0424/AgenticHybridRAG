@@ -34,6 +34,9 @@ class HybridRAGEvaluator:
         ndcg@5, faithfulness, answer_correctness
     """
 
+    EXTRACTIVE_TYPES = frozenset({"single_hop", "single_hop_w_conditions", "multi_hop"})
+    GENERATIVE_TYPES = frozenset({"open_ended", "counterfactual"})
+
     def __init__(self, pipeline: HybridRAGBenchPipeline):
         self.pipeline = pipeline
         judge_llm = LLMClient(model="qwen2.5:7b-instruct")
@@ -82,6 +85,8 @@ class HybridRAGEvaluator:
         modes: list[str] = None,
         top_k: int = 5,
         output_path: str = "tests/results/hybridrag_eval.json",
+        seed: int = 0,
+        run: int = 1,
     ) -> dict:
         """
         Run evaluation across retrieval modes.
@@ -117,7 +122,13 @@ class HybridRAGEvaluator:
                         root_span.set_attribute("retrieval.top_k", top_k)
 
                         response = self._run_query(question, mode, top_k)
-                        item = self._compute_metrics(question, gt_answer, gt_context, response)
+                        item = self._compute_metrics(
+                            question, gt_answer, gt_context, response,
+                            question_type=qa.get("question_type", ""),
+                            domain=qa.get("domain", ""),
+                            seed=seed,
+                            run=run,
+                        )
                         item["mode"] = mode
 
                         m = item.get("metrics", {})
@@ -168,45 +179,83 @@ class HybridRAGEvaluator:
         gt_answer: str,
         gt_context: str,
         response: dict,
+        question_type: str = "",
+        domain: str = "",
+        seed: int = 0,
+        run: int = 1,
     ) -> dict:
-        """Compute all retrieval and generation metrics for one QA pair."""
+        """Compute metrics for one QA pair, dispatching by question_type."""
         contexts = response.get("contexts", [])
         answer = response.get("answer", "")
 
-        metrics = {}
+        metrics = {
+            "exact_match": None,
+            "token_f1": None,
+            "answer_correctness_llm": None,
+            "lm_judge_justification": None,
+            "final_answer_correctness": None,
+            "final_answer_correctness_source": None,
+            "context_recall": None,
+            "faithfulness": None,
+            "hit_rate": None,
+            "mrr": None,
+            "context_precision": None,
+            "ndcg_at_5": None,
+        }
 
-        if gt_context:
-            metrics["hit_rate"] = self.metrics.calculate_hit_rate(contexts, gt_context)
-            metrics["mrr"] = self.metrics.calculate_mrr(contexts, gt_context)
-            metrics["context_precision"] = self.metrics.calculate_context_precision(
-                question, contexts, gt_context
-            )
-            metrics["ndcg_at_5"] = self.metrics.calculate_ndcg(
-                contexts, [gt_context], k=5
-            )
+        if gt_answer and answer:
+            if question_type in self.EXTRACTIVE_TYPES:
+                em = self.metrics.calculate_exact_match(answer, gt_answer)
+                tf1 = self.metrics.calculate_token_f1(answer, gt_answer)
+                metrics["exact_match"] = em
+                metrics["token_f1"] = tf1
+                metrics["final_answer_correctness"] = tf1
+                metrics["final_answer_correctness_source"] = "token_f1"
+
+            elif question_type == "multi_hop_difficult":
+                em = self.metrics.calculate_exact_match(answer, gt_answer)
+                tf1 = self.metrics.calculate_token_f1(answer, gt_answer)
+                metrics["exact_match"] = em
+                metrics["token_f1"] = tf1
+                pred_len = len(self.metrics.normalize(answer).split())
+                if tf1 == 0.0 and pred_len > 15:
+                    judge = self.metrics.calculate_answer_correctness(
+                        question, gt_answer, answer, question_type="multi_hop_difficult"
+                    )
+                    metrics["answer_correctness_llm"] = judge["score"]
+                    metrics["lm_judge_justification"] = judge["justification"]
+                    metrics["final_answer_correctness"] = judge["score"]
+                    metrics["final_answer_correctness_source"] = "llm" if judge["score"] is not None else None
+                else:
+                    metrics["final_answer_correctness"] = tf1
+                    metrics["final_answer_correctness_source"] = "token_f1"
+
+            elif question_type in self.GENERATIVE_TYPES:
+                judge = self.metrics.calculate_answer_correctness(
+                    question, gt_answer, answer, question_type=question_type
+                )
+                metrics["answer_correctness_llm"] = judge["score"]
+                metrics["lm_judge_justification"] = judge["justification"]
+                metrics["final_answer_correctness"] = judge["score"]
+                metrics["final_answer_correctness_source"] = "llm" if judge["score"] is not None else None
 
         if gt_answer and contexts:
-            metrics["context_recall"] = self.metrics.calculate_context_recall(
-                gt_answer, contexts
-            )
+            metrics["context_recall"] = self.metrics.calculate_context_recall(gt_answer, contexts)
 
         if answer and contexts:
-            metrics["faithfulness"] = self.metrics.calculate_faithfulness(
-                question, contexts, answer
-            )
-
-        # TODO(Task4): calculate_answer_correctness now returns dict; this call produces
-        # wrong aggregation until _compute_metrics() is replaced in Task 4.
-        if gt_answer and answer:
-            metrics["answer_correctness"] = self.metrics.calculate_answer_correctness(
-                question, gt_answer, answer
-            )
+            metrics["faithfulness"] = self.metrics.calculate_faithfulness(question, contexts, answer)
 
         return {
             "question": question,
-            "answer": answer,
-            "num_contexts": len(contexts),
+            "question_type": question_type,
+            "domain": domain,
+            "prediction": answer,
+            "ground_truth": gt_answer,
+            "ground_truth_context": gt_context,
+            "seed": seed,
+            "run": run,
             "metrics": metrics,
+            "num_contexts": len(contexts),
             "trace": response.get("trace", {}),
         }
 
@@ -266,7 +315,7 @@ class HybridRAGEvaluator:
                 dropped = t.get("dropped_by_reranker", 0)
                 cr = m.get("context_recall", "")
                 faith = m.get("faithfulness", "")
-                corr = m.get("answer_correctness", "")
+                corr = m.get("final_answer_correctness", "")
                 q = item.get("question", "")[:45]
                 cr_s = f"{cr:.2f}" if isinstance(cr, float) else "N/A"
                 fa_s = f"{faith:.2f}" if isinstance(faith, float) else "N/A"
@@ -281,8 +330,8 @@ class HybridRAGEvaluator:
     def print_comparison_table(self, aggregated: dict) -> None:
         """Print a side-by-side comparison table of modes."""
         metric_keys = [
-            "hit_rate", "mrr", "context_precision", "context_recall",
-            "ndcg_at_5", "faithfulness", "answer_correctness",
+            "exact_match", "token_f1", "answer_correctness_llm",
+            "final_answer_correctness", "context_recall", "faithfulness",
         ]
 
         modes = list(aggregated.keys())
