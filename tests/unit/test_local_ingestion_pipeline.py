@@ -2,7 +2,7 @@ import uuid
 from unittest.mock import MagicMock, patch
 
 from src.pipelines.local_ingestion_pipeline import LocalIngestionPipeline
-from src.ingestion.local_parquet_loader import NodeRecord, ChunkRecord, HYBRIDRAG_NS
+from src.ingestion.local_parquet_loader import NodeRecord, HYBRIDRAG_NS
 
 
 def _make_pipeline():
