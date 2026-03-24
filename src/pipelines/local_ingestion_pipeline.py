@@ -400,28 +400,46 @@ class LocalIngestionPipeline:
     def _ingest_chunks(self, domain: str, include_src_names: bool, progress: _Progress) -> int:
         total = 0
         batch_index = 0
-        points: list[PointStruct] = []
+        recs: list[ChunkRecord] = []
 
         def _flush():
             nonlocal total, batch_index
-            # Snapshot IDs and Neo4j params before any mutation of points list
-            snapshot_ids = [str(p.id) for p in points]
+            snapshot_ids = [str(rec.qdrant_id) for rec in recs]
             neo4j_batch = [
                 {
-                    "src_id": int(p.payload.get("src_id", 0)),
-                    "dst_id": int(p.payload.get("dst_id", 0)),
-                    "edge_id": int(p.payload.get("edge_id", 0)),
-                    "domain": p.payload.get("domain", ""),
-                    "qdrant_id": str(p.id),  # UUID string — must be str()
+                    "src_id": int(rec.src_id),
+                    "dst_id": int(rec.dst_id),
+                    "edge_id": int(rec.edge_id),
+                    "domain": rec.domain,
+                    "qdrant_id": str(rec.qdrant_id),
                 }
-                for p in points
-                if p.payload.get("src_id") is not None and p.payload.get("dst_id") is not None
+                for rec in recs
+                if rec.src_id is not None and rec.dst_id is not None
             ]
 
             qdrant_ok = False
             try:
+                embeddings = embed_texts_with_model(
+                    [r.paragraph for r in recs], EMBEDDING_MODEL, batch_size=64
+                )
+                points: list[PointStruct] = []
+                for r, emb in zip(recs, embeddings):
+                    payload = {
+                        "edge_id": r.edge_id,
+                        "src_id": r.src_id,
+                        "dst_id": r.dst_id,
+                        "rel_type": r.rel_type,
+                        "paragraph": r.paragraph,
+                        "domain": r.domain,
+                        "paper_id": r.paper_id,
+                    }
+                    if r.src_name is not None:
+                        payload["src_name"] = r.src_name
+                    if r.dst_name is not None:
+                        payload["dst_name"] = r.dst_name
+                    points.append(PointStruct(id=str(r.qdrant_id), vector=emb, payload=payload))
                 self._q().upsert(collection_name="arxiv_chunks", points=points)
-                total += len(points)
+                total += len(recs)
                 qdrant_ok = True
             except Exception as e:
                 progress.log_batch_failure(domain, "chunks", batch_index, str(e), snapshot_ids)
@@ -442,37 +460,23 @@ class LocalIngestionPipeline:
                             {"batch": neo4j_batch},
                         )
                 except Exception as e:
-                    progress.log_batch_failure(domain, "chunks_has_chunk", batch_index, str(e), snapshot_ids)
-                    logger.error(f"[{domain}] chunks batch {batch_index} HAS_CHUNK write failed: {e}")
+                    progress.log_batch_failure(
+                        domain, "chunks_has_chunk", batch_index, str(e), snapshot_ids
+                    )
+                    logger.error(
+                        f"[{domain}] chunks batch {batch_index} HAS_CHUNK write failed: {e}"
+                    )
 
             # Always advance batch_index and clear — exactly once per _flush() call
             batch_index += 1
-            points.clear()
+            recs.clear()
 
         for rec in self.loader.iter_chunks(domain, include_src_names=include_src_names):
-            payload = {
-                "edge_id": rec.edge_id,
-                "src_id": rec.src_id,
-                "dst_id": rec.dst_id,
-                "rel_type": rec.rel_type,
-                "paragraph": rec.paragraph,
-                "domain": rec.domain,
-                "paper_id": rec.paper_id,
-            }
-            if rec.src_name is not None:
-                payload["src_name"] = rec.src_name
-            if rec.dst_name is not None:
-                payload["dst_name"] = rec.dst_name
-
-            points.append(PointStruct(
-                id=str(rec.qdrant_id),
-                vector=rec.embedding,
-                payload=payload,
-            ))
-            if len(points) >= QDRANT_BATCH:
+            recs.append(rec)
+            if len(recs) >= QDRANT_BATCH:
                 _flush()
 
-        if points:
+        if recs:
             _flush()
 
         return total
