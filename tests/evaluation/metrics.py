@@ -4,6 +4,8 @@ Evaluation metrics for RAG systems.
 import json
 import math
 import re
+import unicodedata
+from collections import Counter
 from typing import List, Dict, Any
 
 from tenacity import retry, wait_exponential, stop_after_attempt
@@ -332,7 +334,7 @@ Output just the number or "none":"""
         ]
         if any(p in generated_answer.lower() for p in refusal_phrases):
             # If ground truth is short/vague (< 50 words), refusal is appropriate
-            if len(ground_truth_answer.split()) < 50:
+            if len(ground_truth_answer.split()) < 50:  # short GT -> refusal is appropriate
                 return 0.5
             return 0.0
 
@@ -365,7 +367,6 @@ Output just the number or "none":"""
     
     def normalize(self, text: str) -> str:
         """NFKD -> lowercase -> strip punctuation -> remove articles -> collapse whitespace."""
-        import unicodedata, re
         text = unicodedata.normalize("NFKD", text)
         text = text.encode("ascii", "ignore").decode("ascii")
         text = text.lower()
@@ -379,7 +380,6 @@ Output just the number or "none":"""
 
     def calculate_token_f1(self, prediction: str, ground_truth: str) -> float:
         """Counter-based (bag) token F1, SQuAD-style."""
-        from collections import Counter
         pred_tokens = self.normalize(prediction).split()
         gt_tokens = self.normalize(ground_truth).split()
         if not pred_tokens and not gt_tokens:

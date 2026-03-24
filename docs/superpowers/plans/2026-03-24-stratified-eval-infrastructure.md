@@ -86,9 +86,9 @@ class TestTokenF1:
 
     def test_partial_overlap(self, m):
         # normalize removes "on": pred="cat sat", gt="cat mat"
-        # common={"cat":1} → precision=1/2, recall=1/2, f1=0.5
+        # common={"cat":1} → precision=1/2, recall=1/2, f1=0.4
         result = m.calculate_token_f1("cat sat", "cat on mat")
-        assert result == pytest.approx(0.5, abs=1e-3)
+        assert result == pytest.approx(0.4, abs=1e-3)
 
     def test_counter_based_not_set_based(self, m):
         # pred="cat cat dog", gt="cat dog dog"
