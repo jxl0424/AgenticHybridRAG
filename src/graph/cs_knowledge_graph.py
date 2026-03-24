@@ -257,6 +257,21 @@ class CSKnowledgeGraph:
         rows = self.client.execute_read(query, {"name": display_name, "limit": limit})
         return [r["qdrant_id"] for r in rows if r.get("qdrant_id")]
 
+    def get_chunk_refs_by_node_ids(self, node_ids: list[int], limit: int = 20) -> list[str]:
+        """
+        Return qdrant_id strings from HAS_CHUNK edges connected to _Embeddable
+        nodes whose node_id is in the given list. Matches both src and dst
+        sides of the HAS_CHUNK relationship.
+        """
+        query = """
+        MATCH (n:_Embeddable)-[r:HAS_CHUNK]-()
+        WHERE n.node_id IN $node_ids
+        RETURN DISTINCT r.qdrant_id AS qdrant_id
+        LIMIT $limit
+        """
+        rows = self.client.execute_read(query, {"node_ids": node_ids, "limit": limit})
+        return [r["qdrant_id"] for r in rows if r.get("qdrant_id")]
+
     def get_related_entities(self, entity_name: str, depth: int = 2) -> list[dict]:
         query = """
         MATCH path = (e:CSEntity)-[*1..%d]-(related)
