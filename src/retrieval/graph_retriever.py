@@ -8,12 +8,16 @@ import re
 from typing import Optional
 from dataclasses import dataclass
 
+from qdrant_client import QdrantClient
 from src.graph.cs_knowledge_graph import CSKnowledgeGraph
 from src.graph.cs_entity_extractor import CSEntityExtractor, get_cs_entity_extractor
 from src.types import RetrievedContext
-from src.utils import get_logger
+from src.utils import get_logger, embed_texts_with_model
 
 logger = get_logger("retrieval.graph")
+
+NODES_PER_ENTITY = 3
+EMBEDDING_MODEL = "allenai/specter2_base"
 
 
 # Kept for backward-compat imports elsewhere; will be cleaned up separately
@@ -52,10 +56,12 @@ class GraphRetriever:
         knowledge_graph: Optional[CSKnowledgeGraph] = None,
         entity_extractor: Optional[CSEntityExtractor] = None,
         chunk_retriever=None,  # ChunkRetriever -- optional to avoid circular import
+        qdrant_url: str = "http://localhost:6333",
     ):
         self.kg = knowledge_graph or CSKnowledgeGraph()
         self.entity_extractor = entity_extractor or get_cs_entity_extractor()
         self.chunk_retriever = chunk_retriever
+        self._qdrant = QdrantClient(url=qdrant_url, timeout=30)
 
     def retrieve(
         self,
@@ -87,10 +93,20 @@ class GraphRetriever:
 
         all_qdrant_ids: list[str] = []
         for name in entity_names:
-            ids = self.kg.get_chunk_refs_for_entity(name, limit=top_k * 2)
-            logger.debug("[GraphRetriever] entity=%r -> %d qdrant_ids: %s", name, len(ids), ids[:5])
-            self._last_trace["qdrant_ids_per_entity"][name] = len(ids)
-            all_qdrant_ids.extend(ids)
+            name_emb = embed_texts_with_model([name], EMBEDDING_MODEL, batch_size=1)[0]
+            results = self._qdrant.query_points(
+                "arxiv_nodes", query=name_emb, with_payload=True, limit=NODES_PER_ENTITY
+            )
+            node_ids = [
+                r.payload["node_id"]
+                for r in results.points
+                if r.payload and r.payload.get("node_id") is not None
+            ]
+            logger.debug("[GraphRetriever] entity=%r -> %d nodes", name, len(node_ids))
+            self._last_trace["qdrant_ids_per_entity"][name] = len(node_ids)
+            if node_ids:
+                ids = self.kg.get_chunk_refs_by_node_ids(node_ids, limit=top_k * 2)
+                all_qdrant_ids.extend(ids)
 
         # Deduplicate while preserving order
         seen: set[str] = set()
