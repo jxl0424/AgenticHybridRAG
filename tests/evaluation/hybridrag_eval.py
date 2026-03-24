@@ -322,7 +322,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Evaluate HybridRAG-Bench pipeline")
-    parser.add_argument("--max-pairs", type=int, default=50, help="Number of QA pairs to evaluate")
+    parser.add_argument("--k-per-type", type=int, default=5, help="Questions per type (temporary, replaced in Task 5)")
     parser.add_argument("--top-k", type=int, default=5, help="Contexts per query")
     parser.add_argument("--modes", nargs="+", default=["vector", "hybrid"], help="Retrieval modes")
     parser.add_argument("--output", default="tests/results/hybridrag_eval.json", help="Output path")
@@ -333,8 +333,8 @@ if __name__ == "__main__":
     pipeline = HybridRAGBenchPipeline()
     evaluator = HybridRAGEvaluator(pipeline)
 
-    print(f"Loading {args.max_pairs} QA pairs from {args.local_data_dir}...")
-    qa_pairs = evaluator.load_qa_pairs(max_pairs=args.max_pairs, local_data_dir=args.local_data_dir)
+    print(f"Loading QA pairs from {args.local_data_dir}...")
+    qa_pairs = evaluator.load_qa_pairs(k_per_type=args.k_per_type, local_data_dir=args.local_data_dir)
 
     if not qa_pairs:
         print("No QA pairs found. Inspect the dataset schema printed above and adjust --question-key etc.")
