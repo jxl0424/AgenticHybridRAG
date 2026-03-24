@@ -447,21 +447,28 @@ class LocalParquetLoader:
             n = min(k_per_type * len(QUESTION_TYPES), len(full_df))
             sampled = full_df.sample(n=n, random_state=rng)
         else:
-            sampled_groups: list[pd.DataFrame] = []
-            for qt in QUESTION_TYPES:
-                group_df = full_df[full_df["question_type"] == qt]
-                if len(group_df) == 0:
-                    continue
-                if len(group_df) < k_per_type:
-                    print(f"WARNING: only {len(group_df)} rows available for '{qt}', using all")
-                    sampled_groups.append(group_df)
-                else:
-                    sampled_groups.append(
-                        group_df.sample(n=k_per_type, random_state=rng)
-                    )
-            if not sampled_groups:
-                return []
-            sampled = pd.concat(sampled_groups, ignore_index=True)
+            if "question_type" not in full_df.columns:
+                logger.warning(
+                    "question_type column missing from QA parquet; falling back to stratify=False"
+                )
+                n = min(k_per_type * len(QUESTION_TYPES), len(full_df))
+                sampled = full_df.sample(n=n, random_state=rng)
+            else:
+                sampled_groups: list[pd.DataFrame] = []
+                for qt in QUESTION_TYPES:
+                    group_df = full_df[full_df["question_type"] == qt]
+                    if len(group_df) == 0:
+                        continue
+                    if len(group_df) < k_per_type:
+                        logger.warning(f"only {len(group_df)} rows available for '{qt}', using all")
+                        sampled_groups.append(group_df)
+                    else:
+                        sampled_groups.append(
+                            group_df.sample(n=k_per_type, random_state=rng)
+                        )
+                if not sampled_groups:
+                    return []
+                sampled = pd.concat(sampled_groups, ignore_index=True)
 
         # Final shuffle using the same RNG instance (no reset)
         idx = rng.permutation(len(sampled))

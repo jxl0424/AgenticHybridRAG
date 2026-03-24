@@ -7,7 +7,7 @@ the HybridRAGBenchPipeline across retrieval modes (vector-only vs hybrid).
 Usage:
     pipeline = HybridRAGBenchPipeline()
     evaluator = HybridRAGEvaluator(pipeline)
-    qa_pairs = evaluator.load_qa_pairs(max_pairs=200)
+    qa_pairs = evaluator.load_qa_pairs(k_per_type=5, seed=42)
     results = evaluator.run(qa_pairs, modes=["vector", "hybrid"])
     evaluator.print_comparison_table(results)
 """

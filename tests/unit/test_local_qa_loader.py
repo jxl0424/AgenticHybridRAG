@@ -264,12 +264,21 @@ class TestStratifiedSampling:
         # Final shuffle must differ between seeds
         assert [p["question"] for p in run1] != [p["question"] for p in run2]
 
-    def test_warns_when_type_smaller_than_k(self, stratified_qa_data_dir, capsys):
+    def test_warns_when_type_smaller_than_k(self, stratified_qa_data_dir, caplog):
+        import logging
         loader = LocalParquetLoader(stratified_qa_data_dir)
-        # k_per_type=5 but only 3 rows per type -> warning
-        loader.load_local_qa_pairs(k_per_type=5, seed=0)
-        captured = capsys.readouterr()
-        assert "WARNING" in captured.out
+        # k_per_type=5 but only 3 rows per type → warning
+        # The 'rag' logger has propagate=False, so temporarily re-enable propagation
+        # so caplog (which hooks into the root logger) can capture the records.
+        rag_logger = logging.getLogger("rag")
+        rag_logger.propagate = True
+        try:
+            with caplog.at_level(logging.WARNING):
+                loader.load_local_qa_pairs(k_per_type=5, seed=0)
+        finally:
+            rag_logger.propagate = False
+        assert any("only" in record.message and "rows available" in record.message
+                   for record in caplog.records)
 
     def test_stratify_false_samples_from_full_pool(self, stratified_qa_data_dir):
         loader = LocalParquetLoader(stratified_qa_data_dir)
