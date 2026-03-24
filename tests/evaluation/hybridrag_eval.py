@@ -37,7 +37,7 @@ class HybridRAGEvaluator:
 
     def __init__(self, pipeline: HybridRAGBenchPipeline):
         self.pipeline = pipeline
-        judge_llm = LLMClient(model="llama3.2:latest")
+        judge_llm = LLMClient(model="qwen2.5:7b-instruct")
         self.metrics = RAGMetrics(llm_client=judge_llm)
         self.tracer = start_phoenix()
 
@@ -189,6 +189,8 @@ class HybridRAGEvaluator:
                 question, contexts, answer
             )
 
+        # TODO(Task4): calculate_answer_correctness now returns dict; this call produces
+        # wrong aggregation until _compute_metrics() is replaced in Task 4.
         if gt_answer and answer:
             metrics["answer_correctness"] = self.metrics.calculate_answer_correctness(
                 question, gt_answer, answer
@@ -340,3 +342,8 @@ if __name__ == "__main__":
     with open(args.output) as f:
         raw_results = json.load(f)
     evaluator.print_trace_summary(raw_results)
+
+    if evaluator.tracer is not None:
+        print("\nPhoenix is running at http://localhost:6006")
+        print("Press Enter to shut down Phoenix and exit...")
+        input()
