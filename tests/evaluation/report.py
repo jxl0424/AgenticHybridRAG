@@ -203,7 +203,7 @@ def section_weaknesses(results_dir: str):
         graph_hr = graph["aggregate"].get("hit_rate", 0)
         if graph_hr < 0.3:
             findings.append(f"[HIGH] Graph retrieval hit rate is low ({graph_hr:.3f}). "
-                            "Entity extraction may be failing on queries — check medical NER.")
+                            "Entity extraction may be failing on queries — check CS entity extractor.")
         if graph_hr < vec_hr * 0.5:
             findings.append(f"[MEDIUM] Graph retrieval ({graph_hr:.3f}) is much weaker than vector "
                             f"({vec_hr:.3f}). Knowledge graph may have sparse coverage.")
@@ -212,7 +212,7 @@ def section_weaknesses(results_dir: str):
         delta = reranker.get("delta_aggregate", {})
         if delta.get("hit_rate", 0) < -0.02:
             findings.append("[MEDIUM] Reranker reduces hit rate. Cross-encoder may be miscalibrated "
-                            "for this medical domain. Consider disabling or retraining.")
+                            "for this domain. Consider disabling or retraining.")
 
     if agent and ceiling:
         a_corr = agent["aggregate_metrics"].get("answer_correctness", 0)

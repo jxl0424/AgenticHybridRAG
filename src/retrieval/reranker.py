@@ -29,7 +29,7 @@ class Reranker:
     MODELS = {
         "msmarco": "cross-encoder/ms-marco-MiniLM-L-6-v2",      # Fast, good quality
         "msmarco-large": "cross-encoder/ms-marco-MiniLM-L-12-v2",  # Better quality
-        "qa": "cross-encoder/qna-covid-marco-miniLM-L6-2",     # QA focused
+        "qa": "cross-encoder/qnli-MiniLM-L6-H768",             # QA focused
     }
     
     def __init__(

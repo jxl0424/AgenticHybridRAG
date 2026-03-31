@@ -1,7 +1,5 @@
 """
 CS/AI domain knowledge graph for arXiv papers.
-
-Standalone — does not depend on the legacy medical KnowledgeGraph base class.
 """
 import json
 from dataclasses import dataclass, field
@@ -15,7 +13,7 @@ logger = get_logger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Shared graph dataclasses (previously in knowledge_graph.py)
+# Graph dataclasses
 # ---------------------------------------------------------------------------
 
 @dataclass

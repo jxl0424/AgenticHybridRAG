@@ -13,12 +13,12 @@ import requests
 
 load_dotenv()
 
-st.set_page_config(page_title="RAG Clinical Document Ingestion", page_icon="🏥", layout="centered")
+st.set_page_config(page_title="HybridRAG — arXiv Research Assistant", page_icon="📄", layout="centered")
 
-# Inject Custom CSS for Medical Aesthetic
+# Inject Custom CSS
 st.markdown("""
 <style>
-    /* Professional Medical Typography */
+    /* Professional Typography */
     html, body, [class*="css"] {
         font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }
@@ -109,7 +109,7 @@ st.markdown("""
     
     /* Primary Buttons */
     .stButton>button {
-        background-color: #0d836b !important; /* Vibrant Medical Teal */
+        background-color: #0d836b !important;
         color: #ffffff !important;
         border-radius: 10px !important;
         border: none !important;
@@ -215,7 +215,7 @@ with st.sidebar:
     
     st.divider()
     st.header("📄 Document Ingestion")
-    uploaded = st.file_uploader("Upload Clinical PDF", type=["pdf"], accept_multiple_files=False)
+    uploaded = st.file_uploader("Upload PDF", type=["pdf"], accept_multiple_files=False)
     
     if uploaded is not None:
         with st.spinner("Indexing document..."):
@@ -223,20 +223,20 @@ with st.sidebar:
             asyncio.run(send_rag_ingest_event(path))
         st.success(f"Queued for ingestion: {path.name}")
 
-st.title("Medical Assistant AI")
-st.caption("Agentic Graph RAG for Clinical Intelligence")
+st.title("HybridRAG — arXiv Research Assistant")
+st.caption("Hybrid Graph + Vector RAG for CS/AI, Computers & Society, and Quantitative Methods papers")
 
 # ---------------------------------------------------------
 # Chat Interface Initialization
 # ---------------------------------------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hello. I am the Clinical AI Assistant. Please upload a document in the sidebar, or ask a question.", "logs": None, "sources": None}
+        {"role": "assistant", "content": "Hello. I am the arXiv Research Assistant. Ask me a question about CS/AI, Computers & Society, or Quantitative Methods papers.", "logs": None, "sources": None}
     ]
 
 # Display chat history
 for msg in st.session_state.messages:
-    with st.chat_message(msg["role"], avatar="🧑‍⚕️" if msg["role"] == "assistant" else "👤"):
+    with st.chat_message(msg["role"], avatar="🤖" if msg["role"] == "assistant" else "👤"):
         st.write(msg["content"])
         
         # Display agent logs if they exist for this message
@@ -260,14 +260,14 @@ for msg in st.session_state.messages:
 # ---------------------------------------------------------
 # Chat Input & Processing
 # ---------------------------------------------------------
-if prompt := st.chat_input("Enter clinical query..."):
+if prompt := st.chat_input("Ask a question about arXiv papers..."):
     # Append user message to state and display it
     st.session_state.messages.append({"role": "user", "content": prompt, "logs": None, "sources": None})
     with st.chat_message("user", avatar="👤"):
         st.write(prompt)
 
     # Process assistant response
-    with st.chat_message("assistant", avatar="🧑‍⚕️"):
+    with st.chat_message("assistant", avatar="🤖"):
         status_container = st.status("Agent reasoning...", expanded=True)
         with status_container:
             st.write("Querying pipeline...")

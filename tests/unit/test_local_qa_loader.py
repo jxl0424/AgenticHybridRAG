@@ -161,7 +161,6 @@ def _import_evaluator():
     for mod in (
         "src.graph.cs_entity_extractor",
         "src.graph.cs_knowledge_graph",
-        "src.graph.knowledge_graph",
         "src.retrieval.qdrant_storage",
         "src.retrieval.hybrid_retriever",
         "src.retrieval.graph_retriever",

@@ -4,15 +4,20 @@ Diagnostic script for LocalIngestionPipeline — checks each layer independently
 Run from project root:
     python diagnose_hybridrag.py
 """
+import os
 import sys
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 SEP = "-" * 60
 
-NEO4J_URI = "bolt://localhost:7687"
-NEO4J_AUTH = ("neo4j", "Pokemon0424$")
+NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_AUTH = ("neo4j", os.environ.get("NEO4J_PASSWORD", "neo4j"))
 QDRANT_URL = "http://localhost:6333"
 EMBEDDING_MODEL = "allenai/specter2_base"
 COLLECTIONS = ["arxiv_nodes", "arxiv_chunks", "arxiv_papers"]

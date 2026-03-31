@@ -6,8 +6,8 @@ logging:
 chunker:
   chunk_size: 512             # used by TextChunker (get_chunk_settings)
   chunk_overlap: 128          # used by TextChunker (get_chunk_settings)
-  section_max_tokens: 150     # max words per section chunk (MedicalChunker)
-  sentence_group_tokens: 120  # target words per sentence-group chunk (MedicalChunker)
+  section_max_tokens: 150     # max words per section chunk
+  sentence_group_tokens: 120  # target words per sentence-group chunk
 
 # LLM settings (answer generation)
 llm:

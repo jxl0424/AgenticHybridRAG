@@ -5,8 +5,7 @@ Extracts entities (MODEL, DATASET, TASK, FRAMEWORK, etc.) using
 rule-based dictionaries and regex patterns. Also parses _description
 relationship sentences directly into structured (subject, rel, object) triples.
 
-Exposes extract_entities(query) so it can be used as a drop-in replacement
-for MedicalEntityExtractor inside GraphRetriever.
+Exposes extract_entities(query) for use inside GraphRetriever.
 """
 import re
 from dataclasses import dataclass, field
