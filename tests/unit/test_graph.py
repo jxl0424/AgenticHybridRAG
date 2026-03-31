@@ -34,16 +34,16 @@ def test_get_chunk_refs_by_node_ids_returns_qdrant_ids(mock_neo4j_cls):
     ]
 
     kg = _RealCSKG(neo4j_client=client)
-    result = kg.get_chunk_refs_by_node_ids([101, 202], limit=10)
+    result = kg.get_chunk_refs_by_node_ids([(101, "arxiv_ai"), (202, "arxiv_cs")], limit=10)
 
     assert result == ["uuid-aaa", "uuid-bbb"]
     call_args = client.execute_read.call_args
     cypher = call_args.args[0]
     params = call_args.args[1]
-    assert "node_id IN $node_ids" in cypher
+    assert "$pairs" in cypher
     assert "-[r:HAS_CHUNK]-" in cypher       # undirected match (no arrow)
     assert "DISTINCT" in cypher               # deduplication
-    assert params["node_ids"] == [101, 202]
+    assert params["pairs"] == [{"node_id": 101, "domain": "arxiv_ai"}, {"node_id": 202, "domain": "arxiv_cs"}]
     assert params["limit"] == 10
 
 

@@ -24,7 +24,13 @@ Instructions:
 - Answer using the information in the context above
 - Only say you don't have enough information if the context contains NO information about the subject
 - For hypothetical or counterfactual questions, reason from what the context says about the subject — do not refuse
-- Keep your answer concise and accurate"""
+- Keep your answer extremely concise. If the question asks for a specific name, entity, or concept, respond ONLY with that specific word or phrase without any conversational starter.
+
+Examples:
+Question: What is the primary contribution of BERT?
+Answer: Bidirectional Encoder Representations from Transformers
+Question: Which dataset was used in the LLaMA-2 paper?
+Answer: The Pile"""
 
 def build_query_prompt(question: str, contexts: list[str]) -> str:
     """Build a query prompt with the given question and context chunks."""

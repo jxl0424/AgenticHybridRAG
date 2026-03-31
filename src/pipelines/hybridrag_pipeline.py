@@ -126,45 +126,6 @@ class HybridRAGBenchPipeline:
         self.min_score: float = hcfg.get("min_score", hybrid_cfg.get("min_score", 0.05))
 
     # -------------------------------------------------------------------------
-    # Ingestion
-    # -------------------------------------------------------------------------
-
-    def ingest(self, *args, **kwargs):
-        raise NotImplementedError(
-            "HybridRAGBenchPipeline.ingest() is deprecated. "
-            "Use ingest_local.py (LocalIngestionPipeline) instead."
-        )
-
-    def _flush_batch(
-        self,
-        neo4j_batch: list,
-        qdrant_ids: list[int],
-        qdrant_payloads: list[dict],
-    ) -> None:
-        """Store one batch in Qdrant + Neo4j.
-
-        Uses the pre-computed embedding stored in each batch item's third element
-        when available, falling back to on-the-fly SPECTER2 encoding only for
-        chunks that are missing it.
-        """
-        precomputed = [item[2] if len(item) > 2 else None for item in neo4j_batch]
-
-        if all(v is not None for v in precomputed):
-            vectors = precomputed
-        else:
-            # Some or all embeddings missing — compute for those that need it
-            texts = [item[0].text for item in neo4j_batch]
-            computed = embed_texts_with_model(texts, self.embedding_model, self.batch_size)
-            vectors = [
-                pre if pre is not None else comp
-                for pre, comp in zip(precomputed, computed)
-            ]
-
-        # Strip the embedding element before passing to Neo4j
-        neo4j_pairs = [(item[0], item[1]) for item in neo4j_batch]
-        self.cs_kg.ingest_extraction_results_batch(neo4j_pairs)
-
-    # -------------------------------------------------------------------------
     # Native KG ingestion
     # -------------------------------------------------------------------------
 
@@ -286,9 +247,10 @@ class HybridRAGBenchPipeline:
         )
         retrieve_ms = round((time.perf_counter() - t0) * 1000, 2)
 
-        # Single read — used for both span attributes below and the trace dict at the end.
-        # Do NOT add a second getattr call later; this prevents a stale-read trip hazard.
-        graph_trace = getattr(self.graph_retriever, "_last_trace", {})
+        # Only read graph trace when graph was actually called — otherwise _last_trace
+        # holds stale data from the previous question's hybrid run.
+        _empty_graph_trace = {"entities_extracted": [], "qdrant_ids_per_entity": {}, "total_qdrant_ids": 0, "fetched_count": 0}
+        graph_trace = getattr(self.graph_retriever, "_last_trace", {}) if use_hybrid else _empty_graph_trace
         hybrid_trace = getattr(self.hybrid_retriever, "_last_trace", {})
 
         # Sub-spans from trace data — attribute-only, timing is the shared retrieve_ms

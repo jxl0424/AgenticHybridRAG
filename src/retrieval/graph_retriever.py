@@ -6,7 +6,6 @@ qdrant_id references, then fetches text from arxiv_chunks via ChunkRetriever.
 """
 import re
 from typing import Optional
-from dataclasses import dataclass
 
 from qdrant_client import QdrantClient
 from src.graph.cs_knowledge_graph import CSKnowledgeGraph
@@ -18,15 +17,6 @@ logger = get_logger("retrieval.graph")
 
 NODES_PER_ENTITY = 3
 EMBEDDING_MODEL = "allenai/specter2_base"
-
-
-# Kept for backward-compat imports elsewhere; will be cleaned up separately
-@dataclass
-class GraphRetrievalResult:
-    contexts: list[str]
-    sources: list[str]
-    entities_found: list[str]
-    graph_paths: list[dict]
 
 
 class GraphRetriever:
@@ -97,15 +87,15 @@ class GraphRetriever:
             results = self._qdrant.query_points(
                 "arxiv_nodes", query=name_emb, with_payload=True, limit=NODES_PER_ENTITY
             )
-            node_ids = [
-                r.payload["node_id"]
+            node_id_domains = [
+                (r.payload["node_id"], r.payload.get("domain", ""))
                 for r in results.points
                 if r.payload and r.payload.get("node_id") is not None
             ]
-            logger.debug("[GraphRetriever] entity=%r -> %d nodes", name, len(node_ids))
-            self._last_trace["qdrant_ids_per_entity"][name] = len(node_ids)
-            if node_ids:
-                ids = self.kg.get_chunk_refs_by_node_ids(node_ids, limit=top_k * 2)
+            logger.debug("[GraphRetriever] entity=%r -> %d nodes", name, len(node_id_domains))
+            self._last_trace["qdrant_ids_per_entity"][name] = len(node_id_domains)
+            if node_id_domains:
+                ids = self.kg.get_chunk_refs_by_node_ids(node_id_domains, limit=top_k * 2)
                 all_qdrant_ids.extend(ids)
 
         # Deduplicate while preserving order

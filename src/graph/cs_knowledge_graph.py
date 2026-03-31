@@ -257,19 +257,20 @@ class CSKnowledgeGraph:
         rows = self.client.execute_read(query, {"name": display_name, "limit": limit})
         return [r["qdrant_id"] for r in rows if r.get("qdrant_id")]
 
-    def get_chunk_refs_by_node_ids(self, node_ids: list[int], limit: int = 20) -> list[str]:
+    def get_chunk_refs_by_node_ids(self, node_id_domains: list[tuple[int, str]], limit: int = 20) -> list[str]:
         """
         Return qdrant_id strings from HAS_CHUNK edges connected to _Embeddable
-        nodes whose node_id is in the given list. Matches both src and dst
-        sides of the HAS_CHUNK relationship.
+        nodes matched by (node_id, domain) pairs. Domain filtering prevents
+        cross-domain node_id collisions (node_ids are domain-local integers).
         """
+        pairs = [{"node_id": nid, "domain": dom} for nid, dom in node_id_domains]
         query = """
-        MATCH (n:_Embeddable)-[r:HAS_CHUNK]-()
-        WHERE n.node_id IN $node_ids
+        MATCH (n:_Embeddable)-[*0..1]-(m:_Embeddable)-[r:HAS_CHUNK]-()
+        WHERE ANY(pair IN $pairs WHERE n.node_id = pair.node_id AND n.domain = pair.domain)
         RETURN DISTINCT r.qdrant_id AS qdrant_id
         LIMIT $limit
         """
-        rows = self.client.execute_read(query, {"node_ids": node_ids, "limit": limit})
+        rows = self.client.execute_read(query, {"pairs": pairs, "limit": limit})
         return [r["qdrant_id"] for r in rows if r.get("qdrant_id")]
 
     def get_related_entities(self, entity_name: str, depth: int = 2) -> list[dict]:

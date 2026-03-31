@@ -1,68 +1,29 @@
 {
   "vector": [
     {
-      "question": "If variational free energy were NOT a proxy for minimizing entropy, how might this affect the theoretical justification for active inference?",
-      "answer": "If variational free energy (VFE) were not a proxy for minimizing entropy, the theoretical justification for active inference would be significantly affected. Active inference is grounded in the idea that systems minimize their free energy to reduce entropy and maintain a stable state. If VFE were not seen as a proxy for entropy, this core assumption would need to be reevaluated. The justification for active inference's approach to perception, decision-making, and learning, which relies on minimizing expected free energy (EFE), would need to be reconsidered. This could lead to a search for alternative theoretical frameworks or justifications for these cognitive processes.",
-      "num_contexts": 5,
+      "question": "If acyclic CP-nets were NOT a type of CP-net, how would this affect the learning algorithms that guarantee consistency?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "This could reduce the applicability of consistency-guaranteeing learning algorithms, as the acyclicity property ensures the dependency graph is acyclic, which is a key condition for those algorithms. Without this relationship, the theoretical foundation for learning from swap examples might need revision.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.5,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [],
-        "qdrant_ids_per_entity": {},
-        "graph_qdrant_ids_total": 0,
-        "graph_fetched_count": 0,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 2,
-          "arxiv_papers": 13
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          2.625,
-          1.584,
-          1.273,
-          0.787,
-          -1.12
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 2.625,
-            "text": "<!-- image -->\n\nFigure 2.1: The logical flow of the argument of the FEP from the initial formulation to the crucial approximate Bayesian inference lem"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.584,
-            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.273,
-            "text": "## 2.10 Active Inference\n\nIn the previous section, we have covered the very general and abstract form of the FEP, here we elucidate the central proces"
-          }
-        ]
-      },
-      "mode": "vector"
-    },
-    {
-      "question": "If the Expected Free Energy (EFE) objective did NOT mandate minimization of ambiguity, what might be a consequence for an active inference agent?",
-      "answer": "I don't have enough information to answer that question based on the provided documents.",
-      "num_contexts": 5,
-      "metrics": {
-        "context_recall": 0.5,
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.35,
         "faithfulness": 1.0,
-        "answer_correctness": 0.5
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 2,
       "trace": {
         "entities_extracted": [],
         "qdrant_ids_per_entity": {},
@@ -75,106 +36,54 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 1,
-          "arxiv_papers": 14
+          "arxiv_chunks": 15
         },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
         "reranker_scores": [
-          4.776,
-          2.023,
-          1.516,
-          0.751,
-          0.595
+          2.668,
+          2.172
         ],
         "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "2107.00140v1",
-            "rerank_score": 4.776,
-            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+            "source": "1801.03968v3",
+            "rerank_score": 2.668,
+            "text": "On top of the VCD and the TD , we calculated another parameter, RTD , for classes of all complete k -bounded acyclic CP-nets. While we did not use our"
           },
           {
-            "source": "2107.00140v1",
-            "rerank_score": 2.023,
-            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.516,
-            "text": "Specifically, and quite elegantly, we can show that under certain conditions of the generative model of the future, that we can derive the optimal pla"
+            "source": "1801.03968v3",
+            "rerank_score": 2.172,
+            "text": "We determined exact values or non-trivial bounds on the parameters VCD and TD for the classes of all (all complete, resp.) k -bounded acyclic CP-nets "
           }
         ]
       },
       "mode": "vector"
     },
     {
-      "question": "If specification of hyper-parameters was NOT positively correlated with reproducibility, how would that affect the assessment of machine learning research quality?",
-      "answer": "If the specification of hyper-parameters was not positively correlated with reproducibility, it would suggest that simply documenting hyper-parameters might not be sufficient for ensuring the reproducibility of a machine learning research paper. This could imply that other factors, such as detailed explanations of the method, toy examples, and high-level pseudo-code, are also crucial for achieving reproducibility. Consequently, the assessment of machine learning research quality would likely place more emphasis on these additional aspects beyond just listing hyper-parameters.",
-      "num_contexts": 5,
+      "question": "In what year was the research article 'Some experiences and opportunities for big data in translational research' published in Genetics in Medicine?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "2013",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [
-          "EFE"
-        ],
-        "qdrant_ids_per_entity": {
-          "EFE": 90
-        },
-        "graph_qdrant_ids_total": 90,
-        "graph_fetched_count": 90,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_papers": 14,
-          "arxiv_chunks": 1
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          1.957,
-          1.155,
-          -0.483,
-          -1.41,
-          -3.143
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2302.12691v1",
-            "rerank_score": 1.957,
-            "text": "Reproducibility guidelines - beyond documentation. The main paradigm in machine learning has shifted from classic supervised methods and hand-coded al"
-          },
-          {
-            "source": "2302.12691v1",
-            "rerank_score": 1.155,
-            "text": "What makes a ML/DL paper reproducible? However, while the short paper of Tatman et al. gives an important motivation for considering the practical sid"
-          },
-          {
-            "source": "2302.12691v1",
-            "rerank_score": -0.483,
-            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
-          }
-        ]
-      },
-      "mode": "vector"
-    },
-    {
-      "question": "If Embodied AI were NOT composed of intelligence as a core element, how would that affect its ability to generate adaptive behavior?",
-      "answer": "If Embodied AI were NOT composed of intelligence as a core element, it would likely struggle to generate adaptive behavior. The context emphasizes that intelligence, particularly in the form of embodied intelligence, is fundamental to achieving AGI goals and guarantees. Without intelligence as a core element, the AI's ability to learn from experience and optimize its performance would be compromised, affecting its adaptive behavior.",
-      "num_contexts": 5,
-      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
         "context_recall": 0.0,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [],
         "qdrant_ids_per_entity": {},
@@ -187,48 +96,63 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 4,
-          "arxiv_papers": 11
+          "arxiv_chunks": 13,
+          "arxiv_papers": 2
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          -0.485,
-          -3.663,
-          -3.776,
-          -4.679,
-          -5.511
+          -6.849,
+          -7.134,
+          -8.022,
+          -8.06,
+          -8.089
         ],
-        "answer_type": "answer",
+        "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "2505.12229v1",
-            "rerank_score": -0.485,
-            "text": "## Abstract\n\nCurrent artificial intelligence systems-from large language models to autonomous robotsexcel at narrow tasks but lack key qualities of se"
+            "source": "2208.03139v1",
+            "rerank_score": -6.849,
+            "text": "The  Bioinformatic  study  deals  with  the  evaluation  of  disease  phenotypes  necessary  for alleviating  comorbidities,  making  it  essential  t"
           },
           {
-            "source": "2505.12229v1",
-            "rerank_score": -3.663,
-            "text": "## 1. Introduction\n\n## 1.1 Context and Motivation\n\nWe stand at a pivotal moment in the evolution of artificial intelligence. Rapid advancements, parti"
+            "source": "2402.04286v1",
+            "rerank_score": -7.134,
+            "text": "Figure.  3  Challenges  and  Opportunities  in  Applying  Foundation  Models  for  Biological  Problems. FMs  for  solving biological problems have be"
           },
           {
-            "source": "2505.12229v1",
-            "rerank_score": -3.776,
-            "text": "Influential theories, such as Antonio Damasio's work on embodiment [6, 7], posit that consciousness and rational thought are inextricably linked to th"
+            "source": "2402.04286v1",
+            "rerank_score": -8.022,
+            "text": "om sequences [Sapoval et al ., 2022], rare disease discovery from limited task-specific data [Theodoris et al. , 2023], and other analyses on noise in"
           }
         ]
       },
       "mode": "vector"
     },
     {
-      "question": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, what might be the implication for its accessibility?",
-      "answer": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, it would likely have been less accessible to the broader academic community before formal publication in a journal like Royal Society Interface. Arxiv serves as a preprint server that allows researchers to share their work widely and receive feedback before formal peer review and publication. Without this submission, the paper might have taken longer to reach a wider audience and potentially missed out on early feedback and collaboration opportunities.",
-      "num_contexts": 3,
+      "question": "What type of unacceptable risk system, analogous to prohibited AI systems like the Chinese social credit system, could AI, which is developed by CHINA, govern?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_cy",
+      "prediction": "social credit system",
+      "ground_truth": "SOCIAL CREDIT SYSTEM",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 1.0,
-        "answer_correctness": 0.8
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 1.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 0.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [],
         "qdrant_ids_per_entity": {},
@@ -241,55 +165,135 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 1,
-          "arxiv_papers": 14
+          "arxiv_chunks": 15
         },
-        "post_rerank_count": 3,
-        "dropped_by_reranker": 12,
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
         "reranker_scores": [
-          5.705,
-          4.389,
-          1.153
+          2.177,
+          1.669,
+          -0.848,
+          -1.44,
+          -2.937
         ],
         "answer_type": "answer",
         "top3_contexts": [
           {
-            "source": "2107.00140v1",
-            "rerank_score": 5.705,
-            "text": "This paper derives the relationship between active inference methods, and the control as inference paradigm which is popular within the reinforcement "
+            "source": "2502.03468v1",
+            "rerank_score": 2.177,
+            "text": "The EU AI Act aims to ensure the trustworthy development and deployment of AI systems for EU citizens while fostering a robust AI ecosystem. Moreover,"
           },
           {
-            "source": "2107.00140v1",
-            "rerank_score": 4.389,
-            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+            "source": "2506.03497v1",
+            "rerank_score": 1.669,
+            "text": "AI policy proposals in the United States have generally focused on AI models and systems; in contrast, Chinese AI policy typically has its roots in co"
           },
           {
-            "source": "2107.00140v1",
-            "rerank_score": 1.153,
-            "text": "1 Technically this is more of an induction argument than a reductio-ad-absurdum, but we still refer to it as such due to its description as a reductio"
+            "source": "2509.06176v2",
+            "rerank_score": -0.848,
+            "text": "## 4.2 AI legislation in China\n\nChina's regulatory approach to artificial intelligence provides an important comparative perspective for understanding"
           }
         ]
       },
       "mode": "vector"
     },
     {
-      "question": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, how would this affect the model's ability to guide AI adoption?",
-      "answer": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, this would significantly affect its ability to guide AI adoption. The AI-CAM is designed to cover core capability dimensions including technology, which are essential for ensuring the successful comprehension, adoption, implementation, and use of AI. Excluding the Technology area would mean the model would lack a crucial aspect needed to comprehensively assess an organization's readiness for AI. This could lead to gaps in the assessment, potentially overlooking critical technological requirements that are necessary for effective AI adoption and innovation.",
-      "num_contexts": 5,
+      "question": "What transformation involves data governance, and what group does data governance concern?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_cy",
+      "prediction": "digital transformation",
+      "ground_truth": "DIGITAL TRANSFORMATION; PEOPLE INVOLVED",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
+        "exact_match": 0.0,
+        "token_f1": 0.6666666666666666,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6666666666666666,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.4,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
-        "entities_extracted": [
-          "ARXIV"
-        ],
-        "qdrant_ids_per_entity": {
-          "ARXIV": 90
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
         },
-        "graph_qdrant_ids_total": 90,
-        "graph_fetched_count": 90,
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.62,
+          2.79,
+          0.953,
+          0.784,
+          -0.146
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 3.62,
+            "text": "To address the need for regulating digital technologies without hampering innovation or pre-digital transformation regulatory frameworks, we provide a"
+          },
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 2.79,
+            "text": "## 4.3. Robust Data Governance: The Backbone of Accountability in AI-Assisted Urban Governance\n\nPrinciple 3: Reliable and ethically governed data is e"
+          },
+          {
+            "source": "2006.02709v1",
+            "rerank_score": 0.953,
+            "text": "the data governance model employed within the VPP is crucial for the development of trust between assetowners and aggregator."
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "In which application area did HENDERSON apply the evolutionary algorithm that includes survival selection?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "nuclear reactor core design",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
         "raw_counts": {
           "chunk": 45,
           "paper": 44,
@@ -297,98 +301,63 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 4,
-          "arxiv_papers": 11
+          "arxiv_chunks": 14,
+          "arxiv_papers": 1
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          5.134,
-          4.545,
-          4.492,
-          3.89,
-          3.723
+          0.987,
+          -0.413,
+          -0.903,
+          -1.035,
+          -2.45
         ],
-        "answer_type": "answer",
+        "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "2305.15922v1",
-            "rerank_score": 5.134,
-            "text": "This paper's contribution is a 5-level AI Capability Assessment Model (AI-CAM) and a related AI Capabilities Matrix (AI-CM) which are tools aimed at a"
+            "source": "1508.00468v1",
+            "rerank_score": 0.987,
+            "text": "## Survival Selection\n\nSurvival selection aims at selecting a subset of good individuals from a population, where the goodness of individual is propor"
           },
           {
-            "source": "2305.15922v1",
-            "rerank_score": 4.545,
-            "text": "This article's contribution is a Capability Assessment Model for AI adoption in organisations: This specifies the capabilities required to achieve des"
+            "source": "1508.00468v1",
+            "rerank_score": -0.413,
+            "text": "In this book chapter, we follow the unified approach proposed by De Jong (De Jong, 2006). The design of evolutionary algorithm can be divided into sev"
           },
           {
-            "source": "2305.15922v1",
-            "rerank_score": 4.492,
-            "text": "These  three  AI  categories  are  used  to  drive  the  development  of  the  capability  assessment  model presented in the next section.\n\n## 3 Towa"
+            "source": "1508.00468v1",
+            "rerank_score": -0.903,
+            "text": "Genetic Programming: Genetic programming is indeed a special type of genetic algorithm. The difference lies in their representations. Genetic programm"
           }
         ]
       },
       "mode": "vector"
     },
     {
-      "question": "If Design D2 did NOT enable continual learning without erasing past knowledge, what might be a consequence?",
-      "answer": "If Design D2 did NOT enable continual learning without erasing past knowledge, it would suffer from the same limitations as contemporary methods like neural networks, which erase past knowledge to fit new data. This would result in the loss of past knowledge and the production of unstructured, overparameterized internal representations that hinder human comprehensibility and integration with non-learning processes.",
-      "num_contexts": 2,
+      "question": "What framework does the A2A protocol, which exemplifies AGENTIC COMMUNICATION, provide?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_ai",
+      "prediction": "structured, scalable, and semantically rich communication",
+      "ground_truth": "ROBUST FOUNDATION",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.8,
-        "faithfulness": 0.0,
-        "answer_correctness": 0.8
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.4,
+        "lm_judge_justification": "The generated answer is partially accurate in terms of factual accuracy (1/3 correct aspects: structured, scalable), but lacks completeness (no mention of \"semantically rich\") and semantic similarity (no mention of \"ROBUST FOUNDATION\" or \"",
+        "final_answer_correctness": 0.4,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 0.75,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
-      "trace": {
-        "entities_extracted": [
-          "AI-CAM"
-        ],
-        "qdrant_ids_per_entity": {
-          "AI-CAM": 9
-        },
-        "graph_qdrant_ids_total": 9,
-        "graph_fetched_count": 9,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 3,
-          "arxiv_papers": 12
-        },
-        "post_rerank_count": 2,
-        "dropped_by_reranker": 13,
-        "reranker_scores": [
-          3.877,
-          2.648
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2506.12891v1",
-            "rerank_score": 3.877,
-            "text": "<!-- image -->\n\nexemplified in Figure 6: In 6b, after elimination of X 1 as a positive source, the earlier exposure of X 0 , X 1 \u2192 Y still results in "
-          },
-          {
-            "source": "2506.12891v1",
-            "rerank_score": 2.648,
-            "text": "## 5 Conclusion\n\nThe prevailing AI design paradigm, despite its widespread success in tackling previously intractable problems, suffers from inherent "
-          }
-        ]
-      },
-      "mode": "vector"
-    },
-    {
-      "question": "If the VC dimension of the class of all complete acyclic 0-bounded CP-nets were not (m-1)n, how might this affect the lower bound on the number of equivalence and membership queries required for learning?",
-      "answer": "I don't have enough information to answer that question based on the provided documents. The context specifically discusses k-bounded CP-nets for k \u2264 n-1, and does not mention the VC dimension or query complexity for 0-bounded CP-nets.",
       "num_contexts": 5,
-      "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 1.0,
-        "answer_correctness": 0.0
-      },
       "trace": {
         "entities_extracted": [],
         "qdrant_ids_per_entity": {},
@@ -401,115 +370,68 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 3,
-          "arxiv_papers": 12
+          "arxiv_chunks": 10,
+          "arxiv_papers": 5
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          4.377,
-          3.96,
-          3.239,
-          2.613,
-          2.491
-        ],
-        "answer_type": "refusal",
-        "top3_contexts": [
-          {
-            "source": "1801.03968v3",
-            "rerank_score": 4.377,
-            "text": "In the remainder of this article, we fix n \u2265 1 , m \u2265 2 , k \u2208 { 0 , . . . , n -1 } , and consider the following two concept classes:\n\n- \u00b7 The class C k"
-          },
-          {
-            "source": "1801.03968v3",
-            "rerank_score": 3.96,
-            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
-          },
-          {
-            "source": "1801.03968v3",
-            "rerank_score": 3.239,
-            "text": "As a consequence, the easiest to teach concepts in C k ac are the maximal ones. Using these lemmas, one can determine the recursive teaching dimension"
-          }
-        ]
-      },
-      "mode": "vector"
-    },
-    {
-      "question": "If the teaching dimension were NOT calculated for the class of k-bounded acyclic CP-nets, how would this affect the assessment of optimality for algorithms learning CP-nets from membership queries?",
-      "answer": "If the teaching dimension were not calculated for the class of k-bounded acyclic CP-nets, it would affect the assessment of optimality for algorithms learning CP-nets from membership queries because the teaching dimension is used to show that the proposed algorithm for learning complete tree CP-nets from membership queries alone is close to optimal. Without this parameter, such an optimality assessment would not be possible.",
-      "num_contexts": 5,
-      "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [
-          "CP-nets"
-        ],
-        "qdrant_ids_per_entity": {
-          "CP-nets": 85
-        },
-        "graph_qdrant_ids_total": 85,
-        "graph_fetched_count": 85,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 1,
-          "arxiv_papers": 14
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          3.563,
-          3.274,
-          2.434,
-          2.416,
-          1.796
+          6.01,
+          5.173,
+          4.429,
+          4.413,
+          3.242
         ],
         "answer_type": "answer",
         "top3_contexts": [
           {
-            "source": "1801.03968v3",
-            "rerank_score": 3.563,
-            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+            "source": "2507.21206v1",
+            "rerank_score": 6.01,
+            "text": "This section investigates the protocol level foundations of the Agentic Web, examining the limitations of conventional protocols such as HTTP and RPC,"
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 3.274,
-            "text": "One may argue that the VC dimension should be computed over arbitrary instances rather than just swap instances, since it captures how difficult a con"
+            "source": "2507.21206v1",
+            "rerank_score": 5.173,
+            "text": "Compared to the MCP, the A2A protocol not only expands the scope of agent communication to include direct interaction and collaboration between hetero"
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 2.434,
-            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+            "source": "2507.21206v1",
+            "rerank_score": 4.429,
+            "text": "## 5.3 Agentic Communication\n\nThe deployment of autonomous agents in complex web environments for multi step tasks introduces novel communication dema"
           }
         ]
       },
       "mode": "vector"
     },
     {
-      "question": "If the deterministic method had NOT been compared with JueWu-SL in validation accuracy, how would this affect the evaluation of its action controllability?",
-      "answer": "I don't have enough information to answer that question based on the provided documents.",
-      "num_contexts": 5,
+      "question": "What is the intended publication venue for the article 'Lessons learned to boost a bioinformatics knowledge base reusability, the Bgee experience'?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The article 'Lessons learned to boost a bioinformatics knowledge base reusability, the Bgee experience' is described as a manuscript in preparation for the GigaScience journal.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
         "faithfulness": 1.0,
-        "answer_correctness": 0.0
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
-        "entities_extracted": [
-          "CP-nets"
-        ],
-        "qdrant_ids_per_entity": {
-          "CP-nets": 85
-        },
-        "graph_qdrant_ids_total": 85,
-        "graph_fetched_count": 85,
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
         "raw_counts": {
           "chunk": 45,
           "paper": 45,
@@ -517,34 +439,1562 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 2,
-          "arxiv_papers": 13
+          "arxiv_chunks": 15
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          -6.265,
-          -7.21,
-          -7.466,
-          -8.38,
-          -9.042
+          -0.513,
+          -2.353,
+          -3.645,
+          -7.247,
+          -7.861
         ],
         "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "2503.00096v3",
-            "rerank_score": -6.265,
-            "text": "To assess the capabilities of current AI models for performing these types of analyses, we present results of two frontier models (GPT-4o from OpenAI "
+            "source": "2303.12329v2",
+            "rerank_score": -0.513,
+            "text": "Although we centre on our work on the Bgee use case, the practices, methods and lessons learned discussed here are transferable to other KBs such as t"
           },
           {
-            "source": "2508.20040v1",
-            "rerank_score": -7.21,
-            "text": "These findings demonstrate a recurring pattern: foundation models, and AI models in general, perform worse than initially reported when subjected to t"
+            "source": "2303.12329v2",
+            "rerank_score": -2.353,
+            "text": "Weprovide EasyBgee with both data models as a good practice to reach more users, to facilitate interoperability, and consequently, to make the Bgee da"
+          },
+          {
+            "source": "2303.12329v2",
+            "rerank_score": -3.645,
+            "text": "The Bgee KB integrates and aggregates data from heterogeneous data sources by reconciling them and applying a data warehouse approach, resulting in a "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "How does deep learning handle protein-protein interaction network data based on the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The paragraph states that deep learning can be used to deal with graph data, including protein-protein interaction networks. It mentions that deep learning promotes state-of-the-art performance on such networks by performing node embedding, which aggregates neighbor information in a tree manner. This embedding is used for downstream tasks like node classification, interaction prediction, and community detection.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.0,
+        "lm_judge_justification": "Model refused to answer.",
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 8,
+          "arxiv_papers": 7
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.231,
+          2.447,
+          1.843,
+          1.358,
+          -1.626
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2410.02023v2",
+            "rerank_score": 3.231,
+            "text": "## Abstract\n\nDeep learning has deeply influenced protein science, enabling breakthroughs in predicting protein properties, higher-order structures, an"
+          },
+          {
+            "source": "2410.02023v2",
+            "rerank_score": 2.447,
+            "text": "Challenges. Previous benchmarks related to molecular learning have offered valuable insights regarding their respective libraries and implementation i"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 1.843,
+            "text": "Protein modeling, especially through deep learning approaches, addresses a variety of critical tasks in biological research and medicine. For instance"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "How is the relationship between GPT-4 and the concept of large language models (LLMs) described in the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "GPT-4 is described as a large language model developed by OpenAI. The paragraph states that the launch of GPT-4 has spurred various LLM-based research systems. It also notes that ChatGPT is a large language model, and the field of artificial intelligence includes large language models such as OpenAI's ChatGPT.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 13,
+          "arxiv_papers": 2
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.904,
+          2.433,
+          2.269,
+          2.143,
+          2.11
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 2.904,
+            "text": "The rapid development of large language models (LLMs) such as BERT [1], GPT [2], and their specialized counterparts has revolutionized the field of na"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 2.433,
+            "text": "Large language models (LLMs) are a class of artificial intelligence models based on deep learning, which have great performance in various tasks, espe"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 2.269,
+            "text": "## 1 Introduction\n\nThe rapid development of large language models (LLMs) such as BERT [1], GPT [2], and their specialized counterparts has revolutioni"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "In which application area did MICHIELSSEN apply the evolutionary algorithm that includes crossover operators?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "electromagnetic optimization",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          0.635,
+          0.232,
+          -1.037,
+          -3.548,
+          -4.287
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1508.00468v1",
+            "rerank_score": 0.635,
+            "text": "In this book chapter, we follow the unified approach proposed by De Jong (De Jong, 2006). The design of evolutionary algorithm can be divided into sev"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": 0.232,
+            "text": "Evolving trees (e.g. boolean expressions of k-mers) by evolutionary algorithms are well studied in the genetic programming field. Many design issues h"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": -1.037,
+            "text": "Genetic Programming: Genetic programming is indeed a special type of genetic algorithm. The difference lies in their representations. Genetic programm"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "Which metric does the DeepPurpose software, authored by MARINKA ZITNIK, use?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "F-1 score",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 9,
+          "arxiv_papers": 6
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -9.999,
+          -10.004,
+          -10.611,
+          -10.892,
+          -10.999
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -9.999,
+            "text": "In the next subsection we analyse the reproducibility issues and solutions specific to deep learning, whereas the next two subsections review how repr"
           },
           {
             "source": "2302.12691v1",
-            "rerank_score": -7.466,
-            "text": "Dealing with randomness and indeterminism. Whereas managing the provenance of a computational objects is a cornerstone of reproducibility, the issues "
+            "rerank_score": -10.004,
+            "text": "Tracking deep learning experiments. A comprehensive taxonomy of tools for tracking ML experiments is described by Quaranta et al. [118]. They address "
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -10.611,
+            "text": "Nevertheless, in the case of computer science, and in particular now artificial intelligence, such a paper description is not enough due to the implem"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What model-agnostic XAI method based on Shapley values is used by Explainable AI in the analysis of gene expression levels using RNA-Seq?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_qm",
+      "prediction": "SHAP",
+      "ground_truth": "SHAPLEY ADDITIVE EXPLANATIONS",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.85,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "arxiv_papers": 4
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.088,
+          1.797,
+          1.189,
+          1.102,
+          0.749
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 2.088,
+            "text": "Artificial intelligence (AI) systems utilizing deep neural networks (DNNs) and machine learning (ML) algorithms are widely used for solving important "
+          },
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 1.797,
+            "text": "## Abstract\n\nArtificial intelligence (AI) systems utilizing deep neural networks (DNNs) and machine learning (ML) algorithms are widely used for solvi"
+          },
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 1.189,
+            "text": "SHapley Additive exPlanations (SHAP) SHapley Additive exPlanations (SHAP) Lundberg and Lee [2017] is a method used to explain the outputs of ML models"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What property, alongside secondary structure, was predicted for proteins generated by the 2022 model ProtGPT2?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "secondary structure",
+      "ground_truth": "disorder",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.85,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "arxiv_papers": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          6.316,
+          3.242,
+          1.399,
+          1.058,
+          0.008
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2401.04155v2",
+            "rerank_score": 6.316,
+            "text": "Protein sequence generation. Protein  sequence  generation  holds  significant  potential  in  drug design  and  protein  engineering    [97].  Using "
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": 3.242,
+            "text": "Protein  sequences,  akin  to  natural  languages,  are  comprehensive  information  repositories,  encapsulating  structure  and function in their am"
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": 1.399,
+            "text": "Structure  construction  focuses  on  predicting  the  structures  of  proteins  and  RNA  from  the  secondary  structure  to  the quaternary structu"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What is an emerging use case of generative AI systems?",
+      "question_type": "single_hop",
+      "domain": "arxiv_cy",
+      "prediction": "enhancing content quality and employee expertise",
+      "ground_truth": "Test preparation.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.4,
+        "lm_judge_justification": "** The generated answer is partially accurate in terms of factual accuracy (1/3), but lacks completeness (0/3) as it doesn't mention test preparation, and has low semantic similarity (1/3) as it mentions enhancing content quality",
+        "final_answer_correctness": 0.4,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 14,
+          "arxiv_papers": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.442,
+          2.256,
+          0.312,
+          -1.246,
+          -2.286
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2406.04554v1",
+            "rerank_score": 2.442,
+            "text": "For these reasons, generative AI is rapidly evolving into a general-purpose technology that may have a distinct, aggregate impact across industry and "
+          },
+          {
+            "source": "2406.04554v1",
+            "rerank_score": 2.256,
+            "text": "Generative AI, like GPT-4, is already capable of producing convincing real-world content, including text, code, images, music, and video, based on vas"
+          },
+          {
+            "source": "2403.08802v4",
+            "rerank_score": 0.312,
+            "text": "Generative  artificial  intelligence  (GenAI)  has  the  potential  to  disrupt  industries  [63].  It  can  generate business value in various ways, "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "Which researcher is referenced in the introduction of the paper authored by CHHOTE LAL PRASAD GUPTA?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "CHANDEL",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 43,
+          "paper": 43,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -8.951,
+          -9.012,
+          -9.16,
+          -9.235,
+          -9.289
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2312.01018v1",
+            "rerank_score": -8.951,
+            "text": "Agostino Capponi, Garud Iyengar and Jay Sethuraman (2023), 'Decentralized Finance: Protocols, Risks, and Governance', : Vol. XX, No. XX, pp 1-64. DOI:"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": -9.012,
+            "text": "It is important to note that the material in the first section of this chapter (walkthrough of the Free Energy principle as described in Friston (2019"
+          },
+          {
+            "source": "2402.17572v1",
+            "rerank_score": -9.16,
+            "text": "Steff Taelman Department of Data Analysis and Mathematical Modelling Ghent University BioLizard nv"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "In what month and year did the Human Genome Project start the high-throughput sequencing era?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "April 2003",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -6.411,
+          -7.598,
+          -7.611,
+          -7.741,
+          -8.3
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2003.00110v3",
+            "rerank_score": -6.411,
+            "text": "One can study an individual genome using sequencing data in two ways: by mapping reads to a reference genome, if it exists, or by de novo assembling t"
+          },
+          {
+            "source": "2003.00110v3",
+            "rerank_score": -7.598,
+            "text": "The trade-off for decreased cost and increased throughput offered by modern sequencing technologies is a larger margin of noise in sequencing data 5 ."
+          },
+          {
+            "source": "2003.00110v3",
+            "rerank_score": -7.611,
+            "text": "The trade-off for decreased cost and increased throughput offered by modern sequencing technologies is a larger margin of noise in sequencing data 5 ."
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If the Expected Free Energy (EFE) objective did NOT mandate the minimization of risk, what might be the consequence for an agent's behavior?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "This could lead the agent to accept larger divergences between its current state density and the equilibrium state, potentially increasing exposure to undesirable outcomes. Without risk minimization, the agent might fail to avoid situations with high predictive error, reducing its ability to maintain stability and achieve its goals.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.35,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 7,
+          "arxiv_papers": 8
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.353,
+          3.325,
+          0.924,
+          -2.725,
+          -2.869
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.353,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.325,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 0.924,
+            "text": "Specifically, and quite elegantly, we can show that under certain conditions of the generative model of the future, that we can derive the optimal pla"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What are truncated hitting times used to test for?",
+      "question_type": "single_hop",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "distance-symmetry",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 1,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 32,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "arxiv_papers": 3
+        },
+        "post_rerank_count": 1,
+        "dropped_by_reranker": 14,
+        "reranker_scores": [
+          6.132
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2302.04599v3",
+            "rerank_score": 6.132,
+            "text": "Usage Given truncated hitting times \u02c6 h L,N i,j , we merge nodes if the difference between their THTs is below a threshold \u03b8 sym ( \u03b1 ) . Next, given p"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "According to the paragraph on advancing participatory accountability in AI, what is one of the tools that local governments should use to publish nontechnical summaries of AI projects?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_cy",
+      "prediction": "dashboards, open-data portals, or algorithmic registers",
+      "ground_truth": "open-data portals",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          7.759,
+          3.567
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 7.759,
+            "text": "Participatory  accountability  in  the  AI  context  can  be  advanced  through  two  mutually reinforcing pathways. The first is to improve accessibi"
+          },
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 3.567,
+            "text": "ion  (Lee,  2018;  Araujo  et  al.,  2020),  while  also  incorporating citizen feedback into the deployment and evaluation of AI tools. As discussed "
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What type of neural network is used in bioinformatics for processing 1D sequences and 2D images?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "fully connected neural networks, standard convolutional neural networks (CNN)",
+      "ground_truth": "Convolutional neural networks (CNN)",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6153846153846153,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6153846153846153,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 5,
+          "arxiv_papers": 10
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.549,
+          1.792,
+          -1.995,
+          -2.251,
+          -3.536
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1903.00342v1",
+            "rerank_score": 2.549,
+            "text": "Considering the great potential of deep learning in promoting the bioinformatic research, to facilitate the the development and application, in this r"
+          },
+          {
+            "source": "2311.02127v1",
+            "rerank_score": 1.792,
+            "text": "## X. BIOINFORMATIC APPLICATIONS\n\nIn this section, various applications of Graph  Neural Networks Bio-informatics are discussed. Based on multiple bio"
+          },
+          {
+            "source": "1802.09791v1",
+            "rerank_score": -1.995,
+            "text": "Although CNNs and recurrent networks have already produced significant advances in biomedical imaging and biomedical signal processing [8], the impact"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What developmental principle, exemplified by the vertebrate eye, enables combinability and reconfigurability?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_ai",
+      "prediction": "combinability and reconfigurability",
+      "ground_truth": "WEAK LINKAGE",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          4.701,
+          -2.079
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 4.701,
+            "text": "the combinability and reconfigurability to generate more complex functions. A prime example of this is the evolution of the vertebrate eye ((Lamb et a"
+          },
+          {
+            "source": "2506.12891v1",
+            "rerank_score": -2.079,
+            "text": "An important concept in this context is weak linkage , which refers to the simplicity of regulatory signals (inputs/conditions) that govern distinct p"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "In which industry segment are midstream applications benefiting from AI/ML for predictive monitoring?",
+      "question_type": "single_hop",
+      "domain": "arxiv_ai",
+      "prediction": "Industrial settings",
+      "ground_truth": "oil and gas industry",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 44,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "arxiv_papers": 3
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -1.565,
+          -3.143,
+          -4.009,
+          -4.041,
+          -4.321
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2507.23535v1",
+            "rerank_score": -1.565,
+            "text": "The increasing reliance on artificial intelligence (AI) and machine learning (ML) systems in critical sectors such as healthcare, finance, and public "
+          },
+          {
+            "source": "2504.13976v1",
+            "rerank_score": -3.143,
+            "text": "Predictive maintenance: AI-driven diagnostics assess dispenser health, reducing operational downtime and ensuring reliability."
+          },
+          {
+            "source": "2405.15832v1",
+            "rerank_score": -4.009,
+            "text": "Recent literature emphasizes the growing application of digital twins in industrial settings for predictive maintenance. These models adapt to changes"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "How was the BWT-FM index introduced according to the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The paragraph states that the BWT-FM index was introduced by Bowtie. It notes that hashing was the only dominant indexing technique used until the BWT-FM index was introduced by Bowtie.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -11.037,
+          -11.169,
+          -11.208,
+          -11.274,
+          -11.306
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1612.09499v1",
+            "rerank_score": -11.037,
+            "text": "Ceusters [Ceusters, 2009] analyzed changes between 2001 and 2007 for measuring to what extent the structure of a terminology mimics reality. Author re"
+          },
+          {
+            "source": "2302.12691v1",
+            "rerank_score": -11.169,
+            "text": "## 3 REVIEWS OF THE RECOMMENDATIONS ON A GENERAL PERSPECTIVE OF AI\n\nThis section reviews general recommendations introducing reproducibility levels an"
+          },
+          {
+            "source": "2507.11546v2",
+            "rerank_score": -11.208,
+            "text": "Data source: Based on statistical analysis of the DBLP literature database (From April 2024 to March 2025)"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If governance scaffolding did NOT include collaborative platforms for stakeholder engagement, how might its emphasis on co-creation and mutual responsibility be affected?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_cy",
+      "prediction": "If governance scaffolding did NOT include collaborative platforms for stakeholder engagement, its emphasis on co-creation and mutual responsibility might be weakened.",
+      "ground_truth": "This could reduce the practical mechanisms for stakeholder participation, potentially weakening the emphasis on co-creation and mutual responsibility. Without such platforms, governance scaffolding might become less adaptive and more top-down, shifting back towards rigid control paradigms rather than fostering shared agency and iterative adjustment.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer accurately reflects the potential consequences of excluding collaborative platforms from governance scaffolding, but lacks the nuance and detail provided in the ground truth, particularly regarding the shift towards rigid control paradigms.",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.85,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          4.848,
+          -2.835
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2504.13957v1",
+            "rerank_score": 4.848,
+            "text": "In governance contexts, scaffolding similarly denotes adaptive, system-level frameworks, such as regulatory instruments, oversight bodies, and partici"
+          },
+          {
+            "source": "2104.02752v1",
+            "rerank_score": -2.835,
+            "text": "Collaboration and coordination should be the ground for governance. However, these platforms need to introduce disruptive elements based on organizati"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What is the connection between Interpretable Machine Learning and Local Interpretability based on the provided definition?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The paragraph defines local interpretability as a type of interpretability that explains why a specific prediction was made for a single instance. Therefore, Local Interpretability is a category or type within the broader field of Interpretable Machine Learning, which focuses on making model decisions understandable.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.6,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "arxiv_papers": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.08,
+          0.553,
+          -0.008,
+          -1.079,
+          -1.326
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 1.08,
+            "text": "A wide range of model-specific and model-agnostic interpretable ML methods have been proposed and developed [9]. All these methods largely fall into t"
+          },
+          {
+            "source": "2507.23535v1",
+            "rerank_score": 0.553,
+            "text": "Section 2: Interpretability Approach This section details the chosen interpretability methodology, whether inherently interpretable models or post-hoc"
+          },
+          {
+            "source": "2508.20040v1",
+            "rerank_score": -0.008,
+            "text": "In recent years, the field of explainable machine learning has been booming, resulting in numerous papers proposing new methods and applications of th"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "Which organization provided compute for the open scientific research collaboration that held the NeurIPS 2022 meetup?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_cy",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "HUGGING FACE",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.551,
+          -2.102,
+          -2.488,
+          -4.165,
+          -5.018
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2312.03872v1",
+            "rerank_score": 1.551,
+            "text": "On December 2, 2022, we held an in-person meetup alongside NeurIPS 2022 in New Orleans with more than 75 members of the BigCode community, where we we"
+          },
+          {
+            "source": "2407.14981v2",
+            "rerank_score": -2.102,
+            "text": "Motivation: Compute usage by private companies in training and running models has increased exponentially in the past years, and now greatly exceeds t"
+          },
+          {
+            "source": "2410.12800v1",
+            "rerank_score": -2.488,
+            "text": "Research organizations play a central role in defining the RDM approaches that govern the research lifecycle, supplying the know-how and infrastructur"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "What process is closely related to issuing birth attestation in a stable governance environment?",
+      "question_type": "single_hop",
+      "domain": "arxiv_cy",
+      "prediction": "issuing a birth certificate",
+      "ground_truth": "issuing birth certificate",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 1.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.4,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          9.177,
+          8.812
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 9.177,
+            "text": "In a stable environment, issuing a birth attestation and a birth certificate are closely related processes. The clinic issues the parents certified do"
+          },
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 8.812,
+            "text": "In a stable environment, issuing a birth attestation and a birth certificate are closely related processes. The clinic issues the parents certified do"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If multimodal pre-training did NOT contribute to achieving AGI, how would this affect progress toward human-like general cognitive abilities?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "This could reduce the stride toward AGI, as the evidence indicates multimodal pre-training makes a giant stride towards AGI. Without this contribution, progress might rely more heavily on other approaches like combining DRL and GAN, potentially slowing the development of general-purpose applications.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.35,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "arxiv_papers": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          0.684,
+          0.329,
+          -1.616,
+          -1.899,
+          -2.065
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2505.06897v1",
+            "rerank_score": 0.684,
+            "text": "through multi-task learning or multi-modal perception, and expand to more complex and broader intelligent tasks. This enhancement of capability will e"
+          },
+          {
+            "source": "2310.15274v3",
+            "rerank_score": 0.329,
+            "text": "Morality  requires  a  balanced cognitive system and dedicated system support. While successful approximations may help to varying degrees, full align"
+          },
+          {
+            "source": "2310.15274v3",
+            "rerank_score": -1.616,
+            "text": "Currently,  there  are  conflicting  descriptions  of  AGI  and  human-like  AI/AGI, while  some  researchers  even  claim  there  is  no  AGI.  Accor"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "If Nanopore sequencing did NOT have the advantage of being PCR-free, how would this affect its applications?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_qm",
+      "prediction": "PCR-free advantage enables direct epigenetic detection. Without it, such detection would require PCR, potentially introducing errors.",
+      "ground_truth": "This could reduce its ability to enable direct epigenetic detection, as PCR-free operation avoids amplification biases that might obscure epigenetic modifications. It might also limit its utility in applications where avoiding PCR is critical for preserving native nucleic acid states.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.3,
+        "lm_judge_justification": "The generated answer partially addresses the query, but its factual accuracy is low as it incorrectly states that PCR is required for direct epigenetic detection without the PCR-free advantage, and it lacks completeness as it does not mention the potential limitation in preserving native nucle",
+        "final_answer_correctness": 0.3,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "arxiv_papers": 3
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.691,
+          -1.669,
+          -3.106,
+          -3.429,
+          -3.562
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2008.11546v1",
+            "rerank_score": 3.691,
+            "text": "r specifically designed for Nanopore, one can obtain the nucleotide sequence reads. Benefited from the underlying design, Nanopore sequencing owns the"
+          },
+          {
+            "source": "2008.11546v1",
+            "rerank_score": -1.669,
+            "text": "conclude this thesis by discussing such future works and the potential challenges as well as opportunities.\n\n## 2.1 Chapter Introduction\n\nNext-generat"
+          },
+          {
+            "source": "2008.11546v1",
+            "rerank_score": -3.106,
+            "text": "Next-generation sequencing (NGS) technologies allow researchers to sequence DNA and RNA in a high-throughput manner, which have facilitated numerous b"
+          }
+        ]
+      },
+      "mode": "vector"
+    },
+    {
+      "question": "Which university is Zhangtianyi Chen affiliated with?",
+      "question_type": "single_hop",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The Chinese University of Hong Kong, Shenzhen",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 3,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 35,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          1.517,
+          -2.3,
+          -6.097
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2306.00869v2",
+            "rerank_score": 1.517,
+            "text": "*Yu Luo and Bingyou Chen contribute equally. Faculty of Electronic and Information Engineering, Xi'an Jiaotong University, Shaanxi, China."
+          },
+          {
+            "source": "2402.13714v1",
+            "rerank_score": -2.3,
+            "text": "Yiparemu is with Henan University School of Stomatology, Kaifeng, China. (e-mail: yiparemu@163.com)"
+          },
+          {
+            "source": "1911.00996v1",
+            "rerank_score": -6.097,
+            "text": "Wanlei Zhou is currently the Alfred Deakin Professor (the highest honour the University can bestow on a member of academic staff) and Associate Dean- "
           }
         ]
       },
@@ -553,74 +2003,35 @@
   ],
   "hybrid": [
     {
-      "question": "If variational free energy were NOT a proxy for minimizing entropy, how might this affect the theoretical justification for active inference?",
-      "answer": "If variational free energy (VFE) were not a proxy for minimizing entropy, the theoretical justification for active inference would be significantly affected. Active inference is grounded in the idea that systems minimize their free energy to reduce entropy and maintain a stable state. If VFE were not seen as a proxy for entropy, this core assumption would need to be reevaluated. The justification for active inference's approach to perception, decision-making, and learning, which relies on minimizing expected free energy (EFE), would need to be reconsidered. This could lead to a search for alternative theoretical frameworks or justifications for these cognitive processes.",
-      "num_contexts": 5,
+      "question": "If acyclic CP-nets were NOT a type of CP-net, how would this affect the learning algorithms that guarantee consistency?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "This could reduce the applicability of consistency-guaranteeing learning algorithms, as the acyclicity property ensures the dependency graph is acyclic, which is a key condition for those algorithms. Without this relationship, the theoretical foundation for learning from swap examples might need revision.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.5,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [],
-        "qdrant_ids_per_entity": {},
-        "graph_qdrant_ids_total": 0,
-        "graph_fetched_count": 0,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 2,
-          "arxiv_papers": 13
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          2.625,
-          1.584,
-          1.273,
-          0.787,
-          -1.12
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 2.625,
-            "text": "<!-- image -->\n\nFigure 2.1: The logical flow of the argument of the FEP from the initial formulation to the crucial approximate Bayesian inference lem"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.584,
-            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.273,
-            "text": "## 2.10 Active Inference\n\nIn the previous section, we have covered the very general and abstract form of the FEP, here we elucidate the central proces"
-          }
-        ]
-      },
-      "mode": "hybrid"
-    },
-    {
-      "question": "If the Expected Free Energy (EFE) objective did NOT mandate minimization of ambiguity, what might be a consequence for an active inference agent?",
-      "answer": "I don't have enough information to answer that question based on the provided documents.",
-      "num_contexts": 5,
-      "metrics": {
-        "context_recall": 0.4,
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
         "faithfulness": 1.0,
-        "answer_correctness": 0.5
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [
-          "EFE"
+          "CP-nets"
         ],
         "qdrant_ids_per_entity": {
-          "EFE": 90
+          "CP-nets": 3
         },
         "graph_qdrant_ids_total": 90,
         "graph_fetched_count": 90,
@@ -631,163 +2042,435 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "graph": 2,
-          "arxiv_chunks": 1,
-          "arxiv_papers": 12
+          "arxiv_chunks": 10,
+          "graph": 5
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          4.776,
-          2.023,
-          0.751,
-          0.595,
-          -0.693
+          2.668,
+          2.172,
+          -1.435,
+          -1.808,
+          -3.564
         ],
         "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "2107.00140v1",
-            "rerank_score": 4.776,
-            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+            "source": "1801.03968v3",
+            "rerank_score": 2.668,
+            "text": "On top of the VCD and the TD , we calculated another parameter, RTD , for classes of all complete k -bounded acyclic CP-nets. While we did not use our"
           },
           {
-            "source": "2107.00140v1",
-            "rerank_score": 2.023,
-            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
+            "source": "1801.03968v3",
+            "rerank_score": 2.172,
+            "text": "We determined exact values or non-trivial bounds on the parameters VCD and TD for the classes of all (all complete, resp.) k -bounded acyclic CP-nets "
           },
           {
-            "source": "2107.00140v1",
-            "rerank_score": 0.751,
-            "text": "<!-- formula-not-decoded -->\n\n\ufe38 \ufe37\ufe37 \ufe38 Divergence Objective\n\n<!-- formula-not-decoded -->\n\n<!-- formula-not-decoded -->\n\n(5.27)\n\nWhere we see that the d"
+            "source": "1801.03968v3",
+            "rerank_score": -1.435,
+            "text": "- \u00b7 Whenever we study classes of CP-nets that contain incomplete CP-nets, we use the instance space X swap = { ( o, o \u2032 ) \u2208 O \u00d7 O | ( o, o \u2032 ) is a sw"
           }
         ]
       },
       "mode": "hybrid"
     },
     {
-      "question": "If specification of hyper-parameters was NOT positively correlated with reproducibility, how would that affect the assessment of machine learning research quality?",
-      "answer": "If the specification of hyper-parameters was not positively correlated with reproducibility, it would suggest that simply documenting hyper-parameters might not be sufficient for ensuring the reproducibility of a machine learning research paper. This could imply that other factors, such as detailed explanations of the method, toy examples, and high-level pseudo-code, are also crucial for achieving reproducibility. Consequently, the assessment of machine learning research quality would likely place more emphasis on these additional aspects beyond just listing hyper-parameters.",
-      "num_contexts": 5,
+      "question": "In what year was the research article 'Some experiences and opportunities for big data in translational research' published in Genetics in Medicine?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "2013",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [],
-        "qdrant_ids_per_entity": {},
-        "graph_qdrant_ids_total": 0,
-        "graph_fetched_count": 0,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_papers": 14,
-          "arxiv_chunks": 1
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          1.957,
-          1.155,
-          -0.483,
-          -1.41,
-          -3.143
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2302.12691v1",
-            "rerank_score": 1.957,
-            "text": "Reproducibility guidelines - beyond documentation. The main paradigm in machine learning has shifted from classic supervised methods and hand-coded al"
-          },
-          {
-            "source": "2302.12691v1",
-            "rerank_score": 1.155,
-            "text": "What makes a ML/DL paper reproducible? However, while the short paper of Tatman et al. gives an important motivation for considering the practical sid"
-          },
-          {
-            "source": "2302.12691v1",
-            "rerank_score": -0.483,
-            "text": "Accordingly, the reproducibility guidelines proposed in literature related to general AI define best practices pertaining to methods, data, and experi"
-          }
-        ]
-      },
-      "mode": "hybrid"
-    },
-    {
-      "question": "If Embodied AI were NOT composed of intelligence as a core element, how would that affect its ability to generate adaptive behavior?",
-      "answer": "If Embodied AI were NOT composed of intelligence as a core element, it would likely struggle to generate adaptive behavior. The context emphasizes that intelligence, particularly in the form of embodied intelligence, is fundamental to achieving AGI goals and guarantees. Without intelligence as a core element, the AI's ability to learn from experience and optimize its performance would be compromised, affecting its adaptive behavior.",
-      "num_contexts": 5,
-      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
         "context_recall": 0.0,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [],
-        "qdrant_ids_per_entity": {},
-        "graph_qdrant_ids_total": 0,
-        "graph_fetched_count": 0,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 45,
-          "graph": 0
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 4,
-          "arxiv_papers": 11
-        },
-        "post_rerank_count": 5,
-        "dropped_by_reranker": 10,
-        "reranker_scores": [
-          -0.485,
-          -3.663,
-          -3.776,
-          -4.679,
-          -5.511
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2505.12229v1",
-            "rerank_score": -0.485,
-            "text": "## Abstract\n\nCurrent artificial intelligence systems-from large language models to autonomous robotsexcel at narrow tasks but lack key qualities of se"
-          },
-          {
-            "source": "2505.12229v1",
-            "rerank_score": -3.663,
-            "text": "## 1. Introduction\n\n## 1.1 Context and Motivation\n\nWe stand at a pivotal moment in the evolution of artificial intelligence. Rapid advancements, parti"
-          },
-          {
-            "source": "2505.12229v1",
-            "rerank_score": -3.776,
-            "text": "Influential theories, such as Antonio Damasio's work on embodiment [6, 7], posit that consciousness and rational thought are inextricably linked to th"
-          }
-        ]
-      },
-      "mode": "hybrid"
-    },
-    {
-      "question": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, what might be the implication for its accessibility?",
-      "answer": "If the paper 'Understanding the Origin of Information-Seeking Exploration in Probabilistic Objectives for Control' had NOT been submitted to Arxiv, it would likely have been less accessible to the broader academic community before formal publication in a journal like Royal Society Interface. Arxiv serves as a preprint server that allows researchers to share their work widely and receive feedback before formal peer review and publication. Without this submission, the paper might have taken longer to reach a wider audience and potentially missed out on early feedback and collaboration opportunities.",
-      "num_contexts": 3,
-      "metrics": {
-        "context_recall": 0.5,
         "faithfulness": 1.0,
-        "answer_correctness": 0.8
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [
-          "ARXIV"
+          "Medicine",
+          "Genetics"
         ],
         "qdrant_ids_per_entity": {
-          "ARXIV": 90
+          "Medicine": 3,
+          "Genetics": 3
+        },
+        "graph_qdrant_ids_total": 109,
+        "graph_fetched_count": 84,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "graph": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -6.849,
+          -7.134,
+          -8.06,
+          -8.089,
+          -8.463
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2208.03139v1",
+            "rerank_score": -6.849,
+            "text": "The  Bioinformatic  study  deals  with  the  evaluation  of  disease  phenotypes  necessary  for alleviating  comorbidities,  making  it  essential  t"
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": -7.134,
+            "text": "Figure.  3  Challenges  and  Opportunities  in  Applying  Foundation  Models  for  Biological  Problems. FMs  for  solving biological problems have be"
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": -8.06,
+            "text": "Feasible applications. In  the field of bioinformatics, FMs provide several opportunities for disease understanding, drug discovery, online healthcare"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What type of unacceptable risk system, analogous to prohibited AI systems like the Chinese social credit system, could AI, which is developed by CHINA, govern?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_cy",
+      "prediction": "prohibited AI systems",
+      "ground_truth": "SOCIAL CREDIT SYSTEM",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "CHINA",
+          "Chinese"
+        ],
+        "qdrant_ids_per_entity": {
+          "CHINA": 3,
+          "Chinese": 3
+        },
+        "graph_qdrant_ids_total": 84,
+        "graph_fetched_count": 84,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "graph": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.177,
+          -0.848,
+          -1.44,
+          -2.937,
+          -3.165
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2502.03468v1",
+            "rerank_score": 2.177,
+            "text": "The EU AI Act aims to ensure the trustworthy development and deployment of AI systems for EU citizens while fostering a robust AI ecosystem. Moreover,"
+          },
+          {
+            "source": "2509.06176v2",
+            "rerank_score": -0.848,
+            "text": "## 4.2 AI legislation in China\n\nChina's regulatory approach to artificial intelligence provides an important comparative perspective for understanding"
+          },
+          {
+            "source": "2502.00012v2",
+            "rerank_score": -1.44,
+            "text": "Importantly, tail risks from AI might not necessarily materialize due solely to the defects in a particular AI system percolating to other systems. In"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What transformation involves data governance, and what group does data governance concern?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_cy",
+      "prediction": "digital transformation",
+      "ground_truth": "DIGITAL TRANSFORMATION; PEOPLE INVOLVED",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6666666666666666,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6666666666666666,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.4,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.62,
+          2.79,
+          0.953,
+          0.784,
+          -0.146
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 3.62,
+            "text": "To address the need for regulating digital technologies without hampering innovation or pre-digital transformation regulatory frameworks, we provide a"
+          },
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 2.79,
+            "text": "## 4.3. Robust Data Governance: The Backbone of Accountability in AI-Assisted Urban Governance\n\nPrinciple 3: Reliable and ethically governed data is e"
+          },
+          {
+            "source": "2006.02709v1",
+            "rerank_score": 0.953,
+            "text": "the data governance model employed within the VPP is crucial for the development of trust between assetowners and aggregator."
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "In which application area did HENDERSON apply the evolutionary algorithm that includes survival selection?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "nuclear reactor core design",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.2,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "HENDERSON"
+        ],
+        "qdrant_ids_per_entity": {
+          "HENDERSON": 3
+        },
+        "graph_qdrant_ids_total": 60,
+        "graph_fetched_count": 60,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "graph": 3
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -0.413,
+          -0.903,
+          -1.035,
+          -2.45,
+          -4.389
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1508.00468v1",
+            "rerank_score": -0.413,
+            "text": "In this book chapter, we follow the unified approach proposed by De Jong (De Jong, 2006). The design of evolutionary algorithm can be divided into sev"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": -0.903,
+            "text": "Genetic Programming: Genetic programming is indeed a special type of genetic algorithm. The difference lies in their representations. Genetic programm"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": -1.035,
+            "text": "Survival selection aims at selecting a subset of good individuals from a population, where the goodness of individual is proportional to its fitness f"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What framework does the A2A protocol, which exemplifies AGENTIC COMMUNICATION, provide?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_ai",
+      "prediction": "direct interaction and collaboration between heterogeneous agents",
+      "ground_truth": "ROBUST FOUNDATION",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.2,
+        "lm_judge_justification": "The generated answer is factually inaccurate and incomplete, as it does not mention the framework provided by the A2A protocol, and its semantic similarity to the ground truth is low, as it describes a process rather than a framework.",
+        "final_answer_correctness": 0.2,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.85,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "AGENTIC COMMUNICATION",
+          "A2A"
+        ],
+        "qdrant_ids_per_entity": {
+          "AGENTIC COMMUNICATION": 3,
+          "A2A": 3
+        },
+        "graph_qdrant_ids_total": 132,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 9,
+          "graph": 6
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          6.01,
+          5.173,
+          4.413,
+          3.113,
+          -0.536
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2507.21206v1",
+            "rerank_score": 6.01,
+            "text": "This section investigates the protocol level foundations of the Agentic Web, examining the limitations of conventional protocols such as HTTP and RPC,"
+          },
+          {
+            "source": "2507.21206v1",
+            "rerank_score": 5.173,
+            "text": "Compared to the MCP, the A2A protocol not only expands the scope of agent communication to include direct interaction and collaboration between hetero"
+          },
+          {
+            "source": "2507.21206v1",
+            "rerank_score": 4.413,
+            "text": "According to the research in (Yang et al., 2025d), a large number of new agent communication protocols emerged in the past year. Among them, the gener"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What is the intended publication venue for the article 'Lessons learned to boost a bioinformatics knowledge base reusability, the Bgee experience'?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "Nucleic Acids Research MolecularBiologyDatabaseCollection",
+      "ground_truth": "The article 'Lessons learned to boost a bioinformatics knowledge base reusability, the Bgee experience' is described as a manuscript in preparation for the GigaScience journal.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.0,
+        "lm_judge_justification": "The generated answer is completely incorrect, as it lists three unrelated bioinformatics databases (Nucleic Acids Research, MolecularBiologyDatabase, and Collection) instead of the intended publication venue for the article, which is GigaScience journal.",
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "Bgee"
+        ],
+        "qdrant_ids_per_entity": {
+          "Bgee": 3
         },
         "graph_qdrant_ids_total": 90,
         "graph_fetched_count": 90,
@@ -798,106 +2481,63 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 2,
-          "graph": 3,
-          "arxiv_papers": 10
-        },
-        "post_rerank_count": 3,
-        "dropped_by_reranker": 12,
-        "reranker_scores": [
-          5.705,
-          4.389,
-          1.153
-        ],
-        "answer_type": "answer",
-        "top3_contexts": [
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 5.705,
-            "text": "This paper derives the relationship between active inference methods, and the control as inference paradigm which is popular within the reinforcement "
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 4.389,
-            "text": "The material in this chapter is heavily based on three first-author papers. Whence the expected free energy (Millidge, Tschantz, &amp; Buckley, 2020b)"
-          },
-          {
-            "source": "2107.00140v1",
-            "rerank_score": 1.153,
-            "text": "1 Technically this is more of an induction argument than a reductio-ad-absurdum, but we still refer to it as such due to its description as a reductio"
-          }
-        ]
-      },
-      "mode": "hybrid"
-    },
-    {
-      "question": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, how would this affect the model's ability to guide AI adoption?",
-      "answer": "If the AI Capability Assessment Model (AI-CAM) did NOT assess capabilities in the Technology area, this would significantly affect its ability to guide AI adoption. The AI-CAM is designed to cover core capability dimensions including technology, which are essential for ensuring the successful comprehension, adoption, implementation, and use of AI. Excluding the Technology area would mean the model would lack a crucial aspect needed to comprehensively assess an organization's readiness for AI. This could lead to gaps in the assessment, potentially overlooking critical technological requirements that are necessary for effective AI adoption and innovation.",
-      "num_contexts": 5,
-      "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 0.8,
-        "answer_correctness": 0.8
-      },
-      "trace": {
-        "entities_extracted": [
-          "AI-CAM"
-        ],
-        "qdrant_ids_per_entity": {
-          "AI-CAM": 9
-        },
-        "graph_qdrant_ids_total": 9,
-        "graph_fetched_count": 9,
-        "raw_counts": {
-          "chunk": 45,
-          "paper": 44,
-          "graph": 9
-        },
-        "pre_rerank_count": 15,
-        "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 4,
-          "arxiv_papers": 10,
-          "graph": 1
+          "arxiv_chunks": 12,
+          "graph": 3
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          5.134,
-          4.545,
-          4.492,
-          3.89,
-          3.723
+          -0.513,
+          -2.353,
+          -3.645,
+          -7.247,
+          -7.827
         ],
         "answer_type": "answer",
         "top3_contexts": [
           {
-            "source": "2305.15922v1",
-            "rerank_score": 5.134,
-            "text": "This paper's contribution is a 5-level AI Capability Assessment Model (AI-CAM) and a related AI Capabilities Matrix (AI-CM) which are tools aimed at a"
+            "source": "2303.12329v2",
+            "rerank_score": -0.513,
+            "text": "Although we centre on our work on the Bgee use case, the practices, methods and lessons learned discussed here are transferable to other KBs such as t"
           },
           {
-            "source": "2305.15922v1",
-            "rerank_score": 4.545,
-            "text": "This article's contribution is a Capability Assessment Model for AI adoption in organisations: This specifies the capabilities required to achieve des"
+            "source": "2303.12329v2",
+            "rerank_score": -2.353,
+            "text": "Weprovide EasyBgee with both data models as a good practice to reach more users, to facilitate interoperability, and consequently, to make the Bgee da"
           },
           {
-            "source": "2305.15922v1",
-            "rerank_score": 4.492,
-            "text": "These  three  AI  categories  are  used  to  drive  the  development  of  the  capability  assessment  model presented in the next section.\n\n## 3 Towa"
+            "source": "2303.12329v2",
+            "rerank_score": -3.645,
+            "text": "The Bgee KB integrates and aggregates data from heterogeneous data sources by reconciling them and applying a data warehouse approach, resulting in a "
           }
         ]
       },
       "mode": "hybrid"
     },
     {
-      "question": "If Design D2 did NOT enable continual learning without erasing past knowledge, what might be a consequence?",
-      "answer": "If Design D2 did NOT enable continual learning without erasing past knowledge, it would suffer from the same limitations as contemporary methods like neural networks, which erase past knowledge to fit new data. This would result in the loss of past knowledge and the production of unstructured, overparameterized internal representations that hinder human comprehensibility and integration with non-learning processes.",
-      "num_contexts": 2,
+      "question": "How does deep learning handle protein-protein interaction network data based on the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "The paragraph states that deep learning can be used to deal with graph data, including protein-protein interaction networks. It mentions that deep learning promotes state-of-the-art performance on such networks by performing node embedding, which aggregates neighbor information in a tree manner. This embedding is used for downstream tasks like node classification, interaction prediction, and community detection.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.8,
-        "faithfulness": 0.0,
-        "answer_correctness": 0.8
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.0,
+        "lm_judge_justification": "Model refused to answer.",
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [],
         "qdrant_ids_per_entity": {},
@@ -910,49 +2550,295 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 3,
-          "arxiv_papers": 12
+          "arxiv_chunks": 8,
+          "arxiv_papers": 7
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.231,
+          2.447,
+          1.843,
+          1.358,
+          -1.626
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2410.02023v2",
+            "rerank_score": 3.231,
+            "text": "## Abstract\n\nDeep learning has deeply influenced protein science, enabling breakthroughs in predicting protein properties, higher-order structures, an"
+          },
+          {
+            "source": "2410.02023v2",
+            "rerank_score": 2.447,
+            "text": "Challenges. Previous benchmarks related to molecular learning have offered valuable insights regarding their respective libraries and implementation i"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 1.843,
+            "text": "Protein modeling, especially through deep learning approaches, addresses a variety of critical tasks in biological research and medicine. For instance"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "How is the relationship between GPT-4 and the concept of large language models (LLMs) described in the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "GPT-4 is an example of a large language model (LLM).",
+      "ground_truth": "GPT-4 is described as a large language model developed by OpenAI. The paragraph states that the launch of GPT-4 has spurred various LLM-based research systems. It also notes that ChatGPT is a large language model, and the field of artificial intelligence includes large language models such as OpenAI's ChatGPT.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer is factually accurate (1.0) and complete (1.0), but lacks semantic similarity (0.5) as it does not fully capture the relationship between GPT-4 and LLMs described in the paragraph,",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "GPT-4",
+          "LLMs"
+        ],
+        "qdrant_ids_per_entity": {
+          "GPT-4": 3,
+          "LLMs": 3
+        },
+        "graph_qdrant_ids_total": 122,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 9,
+          "graph": 6
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.904,
+          2.433,
+          1.463,
+          -1.149,
+          -1.176
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 2.904,
+            "text": "The rapid development of large language models (LLMs) such as BERT [1], GPT [2], and their specialized counterparts has revolutionized the field of na"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 2.433,
+            "text": "Large language models (LLMs) are a class of artificial intelligence models based on deep learning, which have great performance in various tasks, espe"
+          },
+          {
+            "source": "2501.06271v1",
+            "rerank_score": 1.463,
+            "text": "Large Language Models , including GPT-based architectures, have transformed the field of immunology and vaccine development by enabling advanced analy"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "In which application area did MICHIELSSEN apply the evolutionary algorithm that includes crossover operators?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "electromagnetic optimization",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "MICHIELSSEN"
+        ],
+        "qdrant_ids_per_entity": {
+          "MICHIELSSEN": 3
+        },
+        "graph_qdrant_ids_total": 21,
+        "graph_fetched_count": 21,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 21
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "graph": 4
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          0.635,
+          0.232,
+          -1.037,
+          -4.287,
+          -4.903
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "1508.00468v1",
+            "rerank_score": 0.635,
+            "text": "In this book chapter, we follow the unified approach proposed by De Jong (De Jong, 2006). The design of evolutionary algorithm can be divided into sev"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": 0.232,
+            "text": "Evolving trees (e.g. boolean expressions of k-mers) by evolutionary algorithms are well studied in the genetic programming field. Many design issues h"
+          },
+          {
+            "source": "1508.00468v1",
+            "rerank_score": -1.037,
+            "text": "Genetic Programming: Genetic programming is indeed a special type of genetic algorithm. The difference lies in their representations. Genetic programm"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "Which metric does the DeepPurpose software, authored by MARINKA ZITNIK, use?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "Area Under the Receiver Operating Characteristics (AUROC), Area Under Precision-Recall (AUPRC), and F-1 score",
+      "ground_truth": "F-1 score",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.33333333333333337,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.33333333333333337,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.25,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [
+          "MARINKA ZITNIK",
+          "DeepPurpose"
+        ],
+        "qdrant_ids_per_entity": {
+          "MARINKA ZITNIK": 3,
+          "DeepPurpose": 3
+        },
+        "graph_qdrant_ids_total": 122,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 9,
+          "graph": 6
         },
         "post_rerank_count": 2,
         "dropped_by_reranker": 13,
         "reranker_scores": [
-          3.877,
-          2.648
+          2.382,
+          0.211
         ],
         "answer_type": "answer",
         "top3_contexts": [
           {
-            "source": "2506.12891v1",
-            "rerank_score": 3.877,
-            "text": "<!-- image -->\n\nexemplified in Figure 6: In 6b, after elimination of X 1 as a positive source, the earlier exposure of X 0 , X 1 \u2192 Y still results in "
+            "source": "2004.08919v3",
+            "rerank_score": 2.382,
+            "text": "---\nid: 2004.08919v3\ntitle: DeepPurpose: a Deep Learning Library for Drug-Target Interaction Prediction\nauthors: Kexin Huang;Tianfan Fu;Lucas Glass;Ma"
           },
           {
-            "source": "2506.12891v1",
-            "rerank_score": 2.648,
-            "text": "## 5 Conclusion\n\nThe prevailing AI design paradigm, despite its widespread success in tackling previously intractable problems, suffers from inherent "
+            "source": "2004.08919v3",
+            "rerank_score": 0.211,
+            "text": "DeepPurpose feeds the learned protein and compound embeddings into an MLP decoder to generate predictions. Output scores include both continuous bindi"
           }
         ]
       },
       "mode": "hybrid"
     },
     {
-      "question": "If the VC dimension of the class of all complete acyclic 0-bounded CP-nets were not (m-1)n, how might this affect the lower bound on the number of equivalence and membership queries required for learning?",
-      "answer": "I don't have enough information to answer that question based on the provided documents. The context does not specify the VC dimension for complete acyclic 0-bounded CP-nets or discuss how a different VC dimension would affect the query complexity.",
-      "num_contexts": 5,
+      "question": "What model-agnostic XAI method based on Shapley values is used by Explainable AI in the analysis of gene expression levels using RNA-Seq?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_qm",
+      "prediction": "SHAP",
+      "ground_truth": "SHAPLEY ADDITIVE EXPLANATIONS",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 1.0,
-        "answer_correctness": 0.0
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.85,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [
-          "CP-nets"
+          "Seq",
+          "RNA",
+          "XAI",
+          "Explainable AI",
+          "Shapley"
         ],
         "qdrant_ids_per_entity": {
-          "CP-nets": 85
+          "Seq": 3,
+          "RNA": 3,
+          "XAI": 3,
+          "Explainable AI": 3,
+          "Shapley": 3
         },
-        "graph_qdrant_ids_total": 85,
-        "graph_fetched_count": 85,
+        "graph_qdrant_ids_total": 290,
+        "graph_fetched_count": 90,
         "raw_counts": {
           "chunk": 45,
           "paper": 45,
@@ -960,117 +2846,363 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 3,
-          "arxiv_papers": 10,
-          "graph": 2
+          "arxiv_chunks": 9,
+          "graph": 6
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          4.377,
-          3.96,
-          2.848,
-          2.749,
-          2.613
+          2.088,
+          1.189,
+          1.102,
+          -0.672,
+          -1.109
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 2.088,
+            "text": "Artificial intelligence (AI) systems utilizing deep neural networks (DNNs) and machine learning (ML) algorithms are widely used for solving important "
+          },
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 1.189,
+            "text": "SHapley Additive exPlanations (SHAP) SHapley Additive exPlanations (SHAP) Lundberg and Lee [2017] is a method used to explain the outputs of ML models"
+          },
+          {
+            "source": "2306.01744v1",
+            "rerank_score": 1.102,
+            "text": "Myth #03 - explainability with Shapley values. The best-known alternative to feature selection is feature attribution , where each feature receives a "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What property, alongside secondary structure, was predicted for proteins generated by the 2022 model ProtGPT2?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "conformational energy",
+      "ground_truth": "disorder",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.85,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "ProtGPT2"
+        ],
+        "qdrant_ids_per_entity": {
+          "ProtGPT2": 3
+        },
+        "graph_qdrant_ids_total": 25,
+        "graph_fetched_count": 25,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 25
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "graph": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          6.316,
+          5.69,
+          3.242,
+          2.963,
+          1.399
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2401.04155v2",
+            "rerank_score": 6.316,
+            "text": "Protein sequence generation. Protein  sequence  generation  holds  significant  potential  in  drug design  and  protein  engineering    [97].  Using "
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": 5.69,
+            "text": "For tertiary structure, we can extract a binary contact map from the hidden representations of sequences, which offers an alternative to the conventio"
+          },
+          {
+            "source": "2402.04286v1",
+            "rerank_score": 3.242,
+            "text": "Protein  sequences,  akin  to  natural  languages,  are  comprehensive  information  repositories,  encapsulating  structure  and function in their am"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What is an emerging use case of generative AI systems?",
+      "question_type": "single_hop",
+      "domain": "arxiv_cy",
+      "prediction": "enhancing content quality and employee expertise",
+      "ground_truth": "Test preparation.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.4,
+        "lm_judge_justification": "** The generated answer is partially accurate in terms of factual accuracy (1/3), but lacks completeness (0/3) as it doesn't mention test preparation, and has low semantic similarity (1/3) as it mentions enhancing content quality",
+        "final_answer_correctness": 0.4,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 14,
+          "arxiv_papers": 1
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.442,
+          2.256,
+          0.312,
+          -1.246,
+          -2.286
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2406.04554v1",
+            "rerank_score": 2.442,
+            "text": "For these reasons, generative AI is rapidly evolving into a general-purpose technology that may have a distinct, aggregate impact across industry and "
+          },
+          {
+            "source": "2406.04554v1",
+            "rerank_score": 2.256,
+            "text": "Generative AI, like GPT-4, is already capable of producing convincing real-world content, including text, code, images, music, and video, based on vas"
+          },
+          {
+            "source": "2403.08802v4",
+            "rerank_score": 0.312,
+            "text": "Generative  artificial  intelligence  (GenAI)  has  the  potential  to  disrupt  industries  [63].  It  can  generate business value in various ways, "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "Which researcher is referenced in the introduction of the paper authored by CHHOTE LAL PRASAD GUPTA?",
+      "question_type": "multi_hop_difficult",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "CHANDEL",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "CHHOTE LAL PRASAD",
+          "GUPTA"
+        ],
+        "qdrant_ids_per_entity": {
+          "CHHOTE LAL PRASAD": 3,
+          "GUPTA": 3
+        },
+        "graph_qdrant_ids_total": 96,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 43,
+          "paper": 43,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "graph": 4
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -8.951,
+          -9.012,
+          -9.16,
+          -9.289,
+          -9.63
         ],
         "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "1801.03968v3",
-            "rerank_score": 4.377,
-            "text": "In the remainder of this article, we fix n \u2265 1 , m \u2265 2 , k \u2208 { 0 , . . . , n -1 } , and consider the following two concept classes:\n\n- \u00b7 The class C k"
+            "source": "2312.01018v1",
+            "rerank_score": -8.951,
+            "text": "Agostino Capponi, Garud Iyengar and Jay Sethuraman (2023), 'Decentralized Finance: Protocols, Risks, and Governance', : Vol. XX, No. XX, pp 1-64. DOI:"
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 3.96,
-            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+            "source": "2107.00140v1",
+            "rerank_score": -9.012,
+            "text": "It is important to note that the material in the first section of this chapter (walkthrough of the Free Energy principle as described in Friston (2019"
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 2.848,
-            "text": "A CP-net is acyclic if it contains no cycles. We call a CP-net k -bounded, for some k \u2264 n -1 , if each vertex has indegree at most k , i.e., each vari"
+            "source": "2402.17572v1",
+            "rerank_score": -9.16,
+            "text": "Steff Taelman Department of Data Analysis and Mathematical Modelling Ghent University BioLizard nv"
           }
         ]
       },
       "mode": "hybrid"
     },
     {
-      "question": "If the teaching dimension were NOT calculated for the class of k-bounded acyclic CP-nets, how would this affect the assessment of optimality for algorithms learning CP-nets from membership queries?",
-      "answer": "If the teaching dimension (TD) were not calculated for the class of k-bounded acyclic CP-nets, it would affect the assessment of optimality for algorithms learning CP-nets from membership queries because the TD values are used to show that proposed algorithms are close to optimal. The context states that \"TD values were used in order to show that our proposed algorithm for learning complete tree CP-nets from membership queries alone is close to optimal.\" Without these values, such an optimality assessment would not be possible.",
-      "num_contexts": 5,
+      "question": "In what month and year did the Human Genome Project start the high-throughput sequencing era?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "April 2003",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
         "faithfulness": 1.0,
-        "answer_correctness": 0.8
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [
-          "CP-nets"
+          "Human Genome Project"
         ],
         "qdrant_ids_per_entity": {
-          "CP-nets": 85
+          "Human Genome Project": 3
         },
-        "graph_qdrant_ids_total": 85,
-        "graph_fetched_count": 85,
+        "graph_qdrant_ids_total": 2,
+        "graph_fetched_count": 2,
         "raw_counts": {
           "chunk": 45,
           "paper": 45,
-          "graph": 45
+          "graph": 2
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "arxiv_chunks": 1,
-          "arxiv_papers": 12,
-          "graph": 2
+          "arxiv_chunks": 15
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          3.563,
-          3.274,
-          2.434,
-          2.416,
-          1.856
+          -6.411,
+          -7.598,
+          -7.611,
+          -7.741,
+          -8.3
         ],
-        "answer_type": "answer",
+        "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "1801.03968v3",
-            "rerank_score": 3.563,
-            "text": "needed to model them, one might in practice worry about overfitting the observed preferences-a simpler yet approximate CP-net may in such cases be a m"
+            "source": "2003.00110v3",
+            "rerank_score": -6.411,
+            "text": "One can study an individual genome using sequencing data in two ways: by mapping reads to a reference genome, if it exists, or by de novo assembling t"
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 3.274,
-            "text": "One may argue that the VC dimension should be computed over arbitrary instances rather than just swap instances, since it captures how difficult a con"
+            "source": "2003.00110v3",
+            "rerank_score": -7.598,
+            "text": "The trade-off for decreased cost and increased throughput offered by modern sequencing technologies is a larger margin of noise in sequencing data 5 ."
           },
           {
-            "source": "1801.03968v3",
-            "rerank_score": 2.434,
-            "text": "In particular, in either case, the worst-case number of queries is in O ( n 2 + e N \u2217 n log 2 ( n )) , where e N \u2217 is the number of edges in the targe"
+            "source": "2003.00110v3",
+            "rerank_score": -7.611,
+            "text": "The trade-off for decreased cost and increased throughput offered by modern sequencing technologies is a larger margin of noise in sequencing data 5 ."
           }
         ]
       },
       "mode": "hybrid"
     },
     {
-      "question": "If the deterministic method had NOT been compared with JueWu-SL in validation accuracy, how would this affect the evaluation of its action controllability?",
-      "answer": "I don't have enough information to answer that question based on the provided documents.",
-      "num_contexts": 5,
+      "question": "If the Expected Free Energy (EFE) objective did NOT mandate the minimization of risk, what might be the consequence for an agent's behavior?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "The agent would not minimize risk, potentially leading to greater exposure to uncertain situations and larger divergences between the current state and equilibrium state.",
+      "ground_truth": "This could lead the agent to accept larger divergences between its current state density and the equilibrium state, potentially increasing exposure to undesirable outcomes. Without risk minimization, the agent might fail to avoid situations with high predictive error, reducing its ability to maintain stability and achieve its goals.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
       "metrics": {
-        "context_recall": 0.5,
-        "faithfulness": 1.0,
-        "answer_correctness": 0.0
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer accurately conveys the consequence of not minimizing risk, but lacks the nuance and detail of the ground truth, particularly in its explanation of the agent's behavior and stability.",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
       },
+      "num_contexts": 5,
       "trace": {
         "entities_extracted": [
-          "accuracy"
+          "Expected Free Energy",
+          "EFE"
         ],
         "qdrant_ids_per_entity": {
-          "accuracy": 77
+          "Expected Free Energy": 3,
+          "EFE": 3
         },
-        "graph_qdrant_ids_total": 77,
-        "graph_fetched_count": 77,
+        "graph_qdrant_ids_total": 117,
+        "graph_fetched_count": 90,
         "raw_counts": {
           "chunk": 45,
           "paper": 45,
@@ -1078,35 +3210,908 @@
         },
         "pre_rerank_count": 15,
         "pre_rerank_source_breakdown": {
-          "graph": 2,
-          "arxiv_chunks": 3,
+          "arxiv_chunks": 7,
+          "graph": 8
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          3.353,
+          2.98,
+          1.215,
+          -0.197,
+          -2.725
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 3.353,
+            "text": "mathematical origin and nature of the EFE functional have remained unclear. In the literature, the EFE is often justified through a reductio-ad-absurd"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 2.98,
+            "text": "We see that the EFE mandates the minimization of both ambiguity (i.e. avoiding situations which are heavily uncertain) and risk (avoiding large diverg"
+          },
+          {
+            "source": "2107.00140v1",
+            "rerank_score": 1.215,
+            "text": "Here, we see that the expected free energy can be (approximately) decomposed into a reward maximization term and also an information gain term to be m"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What are truncated hitting times used to test for?",
+      "question_type": "single_hop",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "distance-symmetry",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 1,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 32,
+          "paper": 44,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "arxiv_papers": 3
+        },
+        "post_rerank_count": 1,
+        "dropped_by_reranker": 14,
+        "reranker_scores": [
+          6.132
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2302.04599v3",
+            "rerank_score": 6.132,
+            "text": "Usage Given truncated hitting times \u02c6 h L,N i,j , we merge nodes if the difference between their THTs is below a threshold \u03b8 sym ( \u03b1 ) . Next, given p"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "According to the paragraph on advancing participatory accountability in AI, what is one of the tools that local governments should use to publish nontechnical summaries of AI projects?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_cy",
+      "prediction": "dashboards, open-data portals, or algorithmic registers",
+      "ground_truth": "open-data portals",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          7.759,
+          3.567
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 7.759,
+            "text": "Participatory  accountability  in  the  AI  context  can  be  advanced  through  two  mutually reinforcing pathways. The first is to improve accessibi"
+          },
+          {
+            "source": "2502.13101v3",
+            "rerank_score": 3.567,
+            "text": "ion  (Lee,  2018;  Araujo  et  al.,  2020),  while  also  incorporating citizen feedback into the deployment and evaluation of AI tools. As discussed "
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What type of neural network is used in bioinformatics for processing 1D sequences and 2D images?",
+      "question_type": "single_hop_w_conditions",
+      "domain": "arxiv_qm",
+      "prediction": "fully connected neural networks, standard convolutional neural networks (CNN)",
+      "ground_truth": "Convolutional neural networks (CNN)",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.6153846153846153,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.6153846153846153,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 5,
           "arxiv_papers": 10
         },
         "post_rerank_count": 5,
         "dropped_by_reranker": 10,
         "reranker_scores": [
-          -5.873,
-          -7.049,
-          -7.21,
-          -7.466,
-          -8.38
+          2.549,
+          1.792,
+          -1.995,
+          -2.251,
+          -3.536
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "1903.00342v1",
+            "rerank_score": 2.549,
+            "text": "Considering the great potential of deep learning in promoting the bioinformatic research, to facilitate the the development and application, in this r"
+          },
+          {
+            "source": "2311.02127v1",
+            "rerank_score": 1.792,
+            "text": "## X. BIOINFORMATIC APPLICATIONS\n\nIn this section, various applications of Graph  Neural Networks Bio-informatics are discussed. Based on multiple bio"
+          },
+          {
+            "source": "1802.09791v1",
+            "rerank_score": -1.995,
+            "text": "Although CNNs and recurrent networks have already produced significant advances in biomedical imaging and biomedical signal processing [8], the impact"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What developmental principle, exemplified by the vertebrate eye, enables combinability and reconfigurability?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_ai",
+      "prediction": "combinability and reconfigurability",
+      "ground_truth": "WEAK LINKAGE",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.8,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          4.701,
+          -2.079
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2506.12891v1",
+            "rerank_score": 4.701,
+            "text": "the combinability and reconfigurability to generate more complex functions. A prime example of this is the evolution of the vertebrate eye ((Lamb et a"
+          },
+          {
+            "source": "2506.12891v1",
+            "rerank_score": -2.079,
+            "text": "An important concept in this context is weak linkage , which refers to the simplicity of regulatory signals (inputs/conditions) that govern distinct p"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "In which industry segment are midstream applications benefiting from AI/ML for predictive monitoring?",
+      "question_type": "single_hop",
+      "domain": "arxiv_ai",
+      "prediction": "Industrial settings",
+      "ground_truth": "oil and gas industry",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 44,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "arxiv_papers": 3
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          -1.565,
+          -3.143,
+          -4.009,
+          -4.041,
+          -4.321
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2507.23535v1",
+            "rerank_score": -1.565,
+            "text": "The increasing reliance on artificial intelligence (AI) and machine learning (ML) systems in critical sectors such as healthcare, finance, and public "
+          },
+          {
+            "source": "2504.13976v1",
+            "rerank_score": -3.143,
+            "text": "Predictive maintenance: AI-driven diagnostics assess dispenser health, reducing operational downtime and ensuring reliability."
+          },
+          {
+            "source": "2405.15832v1",
+            "rerank_score": -4.009,
+            "text": "Recent literature emphasizes the growing application of digital twins in industrial settings for predictive maintenance. These models adapt to changes"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "How was the BWT-FM index introduced according to the paragraph?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "Bowtie 47",
+      "ground_truth": "The paragraph states that the BWT-FM index was introduced by Bowtie. It notes that hashing was the only dominant indexing technique used until the BWT-FM index was introduced by Bowtie.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "The generated answer is partially factually accurate (1 point) but lacks completeness (0 points) as it only mentions \"Bowtie 47\" without providing any context or explanation, and has low semantic similarity (0 points) as it does not convey",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.95,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 3,
+      "trace": {
+        "entities_extracted": [
+          "BWT-FM"
+        ],
+        "qdrant_ids_per_entity": {
+          "BWT-FM": 3
+        },
+        "graph_qdrant_ids_total": 18,
+        "graph_fetched_count": 18,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 18
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "graph": 4
+        },
+        "post_rerank_count": 3,
+        "dropped_by_reranker": 12,
+        "reranker_scores": [
+          1.605,
+          -1.334,
+          -1.813
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2003.00110v3",
+            "rerank_score": 1.605,
+            "text": "We observe that the most popular indexing technique used by read alignment tools is hashing, which is used exclusively by 60.8% of our surveyed read a"
+          },
+          {
+            "source": "2003.00110v3",
+            "rerank_score": -1.334,
+            "text": "different suffixes of the genome; the shared prefix between the read and the genome is stored only once and used by all the reads with that prefix. Ev"
+          },
+          {
+            "source": "2003.00110v3",
+            "rerank_score": -1.813,
+            "text": "We found no significant difference in the runtime for BWT-FM tools and hashing based tools when adjusting for year of publication, chain of seeds, and"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If governance scaffolding did NOT include collaborative platforms for stakeholder engagement, how might its emphasis on co-creation and mutual responsibility be affected?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_cy",
+      "prediction": "If governance scaffolding did NOT include collaborative platforms for stakeholder engagement, its emphasis on co-creation and mutual responsibility might be weakened.",
+      "ground_truth": "This could reduce the practical mechanisms for stakeholder participation, potentially weakening the emphasis on co-creation and mutual responsibility. Without such platforms, governance scaffolding might become less adaptive and more top-down, shifting back towards rigid control paradigms rather than fostering shared agency and iterative adjustment.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer accurately reflects the potential consequences of excluding collaborative platforms from governance scaffolding, but lacks the nuance and detail provided in the ground truth, particularly regarding the shift towards rigid control paradigms.",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.85,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          4.848,
+          -2.835
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2504.13957v1",
+            "rerank_score": 4.848,
+            "text": "In governance contexts, scaffolding similarly denotes adaptive, system-level frameworks, such as regulatory instruments, oversight bodies, and partici"
+          },
+          {
+            "source": "2104.02752v1",
+            "rerank_score": -2.835,
+            "text": "Collaboration and coordination should be the ground for governance. However, these platforms need to introduce disruptive elements based on organizati"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What is the connection between Interpretable Machine Learning and Local Interpretability based on the provided definition?",
+      "question_type": "open_ended",
+      "domain": "arxiv_qm",
+      "prediction": "Local interpretability e reasons why \u02c6 y has been predicted for an instance x ,",
+      "ground_truth": "The paragraph defines local interpretability as a type of interpretability that explains why a specific prediction was made for a single instance. Therefore, Local Interpretability is a category or type within the broader field of Interpretable Machine Learning, which focuses on making model decisions understandable.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer is factually accurate (1) and complete (1), but lacks semantic similarity (0) as it uses informal notation (\u02c6 y) and a vague phrase (\"e reasons why\") instead of a clear and concise explanation.",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.8,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "Interpretable Machine Learning",
+          "Local Interpretability"
+        ],
+        "qdrant_ids_per_entity": {
+          "Interpretable Machine Learning": 3,
+          "Local Interpretability": 3
+        },
+        "graph_qdrant_ids_total": 108,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "graph": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          2.05,
+          1.08,
+          0.553,
+          -0.008,
+          -1.079
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 2.05,
+            "text": "Definition 9 (Interpretability) Interpretability is the degree to which humans can understand the cause of a decision [71]. Global interpretability re"
+          },
+          {
+            "source": "2212.13261v3",
+            "rerank_score": 1.08,
+            "text": "A wide range of model-specific and model-agnostic interpretable ML methods have been proposed and developed [9]. All these methods largely fall into t"
+          },
+          {
+            "source": "2507.23535v1",
+            "rerank_score": 0.553,
+            "text": "Section 2: Interpretability Approach This section details the chosen interpretability methodology, whether inherently interpretable models or post-hoc"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "Which organization provided compute for the open scientific research collaboration that held the NeurIPS 2022 meetup?",
+      "question_type": "multi_hop",
+      "domain": "arxiv_cy",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "HUGGING FACE",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.0,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.0,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "NEURIPS"
+        ],
+        "qdrant_ids_per_entity": {
+          "NEURIPS": 3
+        },
+        "graph_qdrant_ids_total": 70,
+        "graph_fetched_count": 70,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "graph": 4
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.551,
+          -2.102,
+          -2.488,
+          -4.165,
+          -5.018
         ],
         "answer_type": "refusal",
         "top3_contexts": [
           {
-            "source": "1901.06152v1",
-            "rerank_score": -5.873,
-            "text": "From the last decades, it seems that the computational technique such as machine learning classification technique has been used for functional discov"
+            "source": "2312.03872v1",
+            "rerank_score": 1.551,
+            "text": "On December 2, 2022, we held an in-person meetup alongside NeurIPS 2022 in New Orleans with more than 75 members of the BigCode community, where we we"
           },
           {
             "source": "2407.14981v2",
-            "rerank_score": -7.049,
-            "text": "Balancing tractability and accuracy in data attribution. One key challenge in data attribution is the trade-off between computational tractability and"
+            "rerank_score": -2.102,
+            "text": "Motivation: Compute usage by private companies in training and running models has increased exponentially in the past years, and now greatly exceeds t"
           },
           {
-            "source": "2508.20040v1",
-            "rerank_score": -7.21,
-            "text": "These findings demonstrate a recurring pattern: foundation models, and AI models in general, perform worse than initially reported when subjected to t"
+            "source": "2410.12800v1",
+            "rerank_score": -2.488,
+            "text": "Research organizations play a central role in defining the RDM approaches that govern the research lifecycle, supplying the know-how and infrastructur"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "What process is closely related to issuing birth attestation in a stable governance environment?",
+      "question_type": "single_hop",
+      "domain": "arxiv_cy",
+      "prediction": "issuing a birth certificate",
+      "ground_truth": "issuing birth certificate",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 1.0,
+        "token_f1": 1.0,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 1.0,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.4,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 2,
+      "trace": {
+        "entities_extracted": [],
+        "qdrant_ids_per_entity": {},
+        "graph_qdrant_ids_total": 0,
+        "graph_fetched_count": 0,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 0
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 15
+        },
+        "post_rerank_count": 2,
+        "dropped_by_reranker": 13,
+        "reranker_scores": [
+          9.177,
+          8.812
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 9.177,
+            "text": "In a stable environment, issuing a birth attestation and a birth certificate are closely related processes. The clinic issues the parents certified do"
+          },
+          {
+            "source": "2308.07280v2",
+            "rerank_score": 8.812,
+            "text": "In a stable environment, issuing a birth attestation and a birth certificate are closely related processes. The clinic issues the parents certified do"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If multimodal pre-training did NOT contribute to achieving AGI, how would this affect progress toward human-like general cognitive abilities?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_ai",
+      "prediction": "I don't have enough information to answer that question based on the provided documents.",
+      "ground_truth": "This could reduce the stride toward AGI, as the evidence indicates multimodal pre-training makes a giant stride towards AGI. Without this contribution, progress might rely more heavily on other approaches like combining DRL and GAN, potentially slowing the development of general-purpose applications.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.5,
+        "lm_judge_justification": "Model correctly declined to answer.",
+        "final_answer_correctness": 0.5,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.45,
+        "faithfulness": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "pre-training",
+          "AGI"
+        ],
+        "qdrant_ids_per_entity": {
+          "pre-training": 3,
+          "AGI": 3
+        },
+        "graph_qdrant_ids_total": 53,
+        "graph_fetched_count": 53,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 10,
+          "graph": 5
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          0.684,
+          0.329,
+          -1.616,
+          -1.899,
+          -2.165
+        ],
+        "answer_type": "refusal",
+        "top3_contexts": [
+          {
+            "source": "2505.06897v1",
+            "rerank_score": 0.684,
+            "text": "through multi-task learning or multi-modal perception, and expand to more complex and broader intelligent tasks. This enhancement of capability will e"
+          },
+          {
+            "source": "2310.15274v3",
+            "rerank_score": 0.329,
+            "text": "Morality  requires  a  balanced cognitive system and dedicated system support. While successful approximations may help to varying degrees, full align"
+          },
+          {
+            "source": "2310.15274v3",
+            "rerank_score": -1.616,
+            "text": "Currently,  there  are  conflicting  descriptions  of  AGI  and  human-like  AI/AGI, while  some  researchers  even  claim  there  is  no  AGI.  Accor"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "If Nanopore sequencing did NOT have the advantage of being PCR-free, how would this affect its applications?",
+      "question_type": "counterfactual",
+      "domain": "arxiv_qm",
+      "prediction": "PCR-free advantage enables direct epigenetic detection. Without it, this application would be compromised.",
+      "ground_truth": "This could reduce its ability to enable direct epigenetic detection, as PCR-free operation avoids amplification biases that might obscure epigenetic modifications. It might also limit its utility in applications where avoiding PCR is critical for preserving native nucleic acid states.",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": null,
+        "token_f1": null,
+        "answer_correctness_llm": 0.8,
+        "lm_judge_justification": "The generated answer accurately identifies the consequence of losing the PCR-free advantage, but its phrasing is slightly inverted compared to the ground truth, and it doesn't fully capture the potential limitation in preserving native nucleic acid states.",
+        "final_answer_correctness": 0.8,
+        "final_answer_correctness_source": "llm",
+        "context_recall": 0.25,
+        "faithfulness": 0.5,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 4,
+      "trace": {
+        "entities_extracted": [
+          "Nanopore",
+          "PCR-free"
+        ],
+        "qdrant_ids_per_entity": {
+          "Nanopore": 3,
+          "PCR-free": 3
+        },
+        "graph_qdrant_ids_total": 25,
+        "graph_fetched_count": 25,
+        "raw_counts": {
+          "chunk": 45,
+          "paper": 45,
+          "graph": 25
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 12,
+          "graph": 3
+        },
+        "post_rerank_count": 4,
+        "dropped_by_reranker": 11,
+        "reranker_scores": [
+          3.691,
+          -3.106,
+          -3.429,
+          -4.282
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2008.11546v1",
+            "rerank_score": 3.691,
+            "text": "r specifically designed for Nanopore, one can obtain the nucleotide sequence reads. Benefited from the underlying design, Nanopore sequencing owns the"
+          },
+          {
+            "source": "2008.11546v1",
+            "rerank_score": -3.106,
+            "text": "Next-generation sequencing (NGS) technologies allow researchers to sequence DNA and RNA in a high-throughput manner, which have facilitated numerous b"
+          },
+          {
+            "source": "2008.11546v1",
+            "rerank_score": -3.429,
+            "text": "Despite the existence of more than twenty simulators for NGS technologies [41], there were only three simulators created for the Nanopore sequencing b"
+          }
+        ]
+      },
+      "mode": "hybrid"
+    },
+    {
+      "question": "Which university is Zhangtianyi Chen affiliated with?",
+      "question_type": "single_hop",
+      "domain": "arxiv_qm",
+      "prediction": "CUHK Shenzhen",
+      "ground_truth": "The Chinese University of Hong Kong, Shenzhen",
+      "ground_truth_context": "",
+      "seed": 223681,
+      "run": 1,
+      "metrics": {
+        "exact_match": 0.0,
+        "token_f1": 0.25,
+        "answer_correctness_llm": null,
+        "lm_judge_justification": null,
+        "final_answer_correctness": 0.25,
+        "final_answer_correctness_source": "token_f1",
+        "context_recall": 0.0,
+        "faithfulness": 0.0,
+        "hit_rate": null,
+        "mrr": null,
+        "context_precision": null,
+        "ndcg_at_5": null
+      },
+      "num_contexts": 5,
+      "trace": {
+        "entities_extracted": [
+          "Zhangtianyi Chen"
+        ],
+        "qdrant_ids_per_entity": {
+          "Zhangtianyi Chen": 3
+        },
+        "graph_qdrant_ids_total": 90,
+        "graph_fetched_count": 90,
+        "raw_counts": {
+          "chunk": 35,
+          "paper": 44,
+          "graph": 45
+        },
+        "pre_rerank_count": 15,
+        "pre_rerank_source_breakdown": {
+          "arxiv_chunks": 11,
+          "graph": 4
+        },
+        "post_rerank_count": 5,
+        "dropped_by_reranker": 10,
+        "reranker_scores": [
+          1.517,
+          -2.3,
+          -2.601,
+          -4.807,
+          -6.097
+        ],
+        "answer_type": "answer",
+        "top3_contexts": [
+          {
+            "source": "2306.00869v2",
+            "rerank_score": 1.517,
+            "text": "*Yu Luo and Bingyou Chen contribute equally. Faculty of Electronic and Information Engineering, Xi'an Jiaotong University, Shaanxi, China."
+          },
+          {
+            "source": "2402.13714v1",
+            "rerank_score": -2.3,
+            "text": "Yiparemu is with Henan University School of Stomatology, Kaifeng, China. (e-mail: yiparemu@163.com)"
+          },
+          {
+            "source": "2510.02139v1",
+            "rerank_score": -2.601,
+            "text": "Florensia Widjaja 1 , \u2020 , Zhangtianyi Chen 1 , \u2020 , Juexiao Zhou 1 , \u2217\n\nAbstract -Bioinformatics tools are essential for complex computational biology "
           }
         ]
       },

@@ -249,8 +249,77 @@ class CSEntityExtractor:
                 if key not in seen:
                     result.entities.append(e)
                     seen.add(key)
+                    
+        # Aggressive proper noun extraction for queries to catch missed researchers/tools
+        _PROPER_NOUN_RE = re.compile(r"\b([A-Z][a-zA-Z0-9]*(?:\s+[A-Z][a-zA-Z0-9]*){0,2})\b")
+        known_spans = {(e.start_pos, e.end_pos) for e in result.entities}
+        
+        for m in _PROPER_NOUN_RE.finditer(query):
+            if (m.start(), m.end()) not in known_spans:
+                term = m.group(1).strip()
+                if len(term) >= 3 and term.upper() not in {"WHAT", "HOW", "WHY", "WHEN", "WHERE", "WHO", "WHICH", "THE", "THIS", "THAT"}:
+                    result.entities.append(ExtractedEntity(
+                        text=term, entity_type="UNKNOWN",
+                        start_pos=m.start(), end_pos=m.end(), confidence=0.5
+                    ))
+                    known_spans.add((m.start(), m.end()))
 
+        result.entities = self._clean_query_entities(result.entities)
         return result
+
+    # Words that are never meaningful as graph lookup keys
+    _GRAPH_STOP_WORDS = {
+        "not", "if", "some", "according", "lessons", "which", "what", "how",
+        "why", "when", "where", "who", "the", "and", "for", "but", "all",
+        "this", "that", "these", "those", "with", "from", "into", "about",
+        "using", "based", "used", "given", "such", "each", "also", "both",
+    }
+
+    def _clean_query_entities(
+        self, entities: list[ExtractedEntity]
+    ) -> list[ExtractedEntity]:
+        """
+        Post-process entities extracted from a query before graph lookup:
+
+        1. Strip counterfactual framing prefix ("If Nanopore" -> "Nanopore").
+        2. Drop stop words and tokens shorter than 3 characters (removes NOT,
+           AI, ML, etc. which match thousands of graph nodes and add noise).
+        3. Deduplicate by substring: if entity A is contained in entity B,
+           drop A and keep B (removes MARINKA / ZITNIK when MARINKA ZITNIK is
+           present, BWT when BWT-FM is present, etc.).
+        """
+        # 1. Strip "If " prefix from counterfactual framing
+        cleaned = []
+        for e in entities:
+            text = e.text
+            if text.lower().startswith("if "):
+                text = text[3:].strip()
+            cleaned.append(
+                ExtractedEntity(
+                    text=text,
+                    entity_type=e.entity_type,
+                    start_pos=e.start_pos,
+                    end_pos=e.end_pos,
+                    confidence=e.confidence,
+                )
+            )
+
+        # 2. Drop stop words and very short tokens
+        cleaned = [
+            e for e in cleaned
+            if len(e.text) >= 3 and e.text.lower() not in self._GRAPH_STOP_WORDS
+        ]
+
+        # 3. Substring deduplication — keep longest containing form
+        texts_lower = [e.text.lower() for e in cleaned]
+        non_fragments = [
+            e for i, e in enumerate(cleaned)
+            if not any(
+                texts_lower[i] in texts_lower[j] and texts_lower[i] != texts_lower[j]
+                for j in range(len(cleaned)) if j != i
+            )
+        ]
+        return non_fragments
 
     _COUNTERFACTUAL_RE = re.compile(
         r"^[Ii]f\s+(.+?)\s+(?:were|was|did|had)\s+(?:NOT|not)\b",

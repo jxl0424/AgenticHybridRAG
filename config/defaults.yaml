@@ -17,7 +17,7 @@ llm:
 # OpenRouter free-model fallback (answer generation)
 # Set OPENROUTER_API_KEY in .env to enable. Falls back to local Ollama if unavailable.
 openrouter:
-  enabled: true
+  enabled: false
   api_key_env: "OPENROUTER_API_KEY"
   models:
     - "openai/gpt-oss-120b:free"
@@ -26,11 +26,11 @@ openrouter:
 
 # Hybrid retrieval settings
 hybrid_retrieval:
-  chunk_weight: 0.2
-  paper_weight: 0.6
-  graph_weight: 0.2
+  chunk_weight: 0.64
+  paper_weight: 0.09
+  graph_weight: 0.27
   top_k: 5
-  min_score: 0.2
+  min_score: 0.36
 
 # HybridRAG-Bench (arXiv CS/AI) ingestion and querying settings
 hybridrag:

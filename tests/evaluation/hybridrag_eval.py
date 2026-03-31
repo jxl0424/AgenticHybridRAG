@@ -62,7 +62,9 @@ class HybridRAGEvaluator:
 
     def __init__(self, pipeline: HybridRAGBenchPipeline):
         self.pipeline = pipeline
-        judge_llm = LLMClient(model="qwen2.5:7b-instruct")
+        # llama3.1:8b as judge: different family from qwen2.5 generator (avoids
+        # circular self-evaluation), fits in 6GB VRAM at Q4, reliable structured output.
+        judge_llm = LLMClient(model="llama3.1:8b")
         self.metrics = RAGMetrics(llm_client=judge_llm)
         self.tracer = start_phoenix()
 
@@ -234,8 +236,22 @@ class HybridRAGEvaluator:
                 tf1 = self.metrics.calculate_token_f1(answer, gt_answer)
                 metrics["exact_match"] = em
                 metrics["token_f1"] = tf1
-                metrics["final_answer_correctness"] = tf1
-                metrics["final_answer_correctness_source"] = "token_f1"
+                
+                pred_len = len(self.metrics.normalize(answer).split())
+                gt_len = len(self.metrics.normalize(gt_answer).split())
+                
+                # If token_f1 is poor but the answer is verbose, fallback to LLM judge
+                if tf1 < 0.2 and pred_len > gt_len * 2:
+                    judge = self.metrics.calculate_answer_correctness(
+                        question, gt_answer, answer, question_type=question_type
+                    )
+                    metrics["answer_correctness_llm"] = judge["score"]
+                    metrics["lm_judge_justification"] = judge["justification"]
+                    metrics["final_answer_correctness"] = judge["score"] if judge["score"] is not None else tf1
+                    metrics["final_answer_correctness_source"] = "llm" if judge["score"] is not None else "token_f1"
+                else:
+                    metrics["final_answer_correctness"] = tf1
+                    metrics["final_answer_correctness_source"] = "token_f1"
 
             elif question_type == "multi_hop_difficult":
                 em = self.metrics.calculate_exact_match(answer, gt_answer)

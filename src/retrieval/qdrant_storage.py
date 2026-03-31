@@ -2,7 +2,7 @@
 Qdrant vector database storage interface.
 """
 from qdrant_client import QdrantClient
-from qdrant_client.models import VectorParams, Distance, PointStruct, Filter, FieldCondition, MatchText
+from qdrant_client.models import VectorParams, Distance, PointStruct
 from typing import Optional
 
 

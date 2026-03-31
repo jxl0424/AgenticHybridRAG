@@ -39,7 +39,7 @@ class HybridRetriever:
         config_path: str = "config/defaults.yaml",
     ):
         # Load defaults from config; explicit constructor args override config values.
-        cfg_chunk, cfg_paper, cfg_graph = 0.5, 0.3, 0.2
+        cfg_chunk, cfg_paper, cfg_graph = 0.8, 0.2, 0.1
         try:
             with open(config_path) as f:
                 cfg = yaml.safe_load(f).get("hybrid_retrieval", {})

@@ -76,18 +76,13 @@ def test_graph_retriever_uses_has_chunk_path(mock_embed, mock_qdrant_cls):
     mock_kg.get_chunk_refs_for_entity.assert_not_called()
 
 
-def test_graph_retriever_keyword_fallback_no_entities():
-    """When no entities are found, _keyword_fallback uses parameterised Cypher on _Embeddable nodes."""
+def test_graph_retriever_no_entities_returns_empty():
+    """When no entities are found, retrieve() returns [] immediately (keyword fallback is disabled)."""
     mock_kg = MagicMock()
-    mock_kg.client.execute_read.return_value = [
-        {"name": "attention mechanism", "type": "ALGORITHM"}
-    ]
-
     mock_extractor = MagicMock()
     mock_extractor.extract_entities.return_value.entities = []
 
     mock_chunk_retriever = MagicMock(spec=ChunkRetriever)
-    mock_chunk_retriever.fetch_by_ids.return_value = []
 
     retriever = GraphRetriever(
         knowledge_graph=mock_kg,
@@ -96,13 +91,9 @@ def test_graph_retriever_keyword_fallback_no_entities():
     )
     results = retriever.retrieve("explain attention in neural networks", top_k=3)
 
-    # Verify parameterised Cypher -- must NOT use f-string injection
-    call_args = mock_kg.client.execute_read.call_args
-    cypher_str = call_args[0][0]
-    params_dict = call_args[0][1]
-    assert "$keywords" in cypher_str, "Cypher must use $keywords param, not f-string injection"
-    assert isinstance(params_dict.get("keywords"), list), "keywords must be a list param"
-    assert isinstance(results, list)
+    assert results == []
+    mock_kg.client.execute_read.assert_not_called()
+    mock_chunk_retriever.fetch_by_ids.assert_not_called()
 
 
 def test_hybrid_retriever_three_way_fusion():
@@ -217,7 +208,7 @@ def test_graph_retriever_semantic_lookup(mock_embed, mock_qdrant_cls):
     mock_qdrant_inst.query_points.assert_called_once_with(
         "arxiv_nodes", query=fake_vec, with_payload=True, limit=3
     )
-    mock_kg.get_chunk_refs_by_node_ids.assert_called_once_with([42], limit=10)
+    mock_kg.get_chunk_refs_by_node_ids.assert_called_once_with([(42, "")], limit=10)
     mock_chunk_retriever.fetch_by_ids.assert_called_once_with(["uuid-001", "uuid-002"])
     assert len(results) == 1
     assert results[0].collection == "graph"
