@@ -1,4 +1,4 @@
-# Hybrid RAG — CS/AI arXiv Papers
+# Hybrid RAG — AI, Computers & Society, Quantitative Methods arXiv Papers
 
 A **Hybrid Retrieval-Augmented Generation** system for CS/AI research papers from arXiv, combining:
 
