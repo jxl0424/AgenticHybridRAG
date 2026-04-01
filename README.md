@@ -21,7 +21,6 @@ docker compose up -d
 | Neo4j Browser | http://localhost:7474 |
 | Neo4j Bolt | bolt://localhost:7687 |
 | Qdrant REST | http://localhost:6333 |
-| Inngest Dev | http://localhost:8288 |
 
 ### 2. Install Dependencies
 
@@ -137,6 +136,45 @@ pytest tests/unit/ -v                          # Unit tests (no services needed)
 pytest tests/integration/ -v                   # Integration tests (requires Docker)
 pytest tests/evaluation/hybridrag_eval.py -v   # End-to-end eval with RAGAS metrics
 ```
+
+## Evaluation Results
+
+Evaluated across 30 questions per mode (6 question types × 5 questions, 3 arXiv domains). Metrics computed with an LLM judge for answer correctness and RAGAS-style context recall.
+
+### Overall (n=30)
+
+| Metric | Vector-only | Hybrid | Delta |
+|---|---|---|---|
+| Context Recall | 0.307 | **0.388** | +26% |
+| Faithfulness | 0.825 | 0.717 | — |
+| Answer Correctness | 0.393 | 0.386 | ~= |
+| Refusal Rate | 56.7% | **33.3%** | -41% |
+
+Hybrid mode retrieves more relevant context (+26% recall) and refuses significantly fewer questions (-41%), at a modest faithfulness tradeoff.
+
+### Answer Correctness by Question Type
+
+| Question Type | Vector | Hybrid |
+|---|---|---|
+| Counterfactual | 0.52 | **0.68** |
+| Open-ended | 0.40 | **0.42** |
+| Single-hop | **0.48** | 0.43 |
+| Single-hop w/ conditions | 0.44 | 0.44 |
+| Multi-hop | **0.31** | 0.27 |
+| Multi-hop difficult | **0.20** | 0.07 |
+
+### Context Recall by Question Type
+
+| Question Type | Vector | Hybrid |
+|---|---|---|
+| Open-ended | 0.39 | **0.62** |
+| Multi-hop | 0.50 | **0.58** |
+| Counterfactual | 0.38 | **0.47** |
+| Multi-hop difficult | 0.00 | **0.09** |
+| Single-hop w/ conditions | 0.49 | 0.49 |
+| Single-hop | 0.08 | 0.08 |
+
+Hybrid retrieval gains are strongest on open-ended (+59% recall) and counterfactual (+31% correctness) questions, where graph entity context supplements dense vector results. Multi-hop difficult questions remain a known hard case for both modes.
 
 ## License
 
