@@ -20,7 +20,6 @@ openai>=1.3.0
 
 # API & UI
 streamlit>=1.28.0
-inngest>=0.2.0
 requests>=2.31.0
 
 # Observability (optional — tracing disabled gracefully if not installed)
